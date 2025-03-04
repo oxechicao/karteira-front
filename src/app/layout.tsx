@@ -1,5 +1,9 @@
-import { DevtoolsProvider } from "@providers/devtools";
-import { useNotificationProvider } from "@refinedev/antd";
+import { DevtoolsProvider } from "@common/providers/devtools";
+import {
+  ThemedLayoutContextProvider,
+  ThemedLayoutV2,
+  useNotificationProvider,
+} from "@refinedev/antd";
 import { GitHubBanner, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import routerProvider from "@refinedev/nextjs-router";
@@ -8,10 +12,11 @@ import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { ColorModeContextProvider } from "@contexts/color-mode";
-import { authProviderClient } from "@providers/auth-provider/auth-provider.client";
-import { dataProvider } from "@providers/data-provider";
+import { ColorModeContextProvider } from "@common/contexts/color-mode";
+import { authProviderClient } from "@common/providers/auth-provider/auth-provider.client";
+import { dataProvider } from "@common/providers/data-provider";
 import "@refinedev/antd/dist/reset.css";
+import "@common/styles/global.css";
 
 export const metadata: Metadata = {
   title: "Refine",
@@ -44,6 +49,15 @@ export default function RootLayout({
                     dataProvider={dataProvider}
                     notificationProvider={useNotificationProvider}
                     authProvider={authProviderClient}
+                    resources={[
+                      {
+                        name: "despesas",
+                        list: "/despesas",
+                        show: "/despesas/:id",
+                        create: "/despesas/create",
+                        edit: "/despesas/:id/edit",
+                      },
+                    ]}
                     options={{
                       syncWithLocation: true,
                       warnWhenUnsavedChanges: true,
@@ -51,7 +65,9 @@ export default function RootLayout({
                       projectId: "VjxSuJ-TJOjlk-Djbugf",
                     }}
                   >
-                    {children}
+                    <ThemedLayoutContextProvider>
+                      <ThemedLayoutV2>{children}</ThemedLayoutV2>
+                    </ThemedLayoutContextProvider>
                     <RefineKbar />
                   </Refine>
                 </DevtoolsProvider>
