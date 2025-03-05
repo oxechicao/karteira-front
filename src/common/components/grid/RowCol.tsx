@@ -18,12 +18,12 @@ export const RowCol: React.FC<RowColProps> = ({
 }) => {
   const sumSpanSizes = Object.values(spanSizes || {}).reduce(
     (a, c) => a + c,
-    0
+    0,
   );
 
   const lengthSpanSizes = Object.keys(spanSizes || {}).length;
   const firstItemWithoutSpan = items.findIndex(
-    (_, index) => spanSizes && spanSizes[index] === undefined
+    (_, index) => spanSizes && spanSizes[index] === undefined,
   );
 
   const avgSpanSize = !defaultWidth ? Math.floor(24 / items.length) : 0;
@@ -31,7 +31,7 @@ export const RowCol: React.FC<RowColProps> = ({
 
   const defaultSpanSize =
     Math.floor(
-      (24 - (avgSpanSize * countSpanDefault + sumSpanSizes)) / countSpanDefault
+      (24 - (avgSpanSize * countSpanDefault + sumSpanSizes)) / countSpanDefault,
     ) + avgSpanSize;
 
   const diff = 24 - (sumSpanSizes + defaultSpanSize * countSpanDefault);
@@ -44,8 +44,8 @@ export const RowCol: React.FC<RowColProps> = ({
             spanSizes && spanSizes[index] !== undefined
               ? spanSizes[index]
               : index === firstItemWithoutSpan
-              ? defaultSpanSize + diff
-              : defaultSpanSize
+                ? defaultSpanSize + diff
+                : defaultSpanSize
           }
         >
           {typeof Item === "function" ? <Item /> : Item}

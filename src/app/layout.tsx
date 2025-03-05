@@ -54,7 +54,6 @@ export default function RootLayout({
                         name: "despesas",
                         list: "/despesas",
                         show: "/despesas/:id",
-                        create: "/despesas/create",
                         edit: "/despesas/:id/edit",
                       },
                     ]}

@@ -1,20 +1,20 @@
-import saveExpense from "@modules/expense/repository/saveExpense"
-import { NextApiRequest, NextApiResponse } from "next"
+import dbConnect from "@lib/mongoose/dbConnect";
+import {
+  getExpensesFromToday,
+  saveExpense,
+} from "@modules/expense/repository/expenseRepository";
 
-export const dinamic = 'force-dinamic'
+export const dynamic = "force-dynamic";
 
-export const GET = () => {
-  return Response.json({ data: 'teste' })
-}
+export const GET = async () => {
+  await dbConnect();
+  const data = await getExpensesFromToday();
+  return Response.json(data);
+};
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({ body: req.body })
-  try {
-    await saveExpense(req.body)
-    return res.status(201);
-  } catch (e) {
-    console.log(req.body)
-    console.log(e);
-    return res.status(500);
-  }
-}
+export const POST = async (req: Request) => {
+  await dbConnect();
+  const payload = await req.json();
+  await saveExpense(payload);
+  return new Response(null, { status: 201 });
+};

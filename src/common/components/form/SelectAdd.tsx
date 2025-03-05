@@ -26,7 +26,7 @@ export const SelectAdd: React.FC<SelectAddProps> = ({
   };
 
   const addItem = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
     e.preventDefault();
 
