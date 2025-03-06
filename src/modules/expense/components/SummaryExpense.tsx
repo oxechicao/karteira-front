@@ -23,7 +23,8 @@ export const SummaryExpense: React.FC<SummaryExpenseProps> = ({
       tableProps?.dataSource?.reduce(
         (acc: Record<string, number>, expense) => {
           if (expense.flags.isRecurrent) {
-            acc["recurrent"] += expense.price.value;
+            acc.recurrent += expense.price.value;
+            acc.recurrentAmmount += 1;
             return acc;
           }
 
@@ -39,10 +40,12 @@ export const SummaryExpense: React.FC<SummaryExpenseProps> = ({
 
           return acc;
         },
-        { recurrent: 0 },
+        { recurrent: 0, recurrentAmmount: 0 },
       ),
     [tableProps.dataSource],
   );
+
+  const hasSumByMonth = Object.keys(sumByMonth || []).length > 1;
 
   return (
     <Tabs
@@ -54,19 +57,32 @@ export const SummaryExpense: React.FC<SummaryExpenseProps> = ({
           key: "1",
           children: (
             <Flex gap="large" style={{ width: "100%", overflowX: "auto" }}>
-              {Object.entries(sumByMonth || {})
-                .filter((entries) => entries[0] !== "recurrent")
-                .sort(([a], [b]) => (a > b ? 1 : -1))
-                .map(([key, value]) => (
-                  <Card key={key} loading={!!tableProps.loading}>
+              {!hasSumByMonth &&
+                Array.from({ length: 10 }, (_, i) => (
+                  <Card key={i} loading={!!tableProps.loading}>
                     <Statistic
-                      title={DateTime.fromFormat(`${key}_01`, "yyyy_MM_dd")
+                      title={DateTime.now()
+                        .plus({ months: i })
                         .setLocale("pt-br")
                         .toFormat("LLLL/yyyy")}
-                      value={`R$ ${moneyMask(String(value + (sumByMonth?.recurrent || 0)))}`}
+                      value={`R$ ${moneyMask(String(sumByMonth?.recurrent || 0))}`}
                     />
                   </Card>
                 ))}
+              {hasSumByMonth &&
+                Object.entries(sumByMonth || {})
+                  .filter((entries) => entries[0] !== "recurrent")
+                  .sort(([a], [b]) => (a > b ? 1 : -1))
+                  .map(([key, value]) => (
+                    <Card key={key} loading={!!tableProps.loading}>
+                      <Statistic
+                        title={DateTime.fromFormat(`${key}_01`, "yyyy_MM_dd")
+                          .setLocale("pt-br")
+                          .toFormat("LLLL/yyyy")}
+                        value={`R$ ${moneyMask(String(value + (sumByMonth?.recurrent || 0)))}`}
+                      />
+                    </Card>
+                  ))}
             </Flex>
           ),
         },
