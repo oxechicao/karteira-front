@@ -17,18 +17,8 @@ import {
   ExpenseModel,
   FrequencyType,
 } from "@modules/expense/models/ExpenseModel";
-import { useForm } from "@refinedev/antd";
 import type { FormProps } from "antd";
-import {
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Row,
-  Select,
-} from "antd";
+import { Col, Form, Input, InputNumber, Radio, Row } from "antd";
 import { DateTime } from "luxon";
 import { useState } from "react";
 
@@ -109,7 +99,7 @@ export const FormExpense: React.FC<CreateFormProps> = ({
   return (
     <Form {...createFormProps} initialValues={initialValues} layout="vertical">
       <RowCol
-        spanSizes={{ 1: 4 }}
+        spanSizes={{ 0: 4 }}
         items={[
           <>
             <Form.Item label="Nome" name="name" required>
@@ -152,7 +142,6 @@ export const FormExpense: React.FC<CreateFormProps> = ({
         ]}
       />
       <RowCol
-        spanSizes={{ 0: 8, 3: 8 }}
         items={[
           <>
             <Form.Item
@@ -245,7 +234,7 @@ export const FormExpense: React.FC<CreateFormProps> = ({
         ]}
       />
       <RowCol
-        spanSizes={{ 0: 6 }}
+        spanSizes={{ 1: 7 }}
         align="top"
         items={[
           <>

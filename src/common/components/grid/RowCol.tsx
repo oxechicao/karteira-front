@@ -18,37 +18,37 @@ export const RowCol: React.FC<RowColProps> = ({
   spanSizes,
   align = "bottom",
 }) => {
-  const sumSpanSizes = Object.values(spanSizes || {}).reduce(
-    (a, c) => a + c,
+  const mapSpanPercents = Object.entries(spanSizes || {}).reduce(
+    (result: Record<string, number>, [key, value]) => {
+      result[key] = 10 * value;
+      return result;
+    },
+    {},
+  );
+
+  const sumPercents = Object.values(mapSpanPercents).reduce(
+    (acc, value) => acc + value,
     0,
   );
 
-  const lengthSpanSizes = Object.keys(spanSizes || {}).length;
-  const firstItemWithoutSpan = items.findIndex(
-    (_, index) => spanSizes && spanSizes[index] === undefined,
-  );
+  const defaultFlexPercent =
+    sumPercents > 100
+      ? 100
+      : sumPercents > 0
+        ? Math.floor(
+            (100 - sumPercents) /
+              (items.length - Object.keys(spanSizes || {}).length),
+          )
+        : Math.floor(100 / items.length);
 
-  const avgSpanSize = !defaultWidth ? Math.floor(24 / items.length) : 0;
-  const countSpanDefault = items.length - lengthSpanSizes;
-
-  const defaultSpanSize =
-    Math.floor(
-      (24 - (avgSpanSize * countSpanDefault + sumSpanSizes)) / countSpanDefault,
-    ) + avgSpanSize;
-
-  const diff = 24 - (sumSpanSizes + defaultSpanSize * countSpanDefault);
   return (
     <Row align={align} gutter={gutter}>
       {items.map((Item, index) => (
         <Col
           key={index}
-          span={
-            spanSizes && spanSizes[index] !== undefined
-              ? spanSizes[index]
-              : index === firstItemWithoutSpan
-                ? defaultSpanSize + diff
-                : defaultSpanSize
-          }
+          xs={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: `${mapSpanPercents[index] || defaultFlexPercent}%` }}
         >
           {typeof Item === "function" ? <Item /> : Item}
         </Col>
