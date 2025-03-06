@@ -1,8 +1,10 @@
 "use client";
 
-import { FormExpense } from "@modules/expense/components/FormExpense";
-import { ListExpense } from "@modules/expense/components/ListExpense";
-import { SummaryExpense } from "@modules/expense/components/SummaryExpense";
+import {
+  FormExpense,
+  ListExpense,
+  SummaryExpense,
+} from "@modules/expense/components";
 import { Expense } from "@modules/expense/models/Expense";
 import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
 import { List, useModalForm, useTable } from "@refinedev/antd";
@@ -45,11 +47,13 @@ export const ExpensePage: React.FC = () => {
         okText="Salvar"
         cancelText="Cancelar"
       >
-        <FormExpense
-          createFormProps={
-            createFormProps as unknown as FormProps<ExpenseModel>
-          }
-        />
+        {createFormProps?.form && (
+          <FormExpense
+            createFormProps={
+              createFormProps as unknown as FormProps<ExpenseModel>
+            }
+          />
+        )}
       </Modal>
     </>
   );

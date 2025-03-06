@@ -5,6 +5,8 @@ export type SourceType = "itau" | "nubank" | "inter" | "irmao";
 export type CategoryType =
   | "casa"
   | "fastfood"
+  | "chicao"
+  | "lore"
   | "pessoal"
   | "mercado"
   | "farmacia"
@@ -20,15 +22,11 @@ export type CategoryType =
   | "reservas"
   | "etc";
 
-export type FormType = "credit" | "debit";
+export type FormType = "credit" | "debit" | "pix";
 
-export type TypeType =
-  | "installment"
-  | "debit"
-  | "planning"
-  | "monthly"
-  | "yearly"
-  | "weekly";
+export type TypeType = "installment" | "debit" | "recurrent";
+
+export type FrequencyType = "days" | "weeks" | "months" | "years";
 
 type DefinitionsTag = ExpenseDefinitionName &
   SourceType &
@@ -58,6 +56,7 @@ export type ExpenseModel = {
     type: ExpenseDefinition<TypeType>;
     source: ExpenseDefinition<SourceType>;
     category: ExpenseDefinition<CategoryType>;
+    frequency: ExpenseDefinition<FrequencyType> & { period: number };
   };
   flags: Flags;
   installment: { current: number; total: number };

@@ -1,13 +1,14 @@
 "use client";
 
 import { Col, Row } from "antd";
-import { useMemo } from "react";
+import { Gutter } from "antd/es/grid/row";
 
 export interface RowColProps {
-  gutter?: number;
+  gutter?: Gutter | [Gutter, Gutter];
   defaultWidth?: boolean;
   items: Array<React.FC | React.ReactNode>;
   spanSizes?: Record<string, number>;
+  align?: "top" | "middle" | "bottom";
 }
 
 export const RowCol: React.FC<RowColProps> = ({
@@ -15,6 +16,7 @@ export const RowCol: React.FC<RowColProps> = ({
   defaultWidth,
   items,
   spanSizes,
+  align = "bottom",
 }) => {
   const sumSpanSizes = Object.values(spanSizes || {}).reduce(
     (a, c) => a + c,
@@ -36,7 +38,7 @@ export const RowCol: React.FC<RowColProps> = ({
 
   const diff = 24 - (sumSpanSizes + defaultSpanSize * countSpanDefault);
   return (
-    <Row align={"bottom"} gutter={gutter}>
+    <Row align={align} gutter={gutter}>
       {items.map((Item, index) => (
         <Col
           key={index}

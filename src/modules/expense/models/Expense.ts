@@ -29,6 +29,11 @@ const ExpenseDefinitionSchema = new mongoose.Schema(
       color: { type: String, required: false },
       name: { type: String, required: [true, "Categoria obrigatória"] },
     },
+    frequency: {
+      color: { type: String, required: false },
+      name: { type: String, required: [true, "Categoria obrigatória"] },
+      period: { type: Number, required: [true, "Período obrigatório"] },
+    },
   },
   { _id: false },
 );

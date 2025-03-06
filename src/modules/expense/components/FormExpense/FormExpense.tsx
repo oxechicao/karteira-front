@@ -3,58 +3,44 @@
 import { LDatePicker } from "@common/components/form/LDatePicker";
 import { RowCol } from "@common/components/grid/RowCol";
 import { doMask } from "@common/utils/doMask";
-import { Expense } from "@modules/expense/models/Expense";
-import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
+import {
+  categoryOptions,
+  formOptions,
+  frequencyOptions,
+  typeOptions,
+} from "@modules/expense/components/FormExpense/options";
+import {
+  updateLastPaymentAt,
+  updatePurchaseAt,
+} from "@modules/expense/components/FormExpense/utils";
+import {
+  ExpenseModel,
+  FrequencyType,
+} from "@modules/expense/models/ExpenseModel";
 import { useForm } from "@refinedev/antd";
 import type { FormProps } from "antd";
-import { Form, Input, InputNumber, Select } from "antd";
+import {
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Row,
+  Select,
+} from "antd";
 import { DateTime } from "luxon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface CreateFormProps {
   createFormProps: FormProps<ExpenseModel>;
   initialValues?: ExpenseModel;
 }
 
-const updateLastPaymentAt = (
-  createFormProps: FormProps<ExpenseModel>,
-  installmentTotal: number,
-  formPurchasedAt?: DateTime,
-): boolean => {
-  const purchasedAt = formPurchasedAt || DateTime.now();
-
-  createFormProps?.form?.setFieldValue(
-    ["timeline", "lastPaymentAt"],
-    purchasedAt.plus({
-      months: installmentTotal,
-    }),
-  );
-  return true;
-};
-
-const updatePurchaseAt = (
-  createFormProps: FormProps<ExpenseModel>,
-  currentInstallment: number,
-  purchasedAt?: DateTime,
-  manualPurchasedDate?: DateTime,
-): DateTime | undefined => {
-  let newDate: DateTime | undefined = undefined;
-
-  if (currentInstallment === 0 && manualPurchasedDate) {
-    newDate = manualPurchasedDate;
-  }
-
-  console.log(purchasedAt);
-  if (currentInstallment > 0 && manualPurchasedDate && purchasedAt) {
-    return;
-  }
-
-  newDate = DateTime.now().minus({ months: currentInstallment + 1 });
-
-  if (!newDate) return;
-
-  createFormProps.form?.setFieldValue(["timeline", "purchasedAt"], newDate);
-  return newDate;
+const radioStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 3,
 };
 
 export const FormExpense: React.FC<CreateFormProps> = ({
@@ -62,6 +48,22 @@ export const FormExpense: React.FC<CreateFormProps> = ({
   initialValues,
 }) => {
   const [manualPurchasedDate, setManualPurchasedDate] = useState<DateTime>();
+
+  const definitionType = Form.useWatch(
+    ["definition", "type", "name"],
+    createFormProps.form,
+  );
+  const frequencyType = Form.useWatch(
+    ["definition", "frequency", "name"],
+    createFormProps.form,
+  );
+
+  const periodMax: { [key in FrequencyType]: number } = {
+    days: 366,
+    weeks: 4,
+    months: 12,
+    years: 3,
+  };
 
   createFormProps.onValuesChange = (changedValues, allValues) => {
     if (changedValues?.installment?.total !== undefined) {
@@ -95,6 +97,13 @@ export const FormExpense: React.FC<CreateFormProps> = ({
     ) {
       setManualPurchasedDate(changedValues.timeline.purchasedAt);
     }
+
+    if (changedValues?.flags?.isRecurrent) {
+      createFormProps?.form?.setFieldValue(
+        ["installment", "current"],
+        changedValues.flags.isRecurrent ? 0 : undefined,
+      );
+    }
   };
 
   return (
@@ -107,28 +116,6 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               <Input />
             </Form.Item>
           </>,
-          <>
-            <Form.Item
-              label="Data da compra"
-              name={["timeline", "purchasedAt"]}
-              required
-            >
-              <LDatePicker className="w-full" />
-            </Form.Item>
-          </>,
-          <>
-            <Form.Item
-              label="Data do fim do pagamento"
-              name={["timeline", "lastPaymentAt"]}
-            >
-              <LDatePicker className="w-full" />
-            </Form.Item>
-          </>,
-        ]}
-      />
-      <RowCol
-        spanSizes={{ 0: 8, 3: 8 }}
-        items={[
           <>
             <Form.Item
               label="Valor da parcela"
@@ -162,6 +149,28 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               <InputNumber min={0} max={120} style={{ width: "100%" }} />
             </Form.Item>
           </>,
+        ]}
+      />
+      <RowCol
+        spanSizes={{ 0: 8, 3: 8 }}
+        items={[
+          <>
+            <Form.Item
+              label="Data da compra"
+              name={["timeline", "purchasedAt"]}
+              required
+            >
+              <LDatePicker className="w-full" />
+            </Form.Item>
+          </>,
+          <>
+            <Form.Item
+              label="Data do fim do pagamento"
+              name={["timeline", "lastPaymentAt"]}
+            >
+              <LDatePicker className="w-full" />
+            </Form.Item>
+          </>,
           <>
             <Form.Item
               label="Adicional da primeira parcela"
@@ -184,6 +193,7 @@ export const FormExpense: React.FC<CreateFormProps> = ({
       />
 
       <RowCol
+        align="top"
         items={[
           <>
             <Form.Item
@@ -192,10 +202,7 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               name={["definition", "form", "name"]}
               required
             >
-              <Select>
-                <Select.Option value="credit">Crédito</Select.Option>
-                <Select.Option value="debit">Pix/Débito</Select.Option>
-              </Select>
+              <Radio.Group style={radioStyle} options={formOptions} />
             </Form.Item>
           </>,
           <>
@@ -207,29 +214,49 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               name={["definition", "type", "name"]}
               required
             >
-              <Select>
-                <Select.Option value="installment">Parcelado</Select.Option>
-                <Select.Option value="debit">Pix/Débito</Select.Option>
-                <Select.Option value="planning">
-                  Planejamento/Reserva
-                </Select.Option>
-                <Select.OptGroup label="Recorrentes">
-                  <Select.Option value="monthly">Mensal</Select.Option>
-                  <Select.Option value="yearly">Anualmente</Select.Option>
-                  <Select.Option value="weekly">Semanalmente</Select.Option>
-                </Select.OptGroup>
-              </Select>
+              <Radio.Group style={radioStyle} options={typeOptions} />
             </Form.Item>
           </>,
           <>
             <Form.Item
+              label="Qual a frequencia?"
+              name={["definition", "frequency", "name"]}
+            >
+              <Radio.Group
+                style={radioStyle}
+                disabled={String(definitionType) !== "recurrent"}
+                options={frequencyOptions}
+              />
+            </Form.Item>
+          </>,
+          <>
+            <Form.Item
+              label="Período"
+              name={["definition", "frequency", "period"]}
+            >
+              <InputNumber
+                style={{ width: "100%" }}
+                disabled={String(definitionType) !== "recurrent"}
+                min={1}
+                max={periodMax[String(frequencyType) as FrequencyType] || 30}
+              />
+            </Form.Item>
+          </>,
+        ]}
+      />
+      <RowCol
+        spanSizes={{ 0: 6 }}
+        align="top"
+        items={[
+          <>
+            <Form.Item
               initialValue={initialValues?.definition?.source?.name || "itau"}
-              label="Fonte"
+              label="Fonte do pagamento"
               name={["definition", "source", "name"]}
               required
             >
-              <Select
-                showSearch
+              <Radio.Group
+                style={radioStyle}
                 options={[
                   { label: "Itaú", value: "itau" },
                   { label: "Nubank", value: "nubank" },
@@ -248,29 +275,22 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               name={["definition", "category", "name"]}
               required
             >
-              <Select
-                showSearch
-                options={[
-                  { label: "Casa", value: "casa" },
-                  { label: "Fast Food", value: "fastfood" },
-                  { label: "Pessoal", value: "pessoal" },
-                  { label: "Baby Chicones", value: "chicao" },
-                  { label: "Baby Lore", value: "lore" },
-                  { label: "Mercado", value: "mercado" },
-                  { label: "Farmácia", value: "farmacia" },
-                  { label: "Saúde", value: "saude" },
-                  { label: "Pet", value: "pet" },
-                  { label: "Eventos", value: "eventos" },
-                  { label: "Viagem", value: "viagem" },
-                  { label: "Transporte", value: "transporte" },
-                  { label: "Streaming", value: "streaming" },
-                  { label: "Vesturário", value: "vestuario" },
-                  { label: "Educação", value: "educação" },
-                  { label: "Jogos", value: "jogos" },
-                  { label: "Reservas", value: "reservas" },
-                  { label: "Etc", value: "etc" },
-                ]}
-              />
+              <Radio.Group
+                style={{ display: "flex", flexWrap: "wrap", gap: 6 }}
+              >
+                <Row>
+                  {categoryOptions.map(({ label, value }) => (
+                    <Col
+                      key={value}
+                      xs={{ flex: "100%" }}
+                      sm={{ flex: "50%" }}
+                      md={{ flex: "33%" }}
+                    >
+                      <Radio value={value}>{label}</Radio>
+                    </Col>
+                  ))}
+                </Row>
+              </Radio.Group>
             </Form.Item>
           </>,
         ]}

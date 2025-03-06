@@ -6,6 +6,22 @@ function payNextMonth(form: FormType): boolean {
   return ["credit"].includes(form);
 }
 
+function mapPayments(
+  installment: number,
+  purchasedAt: string,
+  price: number,
+): { date: DateTime; value: number; paid: boolean }[] {
+  return Array.from({ length: installment }, (_, i) => ({
+    date: DateTime.fromISO(purchasedAt)
+      .plus({
+        months: i + (payNextMonth("credit") ? 1 : 0),
+      })
+      .toUTC(),
+    value: price,
+    paid: false,
+  }));
+}
+
 export const mapPayload = (payload: ExpenseModel) => {
   return {
     definition: payload.definition,
@@ -15,9 +31,7 @@ export const mapPayload = (payload: ExpenseModel) => {
     },
     name: payload.name,
     flags: {
-      isRecurrent: ["monthly", "yearly", "weekly"].includes(
-        payload.definition.type.name,
-      ),
+      isRecurrent: payload.definition.type.name === "recurrent",
     },
     timeline: {
       purchasedAt: payload.timeline.purchasedAt,
