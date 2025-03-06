@@ -5,33 +5,6 @@ import { DateTime } from "luxon";
 export const keyFormat = "yyyy_MM";
 export const getKey = (date: string) =>
   DateTime.fromISO(date).toFormat(keyFormat);
-type mapValuesSummaryType = {
-  recurrent: number;
-  byMonth: Record<string, number>;
-};
-export const mapValuesSummary = (
-  expenses: readonly Expense[],
-): mapValuesSummaryType =>
-  expenses.reduce(
-    (acc: mapValuesSummaryType, expense) => {
-      if (expense.flags.isRecurrent) {
-        acc.recurrent += expense.price.value;
-      }
-
-      expense.timeline.paymentsAt.forEach((payment) => {
-        if (DateTime.fromISO(payment.date) < currentMonthStart) return;
-
-        const key = getKey(payment.date);
-
-        if (!acc.byMonth[key]) acc.byMonth[key] = 0;
-
-        acc.byMonth[key] += payment.value;
-      });
-
-      return acc;
-    },
-    { recurrent: 0, byMonth: {} },
-  );
 
 export type valuesSummaryType = {
   key: string;
@@ -39,33 +12,30 @@ export type valuesSummaryType = {
   isRecurrentOnly: boolean;
 };
 
-export const mapValuesSummaryByMonthWithRecurrent = (
-  values: mapValuesSummaryType,
-): valuesSummaryType[] => {
-  const { byMonth, recurrent } = values;
+type mapValuesSummaryType = Record<string, valuesSummaryType>;
 
-  const ammountByMonth = Object.keys(byMonth).length;
-  const hasMoreThanEqualOneYear = ammountByMonth >= 12;
+export const mapValuesSummary = (
+  expenses: readonly Expense[],
+): valuesSummaryType[] =>
+  Object.values(
+    expenses.reduce((acc: mapValuesSummaryType, expense) => {
+      expense.timeline.paymentsAt.forEach((payment) => {
+        if (DateTime.fromISO(payment.date) < currentMonthStart) return;
 
-  const valuesByMonth: { [key: string]: valuesSummaryType } = Array.from(
-    { length: hasMoreThanEqualOneYear ? ammountByMonth + 1 : 12 },
-    (_, index) => {
-      const date = DateTime.now().plus({ months: index }).toFormat(keyFormat);
-      return { key: date, value: recurrent, isRecurrentOnly: true };
-    },
-  ).reduce((acc, curr) => ({ ...acc, ...{ [curr.key]: curr } }), {});
+        const key = getKey(payment.date);
 
-  Object.entries(byMonth).forEach(([key, value]) => {
-    if (valuesByMonth[key]) {
-      valuesByMonth[key] = {
-        ...valuesByMonth[key],
-        value: valuesByMonth[key].value + value,
-        isRecurrentOnly: false,
-      };
-    } else {
-      valuesByMonth[key] = { key, value, isRecurrentOnly: false };
-    }
-  });
+        if (!acc[key])
+          acc[key] = {
+            value: 0,
+            isRecurrentOnly: expense.flags.isRecurrent,
+            key: key,
+          };
 
-  return Object.values(valuesByMonth);
-};
+        acc[key].value += payment.value;
+        acc[key].isRecurrentOnly =
+          acc[key].isRecurrentOnly && expense.flags.isRecurrent;
+      });
+
+      return acc;
+    }, {}),
+  );

@@ -12,7 +12,8 @@ export async function saveExpense(payload: ExpenseModel) {
     throw new Error("Validation error", validation.errors);
   }
 
-  return expense.save();
+  console.log(expense.timeline.paymentsAt);
+  // return expense.save();
 }
 
 export async function getExpensesFromToday() {

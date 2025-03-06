@@ -18,7 +18,7 @@ import {
   FrequencyType,
 } from "@modules/expense/models/ExpenseModel";
 import type { FormProps } from "antd";
-import { Col, Form, Input, InputNumber, Radio, Row } from "antd";
+import { Checkbox, Col, Form, Input, InputNumber, Radio, Row } from "antd";
 import { DateTime } from "luxon";
 import { useState } from "react";
 
@@ -158,6 +158,14 @@ export const FormExpense: React.FC<CreateFormProps> = ({
               name={["timeline", "lastPaymentAt"]}
             >
               <LDatePicker className="w-full" />
+            </Form.Item>
+          </>,
+          <>
+            <Form.Item
+              label="Pagamento no próximo mês?"
+              name={["flags", "isFirstPaymentNextIteration"]}
+            >
+              <Checkbox />
             </Form.Item>
           </>,
           <>

@@ -1,9 +1,6 @@
 "use client";
 import { CardsSummary } from "@modules/expense/components/CardSummary";
-import {
-  mapValuesSummary,
-  mapValuesSummaryByMonthWithRecurrent,
-} from "@modules/expense/components/SummaryExpense/utils";
+import { mapValuesSummary } from "@modules/expense/components/SummaryExpense/utils";
 import { Expense } from "@modules/expense/models/Expense";
 import type { TableProps } from "antd";
 import { Flex, Tabs } from "antd";
@@ -28,9 +25,7 @@ export const SummaryExpense: React.FC<SummaryExpenseProps> = ({
           children: (
             <Flex gap="large" style={{ width: "100%", overflowX: "auto" }}>
               <CardsSummary
-                valueByMonth={mapValuesSummaryByMonthWithRecurrent(
-                  valuesSummary,
-                )}
+                valueByMonth={valuesSummary}
                 loading={!!tableProps.loading}
               />
             </Flex>

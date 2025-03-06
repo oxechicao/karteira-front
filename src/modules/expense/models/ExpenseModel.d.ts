@@ -47,6 +47,7 @@ export type PaymentAt = {
 
 export type Flags = {
   isRecurrent: boolean;
+  isFirstPaymentNextMonth: boolean;
 };
 
 export type ExpenseModel = {

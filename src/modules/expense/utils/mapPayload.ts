@@ -1,4 +1,8 @@
-import { ExpenseModel, FormType } from "@modules/expense/models/ExpenseModel";
+import {
+  ExpenseModel,
+  FormType,
+  FrequencyType,
+} from "@modules/expense/models/ExpenseModel";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
 
@@ -8,17 +12,41 @@ function payNextMonth(form: FormType): boolean {
 
 function mapPayments(
   installment: number,
+  ammountPayments: number,
   purchasedAt: string,
   price: number,
+  isRecurrent?: boolean,
+  frequency?: FrequencyType,
+  period: number = 1,
+  isNextMonth?: boolean,
 ): { date: DateTime; value: number; paid: boolean }[] {
-  return Array.from({ length: installment }, (_, i) => ({
-    date: DateTime.fromISO(purchasedAt)
-      .plus({
-        months: i + (payNextMonth("credit") ? 1 : 0),
-      })
-      .toUTC(),
+  const plusObject = (index: number) => {
+    if (isRecurrent) {
+      switch (frequency) {
+        case "months":
+          return { months: (index + (isNextMonth ? 1 : 0)) * period };
+        case "weeks":
+          return {
+            weeks: index * period,
+            ...(isNextMonth ? { month: index + 1 } : {}),
+          };
+        case "days":
+          return {
+            days: index * period,
+            ...(isNextMonth ? { month: index + 1 } : {}),
+          };
+        case "years":
+          return { months: (index + (isNextMonth ? 1 : 0)) * period };
+      }
+    }
+
+    return { months: index + (isNextMonth ? 1 : 0) };
+  };
+
+  return Array.from({ length: isRecurrent ? 12 : installment }, (_, i) => ({
+    date: DateTime.fromISO(purchasedAt).plus(plusObject(i)).toUTC(),
     value: price,
-    paid: false,
+    paid: i + 1 < ammountPayments,
   }));
 }
 
@@ -37,18 +65,16 @@ export const mapPayload = (payload: ExpenseModel) => {
       purchasedAt: payload.timeline.purchasedAt,
       paymentsAt:
         payload.installment.total &&
-        Array.from({ length: payload.installment.total }, (_, i) => ({
-          date: DateTime.fromISO(payload.timeline.purchasedAt)
-            .plus({
-              months:
-                i + ((payNextMonth(payload.definition.form.name) && 1) || 0),
-            })
-            .toUTC(),
-          value: payload.price.value,
-          paid: payload.installment.current
-            ? payload.installment.current > i
-            : false,
-        })),
+        mapPayments(
+          payload.installment.total,
+          payload.installment.current,
+          payload.timeline.purchasedAt,
+          payload.price.value,
+          payload.definition.type.name === "recurrent",
+          payload.definition.frequency.name,
+          payload.definition.frequency.period,
+          payload.flags.isFirstPaymentNextMonth,
+        ),
     },
     price: {
       value: payload.price.value,
