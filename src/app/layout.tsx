@@ -51,8 +51,13 @@ export default function RootLayout({
                     authProvider={authProviderClient}
                     resources={[
                       {
+                        name: "dashboard",
+                        list: "/",
+                      },
+                      {
                         name: "despesas",
                         list: "/despesas",
+                        create: "/despesas/create",
                         show: "/despesas/:id",
                         edit: "/despesas/:id/edit",
                       },
