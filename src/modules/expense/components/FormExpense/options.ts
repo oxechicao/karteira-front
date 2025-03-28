@@ -1,51 +1,57 @@
 import {
-  CategoryType,
-  FormType,
-  FrequencyType,
-  TypeType,
-} from "@modules/expense/models/ExpenseModel";
+  CategoryEnum,
+  CategoryLabelEnum,
+} from "@modules/expense/enums/CategoryEnum";
+import { FormEnum, FormLabelEnum } from "@modules/expense/enums/FormEnum";
+import {
+  FrequencyEnum,
+  FrequencyLabelEnum,
+} from "@modules/expense/enums/FrequencyEnum";
+import { SourceEnum, SourceLabelEnum } from "@modules/expense/enums/SourceEnum";
+import { TypeEnum, TypeLabelEnum } from "@modules/expense/enums/TypeEnum";
 
-interface Options<T> {
-  label: string;
-  value: T;
+interface Options<T, Y> {
+  label: T;
+  value: Y;
 }
 
-export const frequencyOptions: Options<FrequencyType>[] = [
-  { label: "Dias", value: "days" },
-  { label: "Semanal", value: "weeks" },
-  { label: "Mensal", value: "months" },
-  { label: "Anual", value: "years" },
+export const frequencyOptions: Options<FrequencyLabelEnum, FrequencyEnum>[] = [
+  { label: FrequencyLabelEnum.DAYS, value: FrequencyEnum.DAYS },
+  { label: FrequencyLabelEnum.WEEKS, value: FrequencyEnum.WEEKS },
+  { label: FrequencyLabelEnum.MONTHS, value: FrequencyEnum.MONTHS },
+  { label: FrequencyLabelEnum.YEARS, value: FrequencyEnum.YEARS },
 ];
 
-export const typeOptions: Options<TypeType>[] = [
-  { label: "Parcelado", value: "installment" },
-  { label: "Pix/Débito", value: "debit" },
-  { label: "Recorrente", value: "recurrent" },
+export const typeOptions: Options<TypeLabelEnum, TypeEnum>[] = [
+  { label: TypeLabelEnum.INSTALLMENT, value: TypeEnum.INSTALLMENT },
+  { label: TypeLabelEnum.DEBIT, value: TypeEnum.DEBIT },
+  { label: TypeLabelEnum.RECURRENT, value: TypeEnum.RECURRENT },
 ];
 
-export const formOptions: Options<FormType>[] = [
-  { label: "Crédito", value: "credit" },
-  { label: "Débito", value: "debit" },
-  { label: "Pix", value: "pix" },
+export const formOptions: Options<FormLabelEnum, FormEnum>[] = [
+  { label: FormLabelEnum.CREDIT, value: FormEnum.CREDIT },
+  { label: FormLabelEnum.DEBIT, value: FormEnum.DEBIT },
+  { label: FormLabelEnum.PIX, value: FormEnum.PIX },
 ];
 
-export const categoryOptions: Options<CategoryType>[] = [
-  { label: "Casa", value: "casa" },
-  { label: "Fast Food", value: "fastfood" },
-  { label: "Pessoal", value: "pessoal" },
-  { label: "Baby Chicones", value: "chicao" },
-  { label: "Baby Lore", value: "lore" },
-  { label: "Mercado", value: "mercado" },
-  { label: "Farmácia", value: "farmacia" },
-  { label: "Saúde", value: "saude" },
-  { label: "Pet", value: "pet" },
-  { label: "Eventos", value: "eventos" },
-  { label: "Viagem", value: "viagem" },
-  { label: "Transporte", value: "transporte" },
-  { label: "Streaming", value: "streaming" },
-  { label: "Vesturário", value: "vestuario" },
-  { label: "Educação", value: "educação" },
-  { label: "Jogos", value: "jogos" },
-  { label: "Reservas", value: "reservas" },
-  { label: "Etc", value: "etc" },
+export const categoryOptions: Options<CategoryLabelEnum, CategoryEnum>[] = [
+  { label: CategoryLabelEnum.ASSINATURAS, value: CategoryEnum.ASSINATURAS },
+  { label: CategoryLabelEnum.CASA, value: CategoryEnum.CASA },
+  { label: CategoryLabelEnum.EDUCACAO, value: CategoryEnum.EDUCACAO },
+  { label: CategoryLabelEnum.ETC, value: CategoryEnum.ETC },
+  { label: CategoryLabelEnum.FASTFOOD, value: CategoryEnum.FASTFOOD },
+  { label: CategoryLabelEnum.LAZER, value: CategoryEnum.LAZER },
+  { label: CategoryLabelEnum.MERCADO, value: CategoryEnum.MERCADO },
+  { label: CategoryLabelEnum.PET, value: CategoryEnum.PET },
+  { label: CategoryLabelEnum.RESERVAS, value: CategoryEnum.RESERVAS },
+  { label: CategoryLabelEnum.SAUDE, value: CategoryEnum.SAUDE },
+  { label: CategoryLabelEnum.TRANSPORTE, value: CategoryEnum.TRANSPORTE },
+  { label: CategoryLabelEnum.VESTUARIO, value: CategoryEnum.VESTUARIO },
+];
+
+export const sourceOptions: Options<SourceLabelEnum, SourceEnum>[] = [
+  { label: SourceLabelEnum.ITAU, value: SourceEnum.ITAU },
+  { label: SourceLabelEnum.NUBANK, value: SourceEnum.NUBANK },
+  { label: SourceLabelEnum.INTER, value: SourceEnum.INTER },
+  { label: SourceLabelEnum.OUTROS, value: SourceEnum.OUTROS },
 ];
