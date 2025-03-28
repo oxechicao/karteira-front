@@ -41,13 +41,19 @@ export const RowCol: React.FC<RowColProps> = ({
           )
         : Math.floor(100 / items.length);
 
+  const isLastItemOddIndex = (index: number) => {
+    const isOdd = (index + 1) % 2 === 1;
+    const lastOne = items.length - 1 === index;
+    return isOdd && lastOne;
+  };
+
   return (
     <Row align={align} gutter={gutter}>
       {items.map((Item, index) => (
         <Col
           key={index}
           xs={{ flex: "100%" }}
-          md={{ flex: "50%" }}
+          md={{ flex: isLastItemOddIndex(index) ? "100%" : "50%" }}
           lg={{ flex: `${mapSpanPercents[index] || defaultFlexPercent}%` }}
         >
           {typeof Item === "function" ? <Item /> : Item}
