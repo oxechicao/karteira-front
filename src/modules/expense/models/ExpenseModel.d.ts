@@ -1,76 +1,45 @@
+import { CategoryEnum } from "@modules/expense/enums/CategoryEnum";
+import { FormEnum } from "@modules/expense/enums/FormEnum";
+import { FrequencyEnum } from "@modules/expense/enums/FrequencyEnum";
+import { SourceEnum } from "@modules/expense/enums/SourceEnum";
+import { TypeEnum } from "@modules/expense/enums/TypeEnum";
 import { Types } from "mongoose";
-
-export type ExpenseDefinitionName = "form" | "type" | "source" | "category";
-export type SourceType = "itau" | "nubank" | "inter" | "irmao";
-export type CategoryType =
-  | "casa"
-  | "fastfood"
-  | "chicao"
-  | "lore"
-  | "pessoal"
-  | "mercado"
-  | "farmacia"
-  | "saude"
-  | "pet"
-  | "eventos"
-  | "viagem"
-  | "transporte"
-  | "streaming"
-  | "vestuario"
-  | "educação"
-  | "jogos"
-  | "reservas"
-  | "etc";
-
-export type FormType = "credit" | "debit" | "pix";
-
-export type TypeType = "installment" | "debit" | "recurrent";
-
-export type FrequencyType = "days" | "weeks" | "months" | "years";
-
-type DefinitionsTag = ExpenseDefinitionName &
-  SourceType &
-  CategoryType &
-  FormType &
-  TypeType;
-
-export type ExpenseDefinition<T> = {
-  color: string;
-  name: T;
-};
 
 export type PaymentAt = {
   date: DateTime;
   value: number;
   paid: boolean;
 };
+interface ExpenseValueDefinition {
+  precision: number;
+  currency: string;
+}
 
-export type Flags = {
+interface ExpensePayment {
+  installments: PaymentAt[];
+  totalInstallments: number;
+  currentInstallment: number;
+  frequency: FrequencyEnum;
+  frequencyPeriod: FrequencyPeriodEnum;
   isRecurrent: boolean;
   isFirstPaymentNextMonth: boolean;
-};
+}
 
-export type ExpenseModel = {
+interface ExpenseDetails {
+  category: CategoryEnum;
+  form: FormEnum;
+  source: SourceEnum;
+  type: TypeEnum;
+}
+
+export interface ExpenseModel {
   karteira: Types.ObjectId;
-  definition: {
-    form: ExpenseDefinition<FormType>;
-    type: ExpenseDefinition<TypeType>;
-    source: ExpenseDefinition<SourceType>;
-    category: ExpenseDefinition<CategoryType>;
-    frequency: ExpenseDefinition<FrequencyType> & { period: number };
-  };
-  flags: Flags;
-  installment: { current: number; total: number };
   name: string;
-  timeline: {
-    lastPaymentAt: DateTime;
-    purchasedAt: DateTime;
-    paymentsAt: PaymentAt[];
-  };
-  price: {
-    precision: number;
-    currency: string;
-    value: number;
-    firstInstallmentAdditionalValue: number;
-  };
-};
+  purchasedAt: DateTime;
+  value: number;
+  isFinished: boolean;
+  dueDate: number;
+  valueDefinition: ExpenseValueDefinition;
+  details: ExpenseDetails;
+  payment: ExpensePayment;
+}
