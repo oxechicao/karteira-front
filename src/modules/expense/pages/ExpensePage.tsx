@@ -13,30 +13,22 @@ import type { FormProps } from "antd";
 
 export const ExpensePage: React.FC = () => {
   const { tableProps } = useTable<Expense>();
-  const {
-    modalProps: createModalProps,
-    formProps: createFormProps,
-    show: createModalShow,
-  } = useModalForm<ExpenseModel>({
-    action: "create",
-  });
+  // const {
+  //   modalProps: createModalProps,
+  //   formProps: createFormProps,
+  //   show: createModalShow,
+  // } = useModalForm<ExpenseModel>({
+  //   action: "create",
+  // });
 
   return (
     <>
-      <List
-        resource="despesas"
-        createButtonProps={{
-          children: "Nova despesa",
-          onClick: () => {
-            createModalShow();
-          },
-        }}
-      >
+      <List resource="despesas">
         <SummaryExpense tableProps={tableProps} />
         <Divider />
         <ListExpense tableProps={tableProps} />
       </List>
-      <Modal
+      {/* <Modal
         width={createModalProps.width}
         title={createModalProps.title}
         open={createModalProps.open}
@@ -54,7 +46,7 @@ export const ExpensePage: React.FC = () => {
             }
           />
         )}
-      </Modal>
+      </Modal> */}
     </>
   );
 };
