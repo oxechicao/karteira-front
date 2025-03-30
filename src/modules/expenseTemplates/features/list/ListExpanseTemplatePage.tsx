@@ -1,6 +1,6 @@
 "use client";
 
-import { ModalFormExpenseTemplate } from "@modules/expenseTemplates/features/list/ModalFormExpanseTemplate";
+import { ModalFormExpenseTemplate } from "@modules/expenseTemplates/features/edit/ModalFormExpanseTemplate";
 import { TableExpenseTemplate } from "@modules/expenseTemplates/features/list/TableExpenseTemplate";
 import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
 import {
@@ -8,13 +8,9 @@ import {
   ExpenseTemplateDocument,
 } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
-import { Button, FormProps, Modal } from "antd";
-import { useState } from "react";
+import { FormProps } from "antd";
 
 export const ListExpenseTemplatePage = () => {
-  const [expenseTemplate, setExpenseTemplate] =
-    useState<ExpenseTemplateModel>();
-
   const { tableProps } = useTable<ExpenseTemplate>();
 
   const {
@@ -22,8 +18,18 @@ export const ListExpenseTemplatePage = () => {
     formProps: formEditProps,
     show: openEditModal,
     formLoading: editModalLoading,
-  } = useModalForm<ExpenseTemplateDocument>({
+  } = useModalForm<ExpenseTemplateModel>({
     action: "edit",
+    syncWithLocation: true,
+  });
+
+  const {
+    modalProps: createModalProps,
+    formProps: formCreateProps,
+    show: openCreateModal,
+    formLoading: createModalLoading,
+  } = useModalForm<ExpenseTemplateModel>({
+    action: "create",
     syncWithLocation: true,
   });
 
@@ -33,7 +39,10 @@ export const ListExpenseTemplatePage = () => {
         resource="modelos"
         title="Modelos de Despesas"
         createButtonProps={{
-          children: "Criar Modelo",
+          children: "Novo Modelo de Despesa",
+          onClick: () => {
+            openCreateModal();
+          },
         }}
       >
         <TableExpenseTemplate
@@ -48,6 +57,16 @@ export const ListExpenseTemplatePage = () => {
           modalProps={editModalProps}
           formProps={
             formEditProps as unknown as FormProps<ExpenseTemplateModel>
+          }
+        />
+      )}
+
+      {!tableProps.loading && createModalProps && formCreateProps && (
+        <ModalFormExpenseTemplate
+          loading={createModalLoading}
+          modalProps={createModalProps}
+          formProps={
+            formCreateProps as unknown as FormProps<ExpenseTemplateModel>
           }
         />
       )}

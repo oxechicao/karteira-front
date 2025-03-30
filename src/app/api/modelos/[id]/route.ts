@@ -1,3 +1,4 @@
+import { deleteExpenseTemplate } from "@modules/expenseTemplates/features/delete/deleteExpenseTemplateService";
 import {
   getByIdEditExpenseTemplate,
   updateExpenseTemplate,
@@ -21,5 +22,14 @@ export const PATCH = async (
   const { id } = await params;
   const body = await req.json();
   const result = await updateExpenseTemplate(id, body);
+  return Response.json(result);
+};
+
+export const DELETE = async (
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) => {
+  const { id } = await params;
+  const result = await deleteExpenseTemplate(id);
   return Response.json(result);
 };

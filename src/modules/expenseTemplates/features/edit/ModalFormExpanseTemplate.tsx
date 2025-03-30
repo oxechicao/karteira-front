@@ -1,6 +1,7 @@
 "use client";
 
 import { FormExpenseTemplate } from "@modules/expenseTemplates/features/create/FormExpenseTemplate";
+import mapDatesEditing from "@modules/expenseTemplates/helpers/mapDatesEditing";
 import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
 import { Form, type FormProps, Modal, ModalProps, Spin } from "antd";
 import { DateTime } from "luxon";
@@ -16,7 +17,6 @@ export const ModalFormExpenseTemplate: React.FC<
 > = ({ modalProps, formProps, loading }) => {
   const { initialValues } = formProps;
 
-  console.log(initialValues);
   return (
     <Modal {...modalProps} okText="Salvar" cancelText="Cancelar">
       <Spin spinning={loading}>
@@ -24,12 +24,9 @@ export const ModalFormExpenseTemplate: React.FC<
           <Form
             layout="vertical"
             {...formProps}
-            initialValues={{
-              ...initialValues,
-              purchasedAt: DateTime.fromJSDate(
-                new Date(initialValues?.purchasedAt),
-              ),
-            }}
+            initialValues={mapDatesEditing(
+              initialValues as ExpenseTemplateModel,
+            )}
           >
             <FormExpenseTemplate />
           </Form>

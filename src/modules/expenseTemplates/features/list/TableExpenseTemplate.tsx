@@ -7,6 +7,7 @@ import {
   ExpenseTemplate,
   ExpenseTemplateDocument,
 } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
+import { DeleteButton } from "@refinedev/antd";
 import { Button, Table, TableProps } from "antd";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -30,6 +31,7 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
       dataIndex: "actions",
       width: "250px",
       render: (_: any, record: ExpenseTemplateDocument) => {
+        const id: string = (record?._id as string) || "";
         return (
           <RowCol
             gutter={0}
@@ -40,22 +42,24 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
                 variant="solid"
                 icon={<EditOutlined />}
                 onClick={() => {
-                  openEditModal(record?._id || "");
+                  openEditModal(id);
                 }}
               >
                 Editar
               </Button>,
-              <Button
+              <DeleteButton
                 key="button-delete"
                 color="danger"
                 variant="solid"
                 icon={<DeleteOutlined />}
-                onClick={() => {
-                  // Handle delete action
-                }}
+                resource="modelos"
+                recordItemId={id}
+                confirmTitle="Tem certeza que deseja excluir modelo de despesa?"
+                confirmOkText="Sim"
+                confirmCancelText="Não"
               >
                 Excluir
-              </Button>,
+              </DeleteButton>,
             ]}
           />
         );
