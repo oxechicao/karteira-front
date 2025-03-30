@@ -14,7 +14,7 @@ export type PaymentAt = {
 type ExpenseValueDefinition = {
   precision: number;
   currency: string;
-}
+};
 
 export type ExpensePayment = {
   installments: PaymentAt[];
@@ -24,18 +24,14 @@ export type ExpensePayment = {
   frequencyPeriod: FrequencyPeriodEnum;
   isRecurrent: boolean;
   isFirstPaymentNextMonth: boolean;
-}
+};
 
 export type ExpenseDetails = {
   category: CategoryEnum;
   form: FormEnum;
   source: SourceEnum;
   type: TypeEnum;
-}
-
-export type ExpenseDueDate = {
-  day: number;
-}
+};
 
 export type ExpenseModel = {
   karteira: Types.ObjectId;
@@ -47,4 +43,4 @@ export type ExpenseModel = {
   valueDefinition: ExpenseValueDefinition;
   details: ExpenseDetails;
   payment: ExpensePayment;
-}
+};

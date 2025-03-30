@@ -1,33 +1,22 @@
 import mongoose from "mongoose";
 import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
 
-export interface Expense extends ExpenseModel, mongoose.Document {
-  teste: string;
-}
+export interface Expense extends ExpenseModel, mongoose.Document {}
 
 export const ExpenseDetailsSchema = new mongoose.Schema(
   {
     form: {
-      color: { type: String, required: false },
-      name: {
-        type: String,
-        required: [true, "Forma de pagamento obrigatória"],
-      },
+      type: String,
+      required: [true, "Forma de pagamento obrigatória"],
     },
-    type: {
-      color: { type: String, required: false },
-      name: { type: String, required: [true, "Tipo de pagamento obrigatório"] },
-    },
+    type: { type: String, required: [true, "Tipo de pagamento obrigatório"] },
     source: {
-      color: { type: String, required: false },
-      name: {
-        type: String,
-        required: [true, "Fonte de pagamento obrigatório"],
-      },
+      type: String,
+      required: [true, "Fonte de pagamento obrigatório"],
     },
     category: {
-      color: { type: String, required: false },
-      name: { type: String, required: [true, "Categoria obrigatória"] },
+      type: String,
+      required: [true, "Categoria obrigatória"],
     },
   },
   { _id: false },
@@ -41,7 +30,11 @@ export const ExpensePaymentAtSchema = new mongoose.Schema(
 export const ExpensePaymentSchema = new mongoose.Schema(
   {
     installments: [ExpensePaymentAtSchema],
-    totalInstallments: { type: Number, default: 1, min: [1, "Mínimo de parcelas é 1"] },
+    totalInstallments: {
+      type: Number,
+      default: 1,
+      min: [1, "Mínimo de parcelas é 1"],
+    },
     currentInstallment: { type: Number, default: 0, required: true },
     frequency: String,
     frequencyPeriod: String,
@@ -53,27 +46,30 @@ export const ExpensePaymentSchema = new mongoose.Schema(
 
 export const ExpenseValueSchema = new mongoose.Schema(
   {
-    precision: { type: Number, default: 2 },
-    currency: { type: String, default: "BRL" },
+    precision: { type: Number, required: false, default: 2 },
+    currency: { type: String, required: false, default: "BRL" },
   },
   { _id: false },
 );
 
-export const ExpenseSchema = new mongoose.Schema<Expense>({
-  karteira: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Karteira",
-    required: [true, "Karteira deve ser definida"],
+export const ExpenseSchema = new mongoose.Schema<Expense>(
+  {
+    karteira: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Karteira",
+      required: [true, "Karteira deve ser definida"],
+    },
+    name: { type: String, required: [true, "Nome obrigatório"] },
+    purchasedAt: { type: Date, required: [true, "Data de compra obrigatória"] },
+    value: { type: Number, required: [true, "Valor obrigatório"] },
+    isFinished: { type: Boolean, default: false },
+    payday: Number,
+    valueDefinition: ExpenseValueSchema,
+    details: ExpenseDetailsSchema,
+    payment: ExpensePaymentSchema,
   },
-  name: { type: String, required: [true, "Nome obrigatório"] },
-  purchasedAt: { type: Date, required: [true, "Data de compra obrigatória"] },
-  value: { type: Number, required: [true, "Valor obrigatório"] },
-  isFinished: { type: Boolean, default: false },
-  dueDate: { type: Date, required: [true, "Data de vencimento obrigatória"] },
-  valueDefinition: ExpenseValueSchema,
-  details: ExpenseDetailsSchema,
-  payment: ExpensePaymentSchema,
-});
+  { timestamps: true },
+);
 
 export default mongoose.models.Expense ||
   mongoose.model<Expense>("Expense", ExpenseSchema);

@@ -1,8 +1,8 @@
 export enum FrequencyLabelEnum {
-  DAYS = "Dias",
-  WEEKS = "Semanas",
-  MONTHS = "Meses",
-  YEARS = "Anos",
+  DAYS = "Em dias",
+  WEEKS = "Em semanas",
+  MONTHS = "Em meses",
+  YEARS = "Em anos",
 }
 
 export enum FrequencyEnum {

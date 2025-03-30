@@ -1,5 +1,5 @@
-import { CreateExpenseTemplatePage } from "@modules/expense/pages/CreateExpenseTemplatePage";
+import { ListExpenseTemplatePage } from "@modules/expenseTemplates/features/list/ListExpanseTemplatePage";
 
 export default function ModelosPage() {
-  return <CreateExpenseTemplatePage />;
+  return <ListExpenseTemplatePage />;
 }
