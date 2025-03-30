@@ -3,7 +3,7 @@
 import { FormExpense } from "@modules/expense/components";
 import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
 import { Create, useForm } from "@refinedev/antd";
-import { FormProps } from "antd";
+import { Form, FormProps } from "antd";
 
 export const CreateExpensePage: React.FC = () => {
   const { formProps: createFormProps } = useForm<ExpenseModel>({
@@ -12,9 +12,9 @@ export const CreateExpensePage: React.FC = () => {
 
   return (
     <Create>
-      <FormExpense
-        createFormProps={createFormProps as unknown as FormProps<ExpenseModel>}
-      />
+      <Form {...createFormProps} layout="vertical">
+        <FormExpense />
+      </Form>
     </Create>
   );
 };

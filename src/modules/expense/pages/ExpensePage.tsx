@@ -5,7 +5,7 @@ import {
   ListExpense,
   SummaryExpense,
 } from "@modules/expense/components";
-import { Expense } from "@modules/expense/models/Expense";
+import { Expense } from "@modules/expense/schemas/Expense";
 import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { Divider, Modal } from "antd";

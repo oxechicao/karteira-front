@@ -10,7 +10,7 @@ import {
 import { SourceEnum, SourceLabelEnum } from "@modules/expense/enums/SourceEnum";
 import { TypeEnum, TypeLabelEnum } from "@modules/expense/enums/TypeEnum";
 
-interface Options<T, Y> {
+type Options<T, Y> = {
   label: T;
   value: Y;
 }

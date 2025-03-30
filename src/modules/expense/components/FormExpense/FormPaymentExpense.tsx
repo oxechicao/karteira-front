@@ -1,15 +1,17 @@
 import { RowCol } from "@common/components/grid/RowCol";
+import { FormExpenseNoRequired } from "@modules/expense/components/FormExpense/FormExpense";
 import { frequencyOptions } from "@modules/expense/components/FormExpense/options";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
 } from "@modules/expense/enums/FrequencyEnum";
-import { Checkbox, Form, InputNumber, Select } from "antd";
-import { useEffect } from "react";
+import { Form, InputNumber, Select } from "antd";
 
 const inputStyle: { style: React.CSSProperties } = { style: { width: "100%" } };
 
-export const FormPaymentExpense: React.FC = () => {
+export const FormPaymentExpense: React.FC<FormExpenseNoRequired> = ({
+  notRequired,
+}) => {
   const form = Form.useFormInstance();
   const isRecurrent = Form.useWatch(["payment", "isRecurrent"], {
     form,
@@ -26,8 +28,6 @@ export const FormPaymentExpense: React.FC = () => {
     [FrequencyEnum.YEARS]: FrequencyPeriodEnum.YEARS,
   };
 
-  console.log(maxPeriod, frequency);
-
   return (
     <RowCol
       items={[
@@ -35,7 +35,7 @@ export const FormPaymentExpense: React.FC = () => {
           key="payment-totalInstallments"
           label="Total de Parcelas"
           name={["payment", "totalInstallments"]}
-          required
+          required={!notRequired}
         >
           <InputNumber {...inputStyle} />
         </Form.Item>,
@@ -43,7 +43,7 @@ export const FormPaymentExpense: React.FC = () => {
           key="payment-currentInstallment"
           label="Total de Parcelas Pagas"
           name={["payment", "currentInstallment"]}
-          required
+          required={!notRequired}
         >
           <InputNumber {...inputStyle} />
         </Form.Item>,
@@ -89,7 +89,7 @@ export const FormPaymentExpense: React.FC = () => {
           key="installment-frequencyPeriod"
           label="Período"
           name={["payment", "frequencyPeriod"]}
-          required
+          required={isRecurrent}
         >
           <InputNumber
             disabled={!isRecurrent}

@@ -1,13 +1,13 @@
 "use client";
 import { CardsSummary } from "@modules/expense/components/CardSummary";
 import { mapValuesSummary } from "@modules/expense/components/SummaryExpense/utils";
-import { Expense } from "@modules/expense/models/Expense";
+import { Expense } from "@modules/expense/schemas/Expense";
 import type { TableProps } from "antd";
 import { Flex, Tabs } from "antd";
 
-interface SummaryExpenseProps {
+type SummaryExpenseProps = {
   tableProps: TableProps<Expense>;
-}
+};
 
 export const SummaryExpense: React.FC<SummaryExpenseProps> = ({
   tableProps,

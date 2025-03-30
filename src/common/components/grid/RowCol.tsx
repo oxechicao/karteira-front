@@ -3,13 +3,13 @@
 import { Col, Row } from "antd";
 import { Gutter } from "antd/es/grid/row";
 
-export interface RowColProps {
+export type RowColProps = {
   gutter?: Gutter | [Gutter, Gutter];
   defaultWidth?: boolean;
   items: Array<React.FC | React.ReactNode>;
   spanSizes?: Record<string, number>;
   align?: "top" | "middle" | "bottom";
-}
+};
 
 export const RowCol: React.FC<RowColProps> = ({
   gutter = 24,

@@ -5,7 +5,7 @@ export interface Expense extends ExpenseModel, mongoose.Document {
   teste: string;
 }
 
-const ExpenseDefinitionSchema = new mongoose.Schema(
+export const ExpenseDetailsSchema = new mongoose.Schema(
   {
     form: {
       color: { type: String, required: false },
@@ -29,64 +29,50 @@ const ExpenseDefinitionSchema = new mongoose.Schema(
       color: { type: String, required: false },
       name: { type: String, required: [true, "Categoria obrigatória"] },
     },
-    frequency: {
-      color: { type: String, required: false },
-      name: { type: String, required: [true, "Categoria obrigatória"] },
-      period: { type: Number, required: [true, "Período obrigatório"] },
-    },
   },
   { _id: false },
 );
 
-const ExpenseInstallmentSchema = new mongoose.Schema(
-  {
-    current: { type: Number, default: 0 },
-    total: { type: Number, required: true, min: [1, "Mínimo de parcelas é 1"] },
-  },
-  { _id: false },
-);
-
-const ExpensePaymentAtSchema = new mongoose.Schema(
+export const ExpensePaymentAtSchema = new mongoose.Schema(
   { date: Date, value: Number, paid: Boolean },
   { _id: false },
 );
 
-const ExpenseTimelineSchema = new mongoose.Schema(
+export const ExpensePaymentSchema = new mongoose.Schema(
   {
-    lastPaymentAt: Date,
-    purchasedAt: Date,
-    paymentsAt: [ExpensePaymentAtSchema],
+    installments: [ExpensePaymentAtSchema],
+    totalInstallments: { type: Number, default: 1, min: [1, "Mínimo de parcelas é 1"] },
+    currentInstallment: { type: Number, default: 0, required: true },
+    frequency: String,
+    frequencyPeriod: String,
+    isRecurrent: { type: Boolean, default: false },
+    isFirstPaymentNextMonth: { type: Boolean, default: false },
   },
   { _id: false },
 );
 
-const ExpensePriceSchema = new mongoose.Schema(
+export const ExpenseValueSchema = new mongoose.Schema(
   {
     precision: { type: Number, default: 2 },
     currency: { type: String, default: "BRL" },
-    value: Number,
-    firstInstallmentAdditionalValue: { type: Number, default: 0 },
   },
   { _id: false },
 );
 
-const ExpenseFlags = new mongoose.Schema(
-  { isRecurrent: Boolean },
-  { _id: false },
-);
-
-const ExpenseSchema = new mongoose.Schema<Expense>({
-  definition: ExpenseDefinitionSchema,
-  installment: ExpenseInstallmentSchema,
-  name: { type: String, required: [true, "Nome da Despesa deve ser definido"] },
-  timeline: ExpenseTimelineSchema,
-  price: ExpensePriceSchema,
-  flags: ExpenseFlags,
+export const ExpenseSchema = new mongoose.Schema<Expense>({
   karteira: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Karteira",
     required: [true, "Karteira deve ser definida"],
   },
+  name: { type: String, required: [true, "Nome obrigatório"] },
+  purchasedAt: { type: Date, required: [true, "Data de compra obrigatória"] },
+  value: { type: Number, required: [true, "Valor obrigatório"] },
+  isFinished: { type: Boolean, default: false },
+  dueDate: { type: Date, required: [true, "Data de vencimento obrigatória"] },
+  valueDefinition: ExpenseValueSchema,
+  details: ExpenseDetailsSchema,
+  payment: ExpensePaymentSchema,
 });
 
 export default mongoose.models.Expense ||

@@ -2,7 +2,7 @@
 
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
-import { Expense } from "@modules/expense/models/Expense";
+import { Expense } from "@modules/expense/schemas/Expense";
 import { DefinitionsTag } from "@modules/expense/models/ExpenseModel";
 import { Table, type TableColumnProps, type TableProps } from "antd";
 import { DateTime } from "luxon";
@@ -68,9 +68,10 @@ const columns = [
     ),
   },
 ];
-interface ListExpenseProps {
+
+type ListExpenseProps = {
   tableProps: TableProps<Expense>;
-}
+};
 
 export const ListExpense: React.FC<ListExpenseProps> = ({ tableProps }) => {
   return (

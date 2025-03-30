@@ -3,10 +3,10 @@ import { Button, Divider, InputRef, Select, Space } from "antd";
 import Input from "rc-input";
 import { useRef, useState } from "react";
 
-interface Options {
+type Options = {
   label: string;
   value: string;
-}
+};
 
 export type SelectAddProps = {
   defaultOptions?: Options[];

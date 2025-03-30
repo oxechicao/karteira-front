@@ -1,5 +1,5 @@
 import { currentMonthStart } from "@common/utils/date";
-import { Expense } from "@modules/expense/models/Expense";
+import { Expense } from "@modules/expense/schemas/Expense";
 import { DateTime } from "luxon";
 
 export const keyFormat = "yyyy_MM";

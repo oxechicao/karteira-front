@@ -1,9 +1,7 @@
-import { useCallback } from "react";
-
-interface maskPatterProp {
+type maskPatterProp = {
   reverse?: boolean;
   charPattern?: string;
-}
+};
 
 export const doMask = (
   value: string,

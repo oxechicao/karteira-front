@@ -1,30 +1,32 @@
 import { LDatePicker } from "@common/components/form/LDatePicker";
 import { RowCol } from "@common/components/grid/RowCol";
-import { categoryOptions } from "@modules/expense/components/FormExpense/options";
-import { Form, Input, Select } from "antd";
+import { FormExpenseNoRequired } from "@modules/expense/components/FormExpense/FormExpense";
+import { Form, Input, InputNumber } from "antd";
 
-export const FormBaseExpense: React.FC = () => {
+export const FormBaseExpense: React.FC<FormExpenseNoRequired> = ({
+  notRequired,
+}) => {
   return (
     <RowCol
       items={[
-        <Form.Item key="name" label="Nome" name="name" required>
+        <Form.Item key="name" label="Nome" name="name" required={!notRequired}>
           <Input />
         </Form.Item>,
         <Form.Item
           key="purchasedAt"
           label="Data da compra"
           name="purchasedAt"
-          required
+          required={!notRequired}
         >
           <LDatePicker className="w-full" />
         </Form.Item>,
         <Form.Item
           key="purchasedAt"
-          label="Data do vencimento (pagamento)"
+          label="Dia do vencimento (pagamento)"
           name="dueDate"
-          required
+          required={!notRequired}
         >
-          <LDatePicker className="w-full" />
+          <InputNumber style={{ width: "100%" }} />
         </Form.Item>,
       ]}
     />

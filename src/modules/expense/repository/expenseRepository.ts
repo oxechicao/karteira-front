@@ -1,6 +1,6 @@
 "use server";
 
-import Expense from "@modules/expense/models/Expense";
+import Expense from "@modules/expense/schemas/Expense";
 import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
 import { mapPayload } from "@modules/expense/utils/mapPayload";
 import { DateTime } from "luxon";

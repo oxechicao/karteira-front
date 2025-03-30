@@ -10,12 +10,13 @@ export type PaymentAt = {
   value: number;
   paid: boolean;
 };
-interface ExpenseValueDefinition {
+
+type ExpenseValueDefinition = {
   precision: number;
   currency: string;
 }
 
-interface ExpensePayment {
+export type ExpensePayment = {
   installments: PaymentAt[];
   totalInstallments: number;
   currentInstallment: number;
@@ -25,20 +26,24 @@ interface ExpensePayment {
   isFirstPaymentNextMonth: boolean;
 }
 
-interface ExpenseDetails {
+export type ExpenseDetails = {
   category: CategoryEnum;
   form: FormEnum;
   source: SourceEnum;
   type: TypeEnum;
 }
 
-export interface ExpenseModel {
+export type ExpenseDueDate = {
+  day: number;
+}
+
+export type ExpenseModel = {
   karteira: Types.ObjectId;
   name: string;
   purchasedAt: DateTime;
   value: number;
   isFinished: boolean;
-  dueDate: number;
+  payday: number;
   valueDefinition: ExpenseValueDefinition;
   details: ExpenseDetails;
   payment: ExpensePayment;

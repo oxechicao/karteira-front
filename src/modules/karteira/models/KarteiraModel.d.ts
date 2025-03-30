@@ -1,8 +1,8 @@
-export interface GuestModel {
+export type GuestModel = {
   email: string;
   role: string;
 }
-export interface KarteiraModel {
+export type KarteiraModel = {
   name: string;
   owner: string;
   guests: GuestModel[];
