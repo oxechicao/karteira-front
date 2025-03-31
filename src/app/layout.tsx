@@ -17,6 +17,7 @@ import { authProviderClient } from "@common/providers/auth-provider/auth-provide
 import { dataProvider } from "@common/providers/data-provider";
 import "@refinedev/antd/dist/reset.css";
 import "@common/styles/global.css";
+import { Sider } from "@common/components/layout/Sider";
 
 export const metadata: Metadata = {
   title: "Refine",
@@ -77,7 +78,7 @@ export default function RootLayout({
                     }}
                   >
                     <ThemedLayoutContextProvider>
-                      <ThemedLayoutV2>{children}</ThemedLayoutV2>
+                      <ThemedLayoutV2 Sider={Sider}>{children}</ThemedLayoutV2>
                     </ThemedLayoutContextProvider>
                     <RefineKbar />
                   </Refine>
