@@ -1,4 +1,5 @@
 import dbConnect from "@lib/mongoose/dbConnect";
+import ExpenseModelForm from "@modules/expense/models/ExpenseModelForm";
 import ExpenseTemplateSchema, {
   ExpenseTemplateSchemaModel,
 } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";

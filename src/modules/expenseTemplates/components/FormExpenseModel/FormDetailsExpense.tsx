@@ -1,15 +1,15 @@
 import { RowCol } from "@common/components/grid/RowCol";
-import { FormExpenseNoRequired } from "@modules/expense/components/FormExpense/FormExpense";
+import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
 import {
   categoryOptions,
   formOptions,
   typeOptions,
-} from "@modules/expense/components/FormExpense/options";
+} from "@modules/expenseTemplates/components/FormExpenseModel/options";
 import { Form, Input, Select } from "antd";
 
-export const FormDetailsExpense: React.FC<FormExpenseNoRequired> = ({
+export default function FormDetailsExpense({
   notRequired,
-}) => {
+}: FormExpenseNoRequired) {
   return (
     <RowCol
       items={[
@@ -48,4 +48,4 @@ export const FormDetailsExpense: React.FC<FormExpenseNoRequired> = ({
       ]}
     />
   );
-};
+}

@@ -1,4 +1,4 @@
-import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
+import { ExpenseModel } from "@modules/expense/models/ExpenseModelForm";
 import type { FormProps } from "antd";
 import { DateTime } from "luxon";
 

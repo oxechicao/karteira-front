@@ -1,17 +1,17 @@
 import { RowCol } from "@common/components/grid/RowCol";
-import { FormExpenseNoRequired } from "@modules/expense/components/FormExpense/FormExpense";
-import { frequencyOptions } from "@modules/expense/components/FormExpense/options";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
 } from "@modules/expense/enums/FrequencyEnum";
+import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
+import { frequencyOptions } from "@modules/expenseTemplates/components/FormExpenseModel/options";
 import { Form, InputNumber, Select } from "antd";
 
 const inputStyle: { style: React.CSSProperties } = { style: { width: "100%" } };
 
-export const FormPaymentExpense: React.FC<FormExpenseNoRequired> = ({
+export default function FormPaymentExpense({
   notRequired,
-}) => {
+}: FormExpenseNoRequired) {
   const form = Form.useFormInstance();
   const isRecurrent = Form.useWatch(["payment", "isRecurrent"], {
     form,
@@ -100,4 +100,4 @@ export const FormPaymentExpense: React.FC<FormExpenseNoRequired> = ({
       ]}
     />
   );
-};
+}

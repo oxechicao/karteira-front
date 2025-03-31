@@ -1,7 +1,7 @@
 "use client";
 
-import { FormExpenseTemplate } from "@modules/expenseTemplates/features/create/FormExpenseTemplate";
-import mapDatesEditing from "@modules/expenseTemplates/helpers/mapDatesEditing";
+import { FormExpenseTemplate } from "@modules/expenseTemplates/components/FormExpenseTemplate";
+import mapFormExpenseEditing from "@modules/expenseTemplates/helpers/mapFormExpenseEditing";
 import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import { Form, type FormProps, Modal, ModalProps, Spin } from "antd";
 import { DateTime } from "luxon";
@@ -24,7 +24,7 @@ export const ModalFormExpenseTemplate: React.FC<
           <Form
             layout="vertical"
             {...formProps}
-            initialValues={mapDatesEditing(
+            initialValues={mapFormExpenseEditing(
               initialValues as ExpenseTemplateModelForm,
             )}
           >

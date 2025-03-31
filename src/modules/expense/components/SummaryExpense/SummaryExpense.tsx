@@ -1,7 +1,7 @@
 "use client";
 import { CardsSummary } from "@modules/expense/components/CardSummary";
 import { mapValuesSummary } from "@modules/expense/components/SummaryExpense/utils";
-import { Expense } from "@modules/expense/schemas/Expense";
+import { Expense } from "@modules/expense/schemas/ExpenseSchema";
 import type { TableProps } from "antd";
 import { Flex, Tabs } from "antd";
 

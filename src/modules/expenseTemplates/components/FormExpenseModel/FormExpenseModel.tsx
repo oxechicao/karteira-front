@@ -1,17 +1,17 @@
 "use client";
 
-import { FormBaseExpense } from "@modules/expense/components/FormExpense/FormBaseExpense";
-import { FormDetailsExpense } from "@modules/expense/components/FormExpense/FormDetailsExpense";
-import { FormPaymentExpense } from "@modules/expense/components/FormExpense/FormPaymentExpense";
+import FormBaseExpense from "@modules/expenseTemplates/components/FormExpenseModel/FormBaseExpense";
+import FormDetailsExpense from "@modules/expenseTemplates/components/FormExpenseModel/FormDetailsExpense";
+import FormPaymentExpense from "@modules/expenseTemplates/components/FormExpenseModel/FormPaymentExpense";
 import { Col, Divider, Form, Input, Row, Space } from "antd";
 
 export type FormExpenseNoRequired = {
   notRequired?: boolean;
 };
 
-export const FormExpense: React.FC<FormExpenseNoRequired> = ({
+export default function FormExpenseModel({
   notRequired = false,
-}) => {
+}: FormExpenseNoRequired) {
   return (
     <>
       <Space direction="vertical" size="large" style={{ display: "flex" }}>
@@ -39,4 +39,4 @@ export const FormExpense: React.FC<FormExpenseNoRequired> = ({
       </Form.Item>
     </>
   );
-};
+}

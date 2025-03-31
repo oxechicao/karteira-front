@@ -1,15 +1,15 @@
 import { LDatePicker } from "@common/components/form/LDatePicker";
 import { RowCol } from "@common/components/grid/RowCol";
-import { doMask, moneyMask } from "@common/utils/doMask";
-import { FormExpenseNoRequired } from "@modules/expense/components/FormExpense/FormExpense";
-import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
+import { moneyMask } from "@common/utils/doMask";
+import ExpenseModelForm from "@modules/expense/models/ExpenseModelForm";
+import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
 import { Form, Input, InputNumber } from "antd";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
 
-export const FormBaseExpense: React.FC<FormExpenseNoRequired> = ({
+export default function FormBaseExpense({
   notRequired,
-}) => {
-  const { setFieldValue } = useFormInstance<ExpenseModel>();
+}: FormExpenseNoRequired) {
+  const { setFieldValue } = useFormInstance<ExpenseModelForm>();
 
   return (
     <RowCol
@@ -53,4 +53,4 @@ export const FormBaseExpense: React.FC<FormExpenseNoRequired> = ({
       ]}
     />
   );
-};
+}

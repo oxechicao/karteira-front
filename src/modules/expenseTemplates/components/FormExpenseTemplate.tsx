@@ -1,4 +1,4 @@
-import { FormExpense } from "@modules/expense/components/FormExpense/FormExpense";
+import FormExpenseModel from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
 import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import { Divider, Form, Input } from "antd";
 import React from "react";
@@ -14,7 +14,7 @@ export const FormExpenseTemplate: React.FC<FormExpenseModelProps> = () => {
       <Form.Item name="templateName" label="Nome do Tipo de Pagamento" required>
         <Input />
       </Form.Item>
-      <FormExpense notRequired />
+      <FormExpenseModel notRequired />
     </>
   );
 };

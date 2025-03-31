@@ -1,7 +1,7 @@
 type ExpenseTemplatePaymentAt = {
   date: DateTime;
   value: number;
-  paid: boolean;
+  isPaid: boolean;
 };
 
 export default ExpenseTemplatePaymentAt;

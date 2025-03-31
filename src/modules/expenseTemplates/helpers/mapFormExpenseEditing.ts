@@ -1,7 +1,7 @@
 import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import { DateTime } from "luxon";
 
-export default function mapDatesEditing(
+export default function mapFormExpenseEditing(
   data: ExpenseTemplateModelForm,
 ): ExpenseTemplateModelForm {
   return {

@@ -1,7 +1,7 @@
 "use client";
 
-import { FormExpenseTemplate } from "@modules/expenseTemplates/features/create/FormExpenseTemplate";
-import mapDatesEditing from "@modules/expenseTemplates/helpers/mapDatesEditing";
+import { FormExpenseTemplate } from "@modules/expenseTemplates/components/FormExpenseTemplate";
+import mapFormExpenseEditing from "@modules/expenseTemplates/helpers/mapFormExpenseEditing";
 import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Spin } from "antd";
@@ -22,7 +22,7 @@ export const EditExpenseTemplatePage: React.FC = () => {
       <Spin spinning={formLoading}>
         <Form
           {...formProps}
-          initialValues={mapDatesEditing(
+          initialValues={mapFormExpenseEditing(
             formProps.initialValues as ExpenseTemplateModelForm,
           )}
         >

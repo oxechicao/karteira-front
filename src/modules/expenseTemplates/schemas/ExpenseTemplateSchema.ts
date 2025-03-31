@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 export type ExpenseTemplateSchemaModel = {
   templateName: string;
+  isAnonymous: boolean;
   template: ExpenseTemplateForm;
 };
 
@@ -13,7 +14,7 @@ export interface ExpenseTemplateDocument
   extends ExpenseTemplateSchemaModel,
     mongoose.Document {}
 
-// copy of ExpenseModel withou _id
+// copy of ExpenseModel without _id
 const ExpenseTemplateModelSchema = new mongoose.Schema(
   {
     karteira: {

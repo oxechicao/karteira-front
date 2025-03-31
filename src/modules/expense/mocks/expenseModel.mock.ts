@@ -8,7 +8,7 @@ import {
   ExpenseModel,
   ExpensePayment,
   ExpenseValueDefinition,
-} from "@modules/expense/models/ExpenseModel";
+} from "@modules/expense/models/ExpenseModelForm";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
 

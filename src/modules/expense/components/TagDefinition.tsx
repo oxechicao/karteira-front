@@ -1,4 +1,4 @@
-import { DefinitionsTag } from "@modules/expense/models/ExpenseModel";
+import { DefinitionsTag } from "@modules/expense/models/ExpenseModelForm";
 import { Tag } from "antd";
 
 export const expenseDefinitionLabel: Record<DefinitionsTag, string> = {
