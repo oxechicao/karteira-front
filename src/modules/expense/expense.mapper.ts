@@ -14,10 +14,14 @@ import {
 import { Types } from "mongoose";
 
 export function mapFormExpenseEditing(data: ExpenseDocument): ExpenseModelForm {
+  const purchasedAt = data.purchasedAt
+    ? new Date(data.purchasedAt.toString())
+    : new Date();
+
   return {
     ...data,
     isFinished: !!data?.isFinished,
-    purchasedAt: DateTime.fromJSDate(new Date(data?.purchasedAt?.toString())),
+    purchasedAt: DateTime.fromJSDate(purchasedAt),
     payment: {
       ...data?.payment,
       isFirstPaymentNextMonth: !!data?.payment?.isFirstPaymentNextMonth,
@@ -88,7 +92,11 @@ const mapInstallments = (
 };
 
 export function mapExpenseSchema(data: ExpenseModelForm): ExpenseModelSchema {
-  const purchasedAt = data.purchasedAt;
+  console.log(typeof data.purchasedAt);
+  const purchasedAt = DateTime.fromJSDate(
+    data.purchasedAt ? new Date(data.purchasedAt.toString()) : new Date(),
+  );
+
   const value = Number(String(data.value).replace(/\D/g, ""));
   return {
     templateId: data?.templateId || new Types.ObjectId(),

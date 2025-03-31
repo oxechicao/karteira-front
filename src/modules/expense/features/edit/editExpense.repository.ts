@@ -6,3 +6,14 @@ export const fetchExpenseById = async (id: string) => {
   const expense = await Expense.findById(id).lean();
   return expense;
 };
+
+export const updateExpense = async (id: string, body: any) => {
+  const validation = new Expense(body).validate();
+  if (validation.error) {
+    throw new Error(validation.error.message);
+  }
+
+  await dbConnect();
+  const result = await Expense.findByIdAndUpdate(id, body);
+  return result;
+};
