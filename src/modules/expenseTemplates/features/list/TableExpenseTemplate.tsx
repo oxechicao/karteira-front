@@ -1,18 +1,17 @@
 "use client";
 
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { RowCol } from "@common/components/grid/RowCol";
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
+import DeleteButtonExpense from "@modules/expenseTemplates/features/delete/DeleteButtonExpense";
+import EditButtonExpense from "@modules/expenseTemplates/features/edit/EditButtonExpense";
 import {
-  ExpenseTemplate,
+  ExpenseTemplateSchemaModel,
   ExpenseTemplateDocument,
 } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
-import { DeleteButton } from "@refinedev/antd";
-import { Button, Table, TableProps } from "antd";
-import React, { Dispatch, SetStateAction } from "react";
+import { Table, TableProps } from "antd";
+import React from "react";
 
 type TableExpenseTemplateProps = {
-  tableProps: TableProps<ExpenseTemplate>;
+  tableProps: TableProps<ExpenseTemplateDocument>;
   openEditModal: (e: any) => void;
 };
 
@@ -36,30 +35,12 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
           <RowCol
             gutter={0}
             items={[
-              <Button
-                key="button-edit"
-                color="gold"
-                variant="solid"
-                icon={<EditOutlined />}
-                onClick={() => {
-                  openEditModal(id);
-                }}
-              >
-                Editar
-              </Button>,
-              <DeleteButton
-                key="button-delete"
-                color="danger"
-                variant="solid"
-                icon={<DeleteOutlined />}
-                resource="modelos"
-                recordItemId={id}
-                confirmTitle="Tem certeza que deseja excluir modelo de despesa?"
-                confirmOkText="Sim"
-                confirmCancelText="Não"
-              >
-                Excluir
-              </DeleteButton>,
+              <EditButtonExpense
+                key="edit-button"
+                id={id}
+                openModal={openEditModal}
+              />,
+              <DeleteButtonExpense key="delete-button" id={id} />,
             ]}
           />
         );

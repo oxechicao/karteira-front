@@ -5,7 +5,7 @@ import {
   fetchByIdExpenseTemplate,
   updateByIdExpenseTemplate,
 } from "@modules/expenseTemplates/features/edit/editExpenseTemplateRepository";
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
+import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 
 export const getByIdEditExpenseTemplate = async (id: string) => {
   const result = await fetchByIdExpenseTemplate(id);
@@ -18,7 +18,7 @@ export const getByIdEditExpenseTemplate = async (id: string) => {
 
 export const updateExpenseTemplate = async (
   id: string,
-  body: ExpenseTemplateModel,
+  body: ExpenseTemplateModelForm,
 ) => {
   const result = await updateByIdExpenseTemplate(
     id,

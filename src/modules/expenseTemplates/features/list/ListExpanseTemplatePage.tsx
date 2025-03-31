@@ -2,23 +2,23 @@
 
 import { ModalFormExpenseTemplate } from "@modules/expenseTemplates/features/edit/ModalFormExpanseTemplate";
 import { TableExpenseTemplate } from "@modules/expenseTemplates/features/list/TableExpenseTemplate";
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
+import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import {
-  ExpenseTemplate,
+  ExpenseTemplateSchemaModel,
   ExpenseTemplateDocument,
 } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 
 export const ListExpenseTemplatePage = () => {
-  const { tableProps } = useTable<ExpenseTemplate>();
+  const { tableProps } = useTable<ExpenseTemplateDocument>();
 
   const {
     modalProps: editModalProps,
     formProps: formEditProps,
     show: openEditModal,
     formLoading: editModalLoading,
-  } = useModalForm<ExpenseTemplateModel>({
+  } = useModalForm<ExpenseTemplateModelForm>({
     action: "edit",
     syncWithLocation: true,
   });
@@ -28,7 +28,7 @@ export const ListExpenseTemplatePage = () => {
     formProps: formCreateProps,
     show: openCreateModal,
     formLoading: createModalLoading,
-  } = useModalForm<ExpenseTemplateModel>({
+  } = useModalForm<ExpenseTemplateModelForm>({
     action: "create",
     syncWithLocation: true,
   });
@@ -36,10 +36,10 @@ export const ListExpenseTemplatePage = () => {
   return (
     <>
       <List
-        resource="modelos"
-        title="Modelos de Despesas"
+        resource="tipos"
+        title="Tipos de Despesas"
         createButtonProps={{
-          children: "Novo Modelo de Despesa",
+          children: "Novo Tipo de Despesa",
           onClick: () => {
             openCreateModal();
           },
@@ -56,7 +56,7 @@ export const ListExpenseTemplatePage = () => {
           loading={editModalLoading}
           modalProps={editModalProps}
           formProps={
-            formEditProps as unknown as FormProps<ExpenseTemplateModel>
+            formEditProps as unknown as FormProps<ExpenseTemplateModelForm>
           }
         />
       )}
@@ -66,7 +66,7 @@ export const ListExpenseTemplatePage = () => {
           loading={createModalLoading}
           modalProps={createModalProps}
           formProps={
-            formCreateProps as unknown as FormProps<ExpenseTemplateModel>
+            formCreateProps as unknown as FormProps<ExpenseTemplateModelForm>
           }
         />
       )}

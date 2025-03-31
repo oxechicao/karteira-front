@@ -1,18 +1,16 @@
-import { ExpenseModel } from "@modules/expense/models/ExpenseModel";
-import {
-  ExpenseDetailsSchema,
-  ExpensePaymentSchema,
-  ExpenseValueSchema,
-} from "@modules/expense/schemas/Expense";
+import ExpenseTemplateForm from "../models/ExpenseTemplateForm";
+import ExpenseDetailsSchema from "@modules/expenseTemplates/schemas/ExpenseDetailsSchema";
+import ExpensePaymentSchema from "@modules/expenseTemplates/schemas/ExpensePaymentSchema";
+import ExpenseValueSchema from "@modules/expenseTemplates/schemas/ExpenseValueSchema";
 import mongoose from "mongoose";
 
-export type ExpenseTemplate = {
+export type ExpenseTemplateSchemaModel = {
   templateName: string;
-  template: ExpenseModel;
+  template: ExpenseTemplateForm;
 };
 
 export interface ExpenseTemplateDocument
-  extends ExpenseTemplate,
+  extends ExpenseTemplateSchemaModel,
     mongoose.Document {}
 
 // copy of ExpenseModel withou _id
@@ -38,6 +36,7 @@ const ExpenseTemplateModelSchema = new mongoose.Schema(
 const ExpenseTemplateSchema = new mongoose.Schema<ExpenseTemplateDocument>(
   {
     templateName: { type: String, required: true },
+    isAnonymous: { type: Boolean, required: false, default: false },
     template: ExpenseTemplateModelSchema,
   },
   { timestamps: true },

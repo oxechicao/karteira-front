@@ -1,8 +1,8 @@
 import { saveExpenseTemplate } from "@modules/expenseTemplates/features/create/createExpenseTemplateRepository";
 import { mapDataToExpenseTemplateModel } from "@modules/expenseTemplates/features/create/mapDataToExpenseTemplateModel";
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
+import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 
-export const newExpenseTemplate = async (data: ExpenseTemplateModel) => {
+export const newExpenseTemplate = async (data: ExpenseTemplateModelForm) => {
   const result = await saveExpenseTemplate(mapDataToExpenseTemplateModel(data));
   return result;
 };

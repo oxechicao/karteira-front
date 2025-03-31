@@ -1,10 +1,10 @@
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
-import { ExpenseTemplate } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
+import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
+import { ExpenseTemplateSchemaModel } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
 import { Types } from "mongoose";
 
 export function mapDataToExpenseTemplateModel(
-  data: ExpenseTemplateModel,
-): ExpenseTemplate {
+  data: ExpenseTemplateModelForm,
+): ExpenseTemplateSchemaModel {
   return {
     templateName: data.templateName,
     template: {

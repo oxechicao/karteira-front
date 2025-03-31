@@ -2,7 +2,7 @@
 
 import { FormExpenseTemplate } from "@modules/expenseTemplates/features/create/FormExpenseTemplate";
 import mapDatesEditing from "@modules/expenseTemplates/helpers/mapDatesEditing";
-import { ExpenseTemplateModel } from "@modules/expenseTemplates/models/ExpenseTemplateModel";
+import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Spin } from "antd";
 import React from "react";
@@ -12,18 +12,18 @@ export const EditExpenseTemplatePage: React.FC = () => {
     formProps: formProps,
     saveButtonProps: saveButtonProps,
     formLoading: formLoading,
-  } = useForm<ExpenseTemplateModel>();
+  } = useForm<ExpenseTemplateModelForm>();
   return (
     <Edit
       saveButtonProps={{ ...saveButtonProps, children: "Salvar" }}
-      title="Editar Modelo de Despesa"
-      resource="modelos"
+      title="Editar Tipo de Despesa"
+      resource="tipos"
     >
       <Spin spinning={formLoading}>
         <Form
           {...formProps}
           initialValues={mapDatesEditing(
-            formProps.initialValues as ExpenseTemplateModel,
+            formProps.initialValues as ExpenseTemplateModelForm,
           )}
         >
           <FormExpenseTemplate />
