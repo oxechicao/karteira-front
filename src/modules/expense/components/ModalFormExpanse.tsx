@@ -22,7 +22,7 @@ export default function ModalFormExpense({
   return (
     <Modal {...modalProps} okText="Salvar" cancelText="Cancelar">
       <Spin spinning={loading}>
-        {formProps?.form && (
+        {!loading && formProps?.form && (
           <Form
             {...formProps}
             layout="vertical"

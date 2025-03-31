@@ -7,8 +7,10 @@ import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 
-export default function ListExpensePage() {
-  const { tableProps } = useTable<ExpenseDocument>();
+export function ListExpensePage() {
+  const { tableProps } = useTable<ExpenseDocument>({
+    syncWithLocation: true,
+  });
 
   const {
     modalProps: editModalProps,

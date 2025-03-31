@@ -51,10 +51,6 @@ export default function FormExpense() {
       message: `Tipo de despesa foi alterado para: ${selectedTemplate.templateName}`,
       key: `template-changes-notification-${templateId}`,
     });
-
-    setTimeout(() => {
-      close?.(`template-changes-notification-${templateId}`);
-    }, 3000);
   }, [templateId, form, data, open, close]);
 
   return (
@@ -66,6 +62,7 @@ export default function FormExpense() {
             key="shouldCreateNewTemplate"
             label="Criar novo modelo?"
             name="shouldCreateNewTemplate"
+            valuePropName="checked"
           >
             <Checkbox
               onChange={(e) =>
