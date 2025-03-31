@@ -1,7 +1,6 @@
-import { DefinitionsTag } from "@modules/expense/models/ExpenseModelForm";
 import { Tag } from "antd";
 
-export const expenseDefinitionLabel: Record<DefinitionsTag, string> = {
+export const expenseDefinitionLabel: Record<string, string> = {
   form: "Forma",
   type: "Tipo",
   source: "Fonte",
@@ -38,7 +37,7 @@ export const expenseDefinitionLabel: Record<DefinitionsTag, string> = {
 };
 
 type TagDefinitionProps = {
-  value: DefinitionsTag;
+  value: string;
 };
 export const TagDefinition: React.FC<TagDefinitionProps> = ({ value }) => {
   return <Tag>{expenseDefinitionLabel[value] || value}</Tag>;

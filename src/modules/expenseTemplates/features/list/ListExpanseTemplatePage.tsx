@@ -3,10 +3,7 @@
 import { ModalFormExpenseTemplate } from "@modules/expenseTemplates/features/edit/ModalFormExpanseTemplate";
 import { TableExpenseTemplate } from "@modules/expenseTemplates/features/list/TableExpenseTemplate";
 import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
-import {
-  ExpenseTemplateSchemaModel,
-  ExpenseTemplateDocument,
-} from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
+import { ExpenseTemplateDocument } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 

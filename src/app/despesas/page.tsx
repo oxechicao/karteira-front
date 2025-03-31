@@ -1,5 +1,5 @@
-import { CreateExpensePage } from "@modules/expense/features/create/CreateExpensePage";
+import ListExpensePage from "@modules/expense/features/list/ListExpensePage";
 
 export default function DespesasPage() {
-  return <CreateExpensePage />;
+  return <ListExpensePage />;
 }

@@ -2,9 +2,8 @@
 
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
-import { Expense } from "@modules/expense/schemas/ExpenseSchema";
-import { DefinitionsTag } from "@modules/expense/models/ExpenseModelForm";
-import { Table, type TableColumnProps, type TableProps } from "antd";
+import { ExpenseDocument } from "@modules/expense/schemas/ExpenseSchema";
+import { Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
 
 const columns = [
@@ -15,16 +14,16 @@ const columns = [
   },
   {
     title: "Valor",
-    dataIndex: ["price", "value"],
+    dataIndex: "value",
     key: "price.value",
     render: (value: number) => `R$ ${moneyMask(String(value))}`,
   },
   {
     title: "Parcela",
-    dataIndex: ["installment", "current"],
+    dataIndex: ["payment", "currentInstallment"],
     key: "installment.current",
-    render: (value: number, record: Expense) =>
-      `${value}/${record.installment.total}`,
+    render: (value: number, record: ExpenseDocument) =>
+      `${value}/${record.payment.currentInstallment}`,
   },
   {
     title: "Data da compra",
@@ -39,41 +38,33 @@ const columns = [
     title: "Categoria",
     dataIndex: ["definition", "category", "name"],
     key: "definition.category.name",
-    render: (value: string) => (
-      <TagDefinition value={value as DefinitionsTag} />
-    ),
+    render: (value: string) => <TagDefinition value={value} />,
   },
   {
     title: "Fonte",
     dataIndex: ["definition", "source", "name"],
     key: "definition.source.name",
-    render: (value: string) => (
-      <TagDefinition value={value as DefinitionsTag} />
-    ),
+    render: (value: string) => <TagDefinition value={value} />,
   },
   {
     title: "Forma",
     dataIndex: ["definition", "form", "name"],
     key: "definition.form.name",
-    render: (value: string) => (
-      <TagDefinition value={value as DefinitionsTag} />
-    ),
+    render: (value: string) => <TagDefinition value={value} />,
   },
   {
     title: "Tipo",
     dataIndex: ["definition", "type", "name"],
     key: "definition.type.name",
-    render: (value: string) => (
-      <TagDefinition value={value as DefinitionsTag} />
-    ),
+    render: (value: string) => <TagDefinition value={value} />,
   },
 ];
 
 type ListExpenseProps = {
-  tableProps: TableProps<Expense>;
+  tableProps: TableProps<ExpenseDocument>;
 };
 
-export const ListExpense: React.FC<ListExpenseProps> = ({ tableProps }) => {
+export default function TableExpense({ tableProps }: ListExpenseProps) {
   return (
     <Table
       {...tableProps}
@@ -84,4 +75,4 @@ export const ListExpense: React.FC<ListExpenseProps> = ({ tableProps }) => {
       pagination={false}
     />
   );
-};
+}

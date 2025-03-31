@@ -3,7 +3,7 @@
 import Expense from "@modules/expense/schemas/ExpenseSchema";
 import { DateTime } from "luxon";
 
-export async function getExpensesFromToday() {
+export default async function getExpensesFromToday() {
   const startOfMonth = DateTime.fromObject({
     day: 1,
     month: DateTime.now().month,
@@ -12,8 +12,8 @@ export async function getExpensesFromToday() {
 
   const expenses = await Expense.find({
     $or: [
-      { "flags.isRecurrent": true },
-      { "timeline.paymentsAt.date": { $gte: startOfMonth } },
+      { "payment.isRecurrent": true },
+      { "payment.installments.date": { $gte: startOfMonth } },
     ],
   });
 
