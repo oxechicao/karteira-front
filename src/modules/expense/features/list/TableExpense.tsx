@@ -5,7 +5,7 @@ import EditButtonModal from "@common/components/button/EditButtonModal";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
-import { Table, type TableProps } from "antd";
+import { Col, Row, Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
 
 type ListExpenseProps = {
@@ -47,26 +47,26 @@ export default function TableExpense({
     },
     {
       title: "Categoria",
-      dataIndex: ["definition", "category", "name"],
-      key: "definition.category.name",
+      dataIndex: ["details", "category"],
+      key: "details.category",
       render: (value: string) => <TagDefinition value={value} />,
     },
     {
       title: "Fonte",
-      dataIndex: ["definition", "source", "name"],
-      key: "definition.source.name",
+      dataIndex: ["details", "source"],
+      key: "details.source",
       render: (value: string) => <TagDefinition value={value} />,
     },
     {
       title: "Forma",
-      dataIndex: ["definition", "form", "name"],
-      key: "definition.form.name",
+      dataIndex: ["details", "form"],
+      key: "details.form",
       render: (value: string) => <TagDefinition value={value} />,
     },
     {
       title: "Tipo",
-      dataIndex: ["definition", "type", "name"],
-      key: "definition.type.name",
+      dataIndex: ["details", "type"],
+      key: "details.type",
       render: (value: string) => <TagDefinition value={value} />,
     },
     {
@@ -77,10 +77,14 @@ export default function TableExpense({
       render: (_: any, record: ExpenseDocument) => {
         const id = (record?._id as string) || "";
         return (
-          <>
-            <EditButtonModal id={id} openModal={openEditModal} />
-            <DeletButtonTableList id={id} resource="despesas" />
-          </>
+          <Row gutter={4} justify="end">
+            <Col>
+              <EditButtonModal id={id} openModal={openEditModal} />
+            </Col>
+            <Col>
+              <DeletButtonTableList id={id} resource="despesas" />
+            </Col>
+          </Row>
         );
       },
     },

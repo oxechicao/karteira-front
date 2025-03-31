@@ -1,9 +1,10 @@
 "use server";
 
+import { mapExpenseToList } from "@modules/expense/expense.mapper";
 import Expense from "@modules/expense/expense.schema";
 import { DateTime } from "luxon";
 
-export default async function getExpensesFromToday() {
+export async function getExpensesFromToday() {
   const startOfMonth = DateTime.fromObject({
     day: 1,
     month: DateTime.now().month,
@@ -17,5 +18,5 @@ export default async function getExpensesFromToday() {
     ],
   });
 
-  return expenses;
+  return mapExpenseToList(expenses);
 }

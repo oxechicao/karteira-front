@@ -12,8 +12,8 @@ export default function ListExpensePage() {
 
   const {
     modalProps: editModalProps,
-    formProps: formEditProps,
-    show: openEditModal,
+    formProps: editFormProps,
+    show: editOpenModal,
     formLoading: editModalLoading,
   } = useModalForm<ExpenseModelForm>({
     action: "edit",
@@ -22,8 +22,8 @@ export default function ListExpensePage() {
 
   const {
     modalProps: createModalProps,
-    formProps: formCreateProps,
-    show: openCreateModal,
+    formProps: createFormProps,
+    show: createOpenModal,
     formLoading: createModalLoading,
   } = useModalForm<ExpenseModelForm>({
     action: "create",
@@ -38,17 +38,24 @@ export default function ListExpensePage() {
         createButtonProps={{
           children: "Novo",
           onClick: () => {
-            openCreateModal();
+            createOpenModal();
           },
         }}
       >
-        <TableExpense tableProps={tableProps} openEditModal={openEditModal} />
+        <TableExpense tableProps={tableProps} openEditModal={editOpenModal} />
       </List>
-      {createModalProps && formCreateProps && (
+      {!tableProps.loading && createModalProps && createFormProps && (
         <ModalFormExpense
           loading={createModalLoading}
           modalProps={createModalProps}
-          formProps={formCreateProps as unknown as FormProps<ExpenseModelForm>}
+          formProps={createFormProps as unknown as FormProps<ExpenseModelForm>}
+        />
+      )}
+      {!tableProps.loading && editModalProps && editFormProps && (
+        <ModalFormExpense
+          loading={editModalLoading}
+          modalProps={editModalProps}
+          formProps={editFormProps as unknown as FormProps<ExpenseModelForm>}
         />
       )}
     </>

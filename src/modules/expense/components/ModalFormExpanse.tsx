@@ -24,11 +24,13 @@ export default function ModalFormExpense({
       <Spin spinning={loading}>
         {formProps?.form && (
           <Form
-            layout="vertical"
             {...formProps}
-            initialValues={mapFormExpenseEditing(
-              initialValues as ExpenseDocument,
-            )}
+            layout="vertical"
+            initialValues={
+              initialValues
+                ? mapFormExpenseEditing(initialValues as ExpenseDocument)
+                : {}
+            }
           >
             <FormExpense />
           </Form>
