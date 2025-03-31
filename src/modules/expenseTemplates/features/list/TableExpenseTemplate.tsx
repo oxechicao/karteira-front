@@ -1,14 +1,11 @@
 "use client";
 
 import { RowCol } from "@common/components/grid/RowCol";
-import DeleteButtonExpense from "@modules/expenseTemplates/features/delete/DeleteButtonExpense";
-import EditButtonExpense from "@modules/expenseTemplates/features/edit/EditButtonExpense";
-import {
-  ExpenseTemplateSchemaModel,
-  ExpenseTemplateDocument,
-} from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
+import { ExpenseTemplateDocument } from "@modules/expenseTemplates/expenseTemplate.schema";
 import { Table, TableProps } from "antd";
 import React from "react";
+import EditButtonModal from "@common/components/button/EditButtonModal";
+import DeletButtonTableList from "@common/components/button/DeleteButtonTableList";
 
 type TableExpenseTemplateProps = {
   tableProps: TableProps<ExpenseTemplateDocument>;
@@ -35,12 +32,16 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
           <RowCol
             gutter={0}
             items={[
-              <EditButtonExpense
+              <EditButtonModal
                 key="edit-button"
                 id={id}
                 openModal={openEditModal}
               />,
-              <DeleteButtonExpense key="delete-button" id={id} />,
+              <DeletButtonTableList
+                key="delete-button"
+                id={id}
+                resource="tipos"
+              />,
             ]}
           />
         );

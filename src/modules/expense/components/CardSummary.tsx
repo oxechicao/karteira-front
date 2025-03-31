@@ -1,10 +1,9 @@
 import { moneyMask } from "@common/utils/doMask";
-import { valuesSummaryType } from "@modules/expense/components/SummaryExpense/utils";
 import { Badge, Card, Statistic } from "antd";
 import { DateTime } from "luxon";
 
 export const CardsSummary: React.FC<{
-  valueByMonth: valuesSummaryType[];
+  valueByMonth: any[];
   loading: boolean;
 }> = ({ valueByMonth, loading }) =>
   valueByMonth

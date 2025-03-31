@@ -2,7 +2,7 @@ import { RowCol } from "@common/components/grid/RowCol";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
-} from "@modules/expense/enums/FrequencyEnum";
+} from "@common/constants/FrequencyEnum";
 import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
 import { frequencyOptions } from "@modules/expenseTemplates/components/FormExpenseModel/options";
 import { Form, InputNumber, Select } from "antd";

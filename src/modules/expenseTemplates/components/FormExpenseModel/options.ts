@@ -1,19 +1,19 @@
 import {
   CategoryEnum,
   CategoryLabelEnum,
-} from "@modules/expense/enums/CategoryEnum";
-import { FormEnum, FormLabelEnum } from "@modules/expense/enums/FormEnum";
+} from "@common/constants/CategoryEnum";
+import { FormEnum, FormLabelEnum } from "@common/constants/FormEnum";
 import {
   FrequencyEnum,
   FrequencyLabelEnum,
-} from "@modules/expense/enums/FrequencyEnum";
-import { SourceEnum, SourceLabelEnum } from "@modules/expense/enums/SourceEnum";
-import { TypeEnum, TypeLabelEnum } from "@modules/expense/enums/TypeEnum";
+} from "@common/constants/FrequencyEnum";
+import { SourceEnum, SourceLabelEnum } from "@common/constants/SourceEnum";
+import { TypeEnum, TypeLabelEnum } from "@common/constants/TypeEnum";
 
 type Options<T, Y> = {
   label: T;
   value: Y;
-}
+};
 
 export const frequencyOptions: Options<FrequencyLabelEnum, FrequencyEnum>[] = [
   { label: FrequencyLabelEnum.DAYS, value: FrequencyEnum.DAYS },

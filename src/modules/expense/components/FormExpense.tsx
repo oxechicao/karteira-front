@@ -1,12 +1,12 @@
 "use client";
 
 import FormExpenseModel from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
-import mapFormExpenseEditing from "@modules/expenseTemplates/helpers/mapFormExpenseEditing";
-import ExpenseTemplateModelForm from "@modules/expenseTemplates/models/ExpenseTemplateModelForm";
-import { ExpenseTemplateDocument } from "@modules/expenseTemplates/schemas/ExpenseTemplateSchema";
+import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expenseTemplates/expenseTemplate.mapper";
+import { ExpenseTemplateDocument } from "@modules/expenseTemplates/expenseTemplate.schema";
 import { useList, useNotification } from "@refinedev/core";
 import { Checkbox, Col, Divider, Form, Input, Row, Select } from "antd";
 import { useEffect, useMemo } from "react";
+import { ExpenseTemplateModelForm } from "@modules/expenseTemplates/expenseTemplate.type";
 
 export default function FormExpense() {
   const form = Form.useFormInstance();
@@ -61,7 +61,7 @@ export default function FormExpense() {
     <>
       <Divider orientation="left"> Tipo de Despesas</Divider>
       <Row>
-        <Col xs={24} md={6} lg={5} xl={3}>
+        <Col xs={24} md={6} lg={5} xl={4}>
           <Form.Item
             key="shouldCreateNewTemplate"
             label="Criar novo modelo?"
@@ -74,7 +74,7 @@ export default function FormExpense() {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={18} lg={19} xl={21}>
+        <Col xs={24} md={18} lg={19} xl={20}>
           {shouldCreateNewTemplate ? (
             <Form.Item
               key="templateName"
