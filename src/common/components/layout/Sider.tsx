@@ -1,9 +1,9 @@
 "use client";
 
 import {
+  BankOutlined,
   BarChartOutlined,
-  PaperClipOutlined,
-  PayCircleFilled,
+  PayCircleFilled
 } from "@ant-design/icons";
 import { useGo } from "@refinedev/core";
 import { Layout, Menu } from "antd";
@@ -30,7 +30,7 @@ export const Sider: React.FC = () => {
         items={[
           { key: "painel", icon: <BarChartOutlined />, label: "Paineis" },
           { key: "despesas", icon: <PayCircleFilled />, label: "Despesas" },
-          { key: "tipos", icon: <PaperClipOutlined />, label: "Tipos" },
+          { key: "contas", icon: <BankOutlined />, label: "Contas" },
         ]}
         onClick={onClick}
       />

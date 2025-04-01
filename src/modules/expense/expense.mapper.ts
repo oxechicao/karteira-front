@@ -10,7 +10,7 @@ import { ExpenseModelSchema } from "@modules/expense/expense.schema";
 import {
   ExpenseTemplateForm,
   ExpenseTemplatePaymentAt,
-} from "@modules/expenseTemplates/expenseTemplate.type";
+} from "@modules/expenseTemplate/expenseTemplate.type";
 import { Types } from "mongoose";
 
 export function mapFormExpenseEditing(data: ExpenseDocument): ExpenseModelForm {

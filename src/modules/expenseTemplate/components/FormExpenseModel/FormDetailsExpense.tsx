@@ -1,10 +1,10 @@
 import { RowCol } from "@common/components/grid/RowCol";
-import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
+import { FormExpenseNoRequired } from "@modules/expenseTemplate/components/FormExpenseModel/FormExpenseModel";
 import {
   categoryOptions,
   formOptions,
   typeOptions,
-} from "@modules/expenseTemplates/components/FormExpenseModel/options";
+} from "@modules/expenseTemplate/components/FormExpenseModel/options";
 import { Form, Input, Select } from "antd";
 
 export default function FormDetailsExpense({

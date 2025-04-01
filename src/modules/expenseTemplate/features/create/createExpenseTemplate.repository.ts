@@ -1,7 +1,7 @@
 import dbConnect from "@lib/mongoose/dbConnect";
 import ExpenseTemplateSchema, {
   ExpenseTemplateSchemaModel,
-} from "@modules/expenseTemplates/expenseTemplate.schema";
+} from "@modules/expenseTemplate/expenseTemplate.schema";
 
 export const saveExpenseTemplate = async (data: ExpenseTemplateSchemaModel) => {
   const expenseTemplate = new ExpenseTemplateSchema(data);

@@ -1,7 +1,7 @@
 "use client";
 
-import { FormExpenseTemplate } from "@modules/expenseTemplates/components/FormExpenseTemplate";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplates/expenseTemplate.type";
+import { FormExpenseTemplate } from "@modules/expenseTemplate/components/FormExpenseTemplate";
+import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
 import { Create, useForm } from "@refinedev/antd";
 import { Form } from "antd";
 
@@ -11,7 +11,7 @@ export const CreateExpenseTemplatePage = () => {
   return (
     <Create
       title="Criar Tipo de Pagamento"
-      resource="tipos"
+      resource="contas"
       saveButtonProps={{ ...saveButtonProps, children: "Salvar" }}
     >
       <Form {...formProps} layout="vertical">

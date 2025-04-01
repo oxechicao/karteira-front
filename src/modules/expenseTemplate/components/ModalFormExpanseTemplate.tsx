@@ -1,8 +1,8 @@
 "use client";
 
-import { FormExpenseTemplate } from "@modules/expenseTemplates/components/FormExpenseTemplate";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplates/expenseTemplate.type";
-import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expenseTemplates/expenseTemplate.mapper";
+import { FormExpenseTemplate } from "@modules/expenseTemplate/components/FormExpenseTemplate";
+import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
+import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expenseTemplate/expenseTemplate.mapper";
 import { Form, type FormProps, Modal, ModalProps, Spin } from "antd";
 
 type ModalFormExpenseTemplateProps = {

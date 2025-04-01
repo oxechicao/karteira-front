@@ -3,8 +3,8 @@ import {
   FrequencyEnum,
   FrequencyPeriodEnum,
 } from "@common/constants/FrequencyEnum";
-import { FormExpenseNoRequired } from "@modules/expenseTemplates/components/FormExpenseModel/FormExpenseModel";
-import { frequencyOptions } from "@modules/expenseTemplates/components/FormExpenseModel/options";
+import { FormExpenseNoRequired } from "@modules/expenseTemplate/components/FormExpenseModel/FormExpenseModel";
+import { frequencyOptions } from "@modules/expenseTemplate/components/FormExpenseModel/options";
 import { Form, InputNumber, Select } from "antd";
 
 const inputStyle: { style: React.CSSProperties } = { style: { width: "100%" } };

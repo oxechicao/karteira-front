@@ -1,7 +1,7 @@
 "use server";
 
 import dbConnect from "@lib/mongoose/dbConnect";
-import ExpenseTemplateSchema from "@modules/expenseTemplates/expenseTemplate.schema";
+import ExpenseTemplateSchema from "@modules/expenseTemplate/expenseTemplate.schema";
 
 export const fetchExpenseTemplates = async () => {
   await dbConnect();

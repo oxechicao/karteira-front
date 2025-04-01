@@ -1,11 +1,11 @@
 "use client";
 
-import { ModalFormExpenseTemplate } from "@modules/expenseTemplates/components/ModalFormExpanseTemplate";
-import { TableExpenseTemplate } from "@modules/expenseTemplates/features/list/TableExpenseTemplate";
-import { ExpenseTemplateDocument } from "@modules/expenseTemplates/expenseTemplate.schema";
+import { ModalFormExpenseTemplate } from "@modules/expenseTemplate/components/ModalFormExpanseTemplate";
+import { TableExpenseTemplate } from "@modules/expenseTemplate/features/list/TableExpenseTemplate";
+import { ExpenseTemplateDocument } from "@modules/expenseTemplate/expenseTemplate.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplates/expenseTemplate.type";
+import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
 
 export const ListExpenseTemplatePage = () => {
   const { tableProps } = useTable<ExpenseTemplateDocument>();
@@ -33,10 +33,10 @@ export const ListExpenseTemplatePage = () => {
   return (
     <>
       <List
-        resource="tipos"
-        title="Tipos de Despesas"
+        resource="contas"
+        title="Template de Contas"
         createButtonProps={{
-          children: "Novo Tipo de Despesa",
+          children: "Novo Template de Conta",
           onClick: () => {
             openCreateModal();
           },
