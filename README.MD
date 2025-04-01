@@ -1,48 +1,61 @@
-# karteira-front
+# Karteira Front
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+## Como funciona?
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+1. Cria uma karteira
+2. Cria uma conta de pagamento para a karteira, que irá agrupar os gastos
+2. Adiciona uma nova despesa/gasto a uma conta
 
-## Getting Started
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
-
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
-
-## Available Scripts
-
-### Running the development server.
-
-```bash
-    npm run dev
+```mermaid
+mindmap
+    ((Karteira))
+        Karteira
+            Nome
+            Controle de Acesso
+              Proprietário
+              Convidados
+            Meta
+            Limite
+        Despesas
+            Nome
+            Valor
+            Data da Compra
+            Nome da Conta
+        Contas
+            Nome
+            Detalhes
+                Categoria
+                Tipo
+                Forma de pagamento
+                Fonte do pagamento
+            Pagamento
+                Data do vencimento
+                Recorrente
+                Frequencia da cobrança
+                    Em meses
+                    Em dias
+                    Em semanas
+                    Em anos
+                Periodo da cobrança número
+                Parcelas
+                    Número total de parcelas
+                    Quantidade de parcelas pagas
 ```
 
-### Building for production.
+## Features
 
-```bash
-    npm run build
-```
-
-### Running the production server.
-
-```bash
-    npm run start
-```
-
-## Learn More
-
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
-- **Custom Auth Provider** [Docs](https://refine.dev/docs/core/providers/auth-provider/)
-
-## License
-
-MIT
+- Visualizar as despesas por mês
+  - Despesas por Conta
+  - Despesas por cada campo em Detalhes
+    - Categoria
+    - Tipo
+    - Forma de pagamento
+    - Fonte do pagamento
+- Saúde financeira
+  - Exibir os dados da carteira
+    - Meta
+    - Limite
+    - Somatório atual
+  - Valor anual de gastos
+    - Traçar um grafico representando o ano de acordo com o limite-meta / gastos-mes
