@@ -22,32 +22,27 @@ export function mapFormExpenseEditing(data: ExpenseDocument): ExpenseModelForm {
     ...data,
     isFinished: !!data?.isFinished,
     purchasedAt: DateTime.fromJSDate(purchasedAt),
-    payment: {
-      ...data?.payment,
-      isFirstPaymentNextMonth: !!data?.payment?.isFirstPaymentNextMonth,
-      isRecurrent: !!data?.payment?.isRecurrent,
-    },
   };
 }
 
 const getPlusDate = (
   frequency: FrequencyEnum,
   frequencyPeriod: number,
-  isFirstPaymentNextMonth: boolean,
-  aditional: number,
+  isNextPeriod: boolean,
+  additional: number,
 ) => {
-  const period = Number(frequencyPeriod) + (isFirstPaymentNextMonth ? 1 : 0);
+  const period = Number(frequencyPeriod) + (isNextPeriod ? 1 : 0);
   switch (frequency) {
     case FrequencyEnum.DAYS:
-      return { days: period + aditional };
+      return { days: period + additional };
     case FrequencyEnum.WEEKS:
-      return { weeks: period + aditional };
+      return { weeks: period + additional };
     case FrequencyEnum.MONTHS:
-      return { months: period + aditional };
+      return { months: period + additional };
     case FrequencyEnum.YEARS:
-      return { years: period + aditional };
+      return { years: period + additional };
     default:
-      return { months: 1 + aditional };
+      return { months: 1 + additional };
   }
 };
 
@@ -68,13 +63,15 @@ const mapInstallments = (
     arraySize = payment.totalInstallments;
   }
 
-  const installments = Array.from(
+  const shouldPayNextPeriod = purchasedAt > DateTime.now().set({ day: payday });
+
+  return Array.from(
     { length: arraySize },
     (_, index): ExpenseTemplatePaymentAt => {
       const interval = getPlusDate(
         payment.frequency,
         payment.frequencyPeriod,
-        payment.isFirstPaymentNextMonth,
+        shouldPayNextPeriod,
         index,
       );
 
@@ -87,8 +84,6 @@ const mapInstallments = (
       return { date, value, isPaid };
     },
   );
-
-  return installments;
 };
 
 export function mapExpenseSchema(data: ExpenseModelForm): ExpenseModelSchema {
@@ -104,8 +99,7 @@ export function mapExpenseSchema(data: ExpenseModelForm): ExpenseModelSchema {
     name: data.name,
     purchasedAt,
     value,
-    isFinished: !!data.isFinished,
-    payday: data.payday,
+    isFinished: Boolean(data.isFinished),
     valueDefinition: {
       precision: 2,
       currency: "BRL",
@@ -120,15 +114,15 @@ export function mapExpenseSchema(data: ExpenseModelForm): ExpenseModelSchema {
       installments: mapInstallments(
         value,
         purchasedAt,
-        data.payday,
+        data.payment.payday,
         data.payment,
       ),
       totalInstallments: data.payment.totalInstallments,
       currentInstallment: data.payment.currentInstallment,
+      payday: data.payment.payday,
       frequency: data.payment.frequency,
       frequencyPeriod: data.payment.frequencyPeriod,
-      isRecurrent: !!data.payment.isRecurrent,
-      isFirstPaymentNextMonth: !!data.payment.isFirstPaymentNextMonth,
+      isRecurrent: Boolean(data.payment.isRecurrent),
     },
   };
 }

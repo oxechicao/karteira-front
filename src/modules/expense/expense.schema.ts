@@ -50,7 +50,7 @@ const PaymentSchema = new mongoose.Schema(
     frequency: String,
     frequencyPeriod: Number,
     isRecurrent: { type: Boolean, default: false },
-    isFirstPaymentNextMonth: { type: Boolean, default: false },
+    payday: { type: Number, required: true, default: 0 },
   },
   { _id: false },
 );
@@ -71,7 +71,6 @@ export const ExpenseSchema = new mongoose.Schema<ExpenseDocument>(
     purchasedAt: { type: Date, required: true },
     value: { type: Number, required: true, default: 0 },
     isFinished: { type: Boolean, required: true, default: false },
-    payday: { type: Number, required: true, default: 0 },
     valueDefinition: ValueSchema,
     details: DetailsSchema,
     payment: PaymentSchema,

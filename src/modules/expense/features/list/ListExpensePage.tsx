@@ -1,7 +1,7 @@
 "use client";
 
 import ModalFormExpense from "@modules/expense/components/ModalFormExpanse";
-import TableExpense from "@modules/expense/features/list/TableExpense";
+import { TableExpense } from "@modules/expense/features/list/TableExpense";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";

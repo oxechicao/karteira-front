@@ -13,10 +13,10 @@ type ListExpenseProps = {
   openEditModal: (e: any) => void;
 };
 
-export default function TableExpense({
+export const TableExpense: React.FC<ListExpenseProps> = ({
   tableProps,
   openEditModal,
-}: ListExpenseProps) {
+}) => {
   const columns = [
     {
       title: "Nome",
@@ -100,4 +100,4 @@ export default function TableExpense({
       pagination={false}
     />
   );
-}
+};

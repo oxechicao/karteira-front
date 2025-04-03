@@ -39,7 +39,6 @@ export const expensePaymentFabric = ({
   frequency = FrequencyEnum.MONTHS,
   frequencyPeriod = FrequencyPeriodEnum.MONTHS,
   isRecurrent = false,
-  isFirstPaymentNextMonth = false,
 }: Partial<ExpenseTemplatePayment>) => ({
   installments,
   totalInstallments,
@@ -47,7 +46,6 @@ export const expensePaymentFabric = ({
   frequency,
   frequencyPeriod,
   isRecurrent,
-  isFirstPaymentNextMonth,
 });
 
 export const expenseModelFabric = ({
