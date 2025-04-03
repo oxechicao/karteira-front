@@ -1,4 +1,4 @@
-# Karteira Front
+# KarteiraSchema Front
 
 ## Como funciona?
 
@@ -9,8 +9,8 @@
 
 ```mermaid
 mindmap
-    ((Karteira))
-        Karteira
+    ((KarteiraSchema))
+        KarteiraSchema
             Nome
             Controle de Acesso
               Proprietário

@@ -1,16 +1,14 @@
-import dbConnect from "@lib/mongoose/dbConnect";
 import { withAuth } from "@lib/with-auth/withAuth";
-import Karteira from "@modules/karteira/models/Karteira";
+import { saveKarteira } from "@modules/karteira/features/create/createKarteira.service";
+import { getKarteiras } from "@modules/karteira/features/list/listKarteira.service";
 
 export const GET = withAuth(async () => {
-  await dbConnect();
-  const karteiras = await Karteira.find({});
+  const karteiras = await getKarteiras();
   return Response.json({ data: karteiras });
 });
 
 export const POST = withAuth(async (req: Request) => {
-  await dbConnect();
   const payload = await req.json();
-  await Karteira.create(payload);
-  return new Response(null, { status: 201 });
+  const result = await saveKarteira(payload);
+  return new Response(result, { status: 201 });
 });

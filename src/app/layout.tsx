@@ -69,6 +69,10 @@ export default function RootLayout({
                         show: "/contas/:id",
                         edit: "/contas/:id/edit",
                       },
+                      {
+                        name: "karteiras",
+                        list: "/karteiras",
+                      }
                     ]}
                     options={{
                       syncWithLocation: true,
