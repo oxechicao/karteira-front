@@ -1,9 +1,9 @@
 import dbConnect from "@lib/mongoose/dbConnect";
-import Expense from "@modules/expense/expense.schema";
+import Expense, { ExpenseDocument } from "@modules/expense/expense.schema";
 
 export const fetchExpenseById = async (id: string) => {
   await dbConnect();
-  const expense = await Expense.findById(id).lean();
+  const expense = await Expense.findById(id).lean<ExpenseDocument>();
   return expense;
 };
 
