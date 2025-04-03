@@ -28,6 +28,7 @@ export type ExpenseTemplatePayment = {
   frequency: FrequencyEnum;
   frequencyPeriod: FrequencyPeriodEnum;
   isRecurrent: boolean;
+  payday: number;
 };
 
 export type ExpenseTemplatePaymentAt = {
@@ -42,7 +43,6 @@ export type ExpenseTemplateForm = {
   purchasedAt: DateTime;
   value: number;
   isFinished: boolean;
-  payday: number;
   valueDefinition: ExpenseTemplateValueDefinition;
   details: ExpenseTemplateDetails;
   payment: ExpenseTemplatePayment;

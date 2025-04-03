@@ -28,7 +28,6 @@ export function mapDataToExpenseTemplateModel(
       purchasedAt: data.purchasedAt,
       value: Number(String(data.value).replace(/\D/g, "")) || 0,
       isFinished: Boolean(data.isFinished),
-      payday: data.payday,
       valueDefinition: {
         precision: 2,
         currency: "BRL",
@@ -42,6 +41,7 @@ export function mapDataToExpenseTemplateModel(
       payment: {
         installments: [],
         totalInstallments: data.payment.totalInstallments,
+        payday: data.payment.payday,
         currentInstallment: data.payment.currentInstallment,
         frequency: data.payment.frequency,
         frequencyPeriod: data.payment.frequencyPeriod,

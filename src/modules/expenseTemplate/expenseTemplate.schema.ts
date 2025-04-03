@@ -36,6 +36,7 @@ const ExpensePaymentSchema = new mongoose.Schema(
     frequency: String,
     frequencyPeriod: String,
     isRecurrent: { type: Boolean, default: false },
+    payday: { type: Number, required: false, default: 0 },
   },
   { _id: false },
 );
@@ -70,7 +71,6 @@ const ExpenseTemplateModelSchema = new mongoose.Schema(
     purchasedAt: { type: Date, required: false, default: Date.now },
     value: { type: Number, required: false, default: 0 },
     isFinished: { type: Boolean, required: false, default: false },
-    payday: { type: Number, required: false, default: 0 },
     valueDefinition: ExpenseValueSchema,
     details: ExpenseDetailsSchema,
     payment: ExpensePaymentSchema,

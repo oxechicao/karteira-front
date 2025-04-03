@@ -45,7 +45,7 @@ export default function FormBaseExpense({
         <Form.Item
           key="purchasedAt"
           label="Dia do vencimento (pagamento)"
-          name="payday"
+          name={["payment", "payday"]}
           required={!notRequired}
         >
           <InputNumber style={{ width: "100%" }} />
