@@ -12,10 +12,8 @@ type TableExpenseTemplateProps = {
   openEditModal: (e: any) => void;
 };
 
-export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
-  tableProps,
-  openEditModal,
-}) => {
+export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = (props) => {
+  const { tableProps, openEditModal } = props;
   const columns = [
     {
       title: "Nome",
@@ -52,7 +50,7 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = ({
   return (
     <>
       <Table
-        {...tableProps}
+        {...(tableProps)}
         loading={tableProps.loading}
         dataSource={tableProps.dataSource || []}
         columns={columns}

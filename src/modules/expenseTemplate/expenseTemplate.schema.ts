@@ -36,7 +36,6 @@ const ExpensePaymentSchema = new mongoose.Schema(
     frequency: String,
     frequencyPeriod: String,
     isRecurrent: { type: Boolean, default: false },
-    isFirstPaymentNextMonth: { type: Boolean, default: false },
   },
   { _id: false },
 );
@@ -65,7 +64,7 @@ const ExpenseTemplateModelSchema = new mongoose.Schema(
     karteira: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Karteira",
-      required: [true, "Karteira deve ser definida"],
+      required: [true, "KarteiraSchema deve ser definida"],
     },
     name: { type: String, required: false, default: "" },
     purchasedAt: { type: Date, required: false, default: Date.now },

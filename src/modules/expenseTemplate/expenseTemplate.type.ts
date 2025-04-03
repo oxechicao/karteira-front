@@ -28,7 +28,6 @@ export type ExpenseTemplatePayment = {
   frequency: FrequencyEnum;
   frequencyPeriod: FrequencyPeriodEnum;
   isRecurrent: boolean;
-  isFirstPaymentNextMonth: boolean;
 };
 
 export type ExpenseTemplatePaymentAt = {

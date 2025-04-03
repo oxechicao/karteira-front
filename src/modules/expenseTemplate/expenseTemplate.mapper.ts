@@ -8,11 +8,10 @@ export function mapFormExpenseTemplateEditing(
 ): ExpenseTemplateModelForm {
   return {
     ...data,
-    isFinished: !!data?.isFinished,
-    purchasedAt: DateTime.fromJSDate(new Date(data?.purchasedAt.toString())),
+    isFinished: Boolean(data?.isFinished),
+    purchasedAt: DateTime.fromJSDate(new Date(data?.purchasedAt?.toString())),
     payment: {
       ...data?.payment,
-      isFirstPaymentNextMonth: !!data?.payment?.isFirstPaymentNextMonth,
       isRecurrent: !!data?.payment?.isRecurrent,
     },
   };
@@ -28,7 +27,7 @@ export function mapDataToExpenseTemplateModel(
       name: data.name,
       purchasedAt: data.purchasedAt,
       value: Number(String(data.value).replace(/\D/g, "")) || 0,
-      isFinished: !!data.isFinished,
+      isFinished: Boolean(data.isFinished),
       payday: data.payday,
       valueDefinition: {
         precision: 2,
@@ -47,7 +46,6 @@ export function mapDataToExpenseTemplateModel(
         frequency: data.payment.frequency,
         frequencyPeriod: data.payment.frequencyPeriod,
         isRecurrent: data.payment.isRecurrent,
-        isFirstPaymentNextMonth: data.payment.isFirstPaymentNextMonth,
       },
     },
   };

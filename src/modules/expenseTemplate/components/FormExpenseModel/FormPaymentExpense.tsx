@@ -48,19 +48,6 @@ export default function FormPaymentExpense({
           <InputNumber {...inputStyle} />
         </Form.Item>,
         <Form.Item
-          key="payment-isFirstPaymentNextMonth"
-          label="A primeira cobrança é no próximo mês?"
-          name={["payment", "isFirstPaymentNextMonth"]}
-          initialValue={true}
-        >
-          <Select
-            options={[
-              { value: true, label: "Sim" },
-              { value: false, label: "Não" },
-            ]}
-          />
-        </Form.Item>,
-        <Form.Item
           key="payment-isRecurrent"
           label="É compra recorrente?"
           name={["payment", "isRecurrent"]}
