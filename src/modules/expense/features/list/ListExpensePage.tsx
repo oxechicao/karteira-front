@@ -3,9 +3,9 @@
 import ModalFormExpense from "@modules/expense/components/ModalFormExpanse";
 import { TableExpense } from "@modules/expense/features/list/TableExpense";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
-import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
+import { ExpenseDocument } from "@modules/expense/expense.schema";
 
 export function ListExpensePage() {
   const { tableProps } = useTable<ExpenseDocument>({

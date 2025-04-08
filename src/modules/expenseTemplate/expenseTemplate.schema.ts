@@ -87,8 +87,11 @@ const ExpenseTemplateSchema = new mongoose.Schema<ExpenseTemplateDocument>(
   { timestamps: true },
 );
 
-export default mongoose.models.ExpenseTemplate ||
+export const ExpenseTemplateModel =
+  mongoose.models?.ExpenseTemplate ||
   mongoose.model<ExpenseTemplateDocument>(
     "ExpenseTemplate",
     ExpenseTemplateSchema,
   );
+
+export default ExpenseTemplateModel;

@@ -39,6 +39,7 @@ export const expensePaymentFabric = ({
   frequency = FrequencyEnum.MONTHS,
   frequencyPeriod = FrequencyPeriodEnum.MONTHS,
   isRecurrent = false,
+  payday = 6,
 }: Partial<ExpenseTemplatePayment>) => ({
   installments,
   totalInstallments,
@@ -46,6 +47,7 @@ export const expensePaymentFabric = ({
   frequency,
   frequencyPeriod,
   isRecurrent,
+  payday,
 });
 
 export const expenseModelFabric = ({
@@ -54,7 +56,6 @@ export const expenseModelFabric = ({
   purchasedAt = DateTime.fromISO("2023-10-01T00:00:00Z"),
   value = 145000,
   isFinished = false,
-  payday = 6,
   valueDefinition = expenseValueDefinitionFabric({}),
   details = expenseDetailsFabric({}),
   payment = expensePaymentFabric({}),
@@ -64,7 +65,6 @@ export const expenseModelFabric = ({
   purchasedAt,
   value,
   isFinished,
-  payday,
   valueDefinition,
   details,
   payment,

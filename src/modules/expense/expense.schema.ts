@@ -80,5 +80,8 @@ export const ExpenseSchema = new mongoose.Schema<ExpenseDocument>(
   },
 );
 
-export default mongoose.models.Expense ||
+export const ExpenseModel =
+  mongoose.models?.Expense ||
   mongoose.model<ExpenseDocument>("Expense", ExpenseSchema);
+
+export default ExpenseModel;

@@ -1,22 +1,23 @@
 "use client";
 
-import DeletButtonTableList from "@common/components/button/DeleteButtonTableList";
+import DeleteButtonTableList from "@common/components/button/DeleteButtonTableList";
 import EditButtonModal from "@common/components/button/EditButtonModal";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { Col, Row, Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
+import { PayButton } from "@modules/expense/components/PayButton";
+import React from "react";
 
 type ListExpenseProps = {
   tableProps: TableProps<ExpenseDocument>;
   openEditModal: (e: any) => void;
 };
 
-export const TableExpense: React.FC<ListExpenseProps> = ({
-  tableProps,
-  openEditModal,
-}) => {
+export const TableExpense: React.FC<ListExpenseProps> = (props) => {
+  const { tableProps, openEditModal } = props;
+
   const columns = [
     {
       title: "Nome",
@@ -73,16 +74,19 @@ export const TableExpense: React.FC<ListExpenseProps> = ({
       title: "Ações",
       dataIndex: "table-actions",
       key: "table-actions",
-      width: "250px",
+      width: 350,
       render: (_: any, record: ExpenseDocument) => {
         const id = (record?._id as string) || "";
         return (
           <Row gutter={4} justify="end">
             <Col>
+              <PayButton expenseId={id} />
+            </Col>
+            <Col>
               <EditButtonModal id={id} openModal={openEditModal} />
             </Col>
             <Col>
-              <DeletButtonTableList id={id} resource="despesas" />
+              <DeleteButtonTableList id={id} resource="despesas" />
             </Col>
           </Row>
         );

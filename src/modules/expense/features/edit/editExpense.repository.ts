@@ -1,19 +1,19 @@
 import dbConnect from "@lib/mongoose/dbConnect";
-import Expense, { ExpenseDocument } from "@modules/expense/expense.schema";
+import { ExpenseModel, ExpenseDocument } from "@modules/expense/expense.schema";
 
-export const fetchExpenseById = async (id: string) => {
+export const fetchExpenseById = async (
+  id: string,
+): Promise<ExpenseDocument | null> => {
   await dbConnect();
-  const expense = await Expense.findById(id).lean<ExpenseDocument>();
-  return expense;
+  return ExpenseModel.findById(id).lean<ExpenseDocument>();
 };
 
 export const updateExpense = async (id: string, body: any) => {
-  const validation = new Expense(body).validate();
+  const validation = new ExpenseModel(body).validate();
   if (validation.error) {
     throw new Error(validation.error.message);
   }
 
   await dbConnect();
-  const result = await Expense.findByIdAndUpdate(id, body);
-  return result;
+  return ExpenseModel.findByIdAndUpdate(id, body);
 };
