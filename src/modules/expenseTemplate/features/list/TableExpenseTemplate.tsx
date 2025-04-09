@@ -12,7 +12,9 @@ type TableExpenseTemplateProps = {
   openEditModal: (e: any) => void;
 };
 
-export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = (props) => {
+export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = (
+  props,
+) => {
   const { tableProps, openEditModal } = props;
   const columns = [
     {
@@ -38,7 +40,7 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = (props)
               <DeletButtonTableList
                 key="delete-button"
                 id={id}
-                resource="tipos"
+                resource="contas"
               />,
             ]}
           />
@@ -50,7 +52,7 @@ export const TableExpenseTemplate: React.FC<TableExpenseTemplateProps> = (props)
   return (
     <>
       <Table
-        {...(tableProps)}
+        {...tableProps}
         loading={tableProps.loading}
         dataSource={tableProps.dataSource || []}
         columns={columns}

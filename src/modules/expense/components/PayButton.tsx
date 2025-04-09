@@ -1,6 +1,11 @@
 "use client";
 
-import { Button, Popconfirm, type PopconfirmProps } from "antd";
+import {
+  Button,
+  Popconfirm,
+  type ButtonProps,
+  type PopconfirmProps,
+} from "antd";
 import { payExpense } from "@modules/expense/features/pay/payExpense.service";
 import { useNotification } from "@refinedev/core";
 import React from "react";
@@ -8,21 +13,37 @@ import { WalletOutlined } from "@ant-design/icons";
 
 type PayButtonProps = {
   expenseId: string;
+  onlyButton?: boolean;
+  onClick?: (e: any) => void;
 };
 
 export const PayButton: React.FC<PayButtonProps> = (props) => {
-  const { expenseId } = props;
+  const { expenseId, onlyButton, onClick } = props;
   const { open } = useNotification();
   const onConfirm: PopconfirmProps["onConfirm"] = async (e) => {
-    console.log(e);
     e?.preventDefault();
-    await payExpense(expenseId);
+    await payExpense(expenseId, []);
     open?.({
       type: "success",
       description: "Scesso",
       message: `Conta paga com sucesso`,
     });
   };
+
+  const buttonProps: ButtonProps = {
+    variant: "solid",
+    icon: <WalletOutlined />,
+    color: "green",
+  };
+
+  if (onlyButton) {
+    return (
+      <Button {...buttonProps} onClick={onClick}>
+        Pagar
+      </Button>
+    );
+  }
+
   return (
     <Popconfirm
       title="Confirmar pagamento"
@@ -31,9 +52,7 @@ export const PayButton: React.FC<PayButtonProps> = (props) => {
       cancelText="Não"
       onConfirm={onConfirm}
     >
-      <Button variant="solid" icon={<WalletOutlined />} color="green">
-        Pagar
-      </Button>
+      <Button {...buttonProps}>Pagar</Button>
     </Popconfirm>
   );
 };

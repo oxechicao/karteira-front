@@ -13,7 +13,7 @@ export const updateExpense = async (id: string, body: any) => {
   if (validation.error) {
     throw new Error(validation.error.message);
   }
-
+  console.log(body);
   await dbConnect();
   return ExpenseModel.findByIdAndUpdate(id, body);
 };

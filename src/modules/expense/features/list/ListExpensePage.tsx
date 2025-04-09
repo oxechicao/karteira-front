@@ -6,8 +6,18 @@ import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
+import { useState } from "react";
+import { ModalPayment } from "@modules/expense/features/pay/ModalPayment";
 
 export function ListExpensePage() {
+  const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
+  const [currentId, setCurrentId] = useState<string>("");
+
+  const setupPaymentModal = (id: string) => {
+    setCurrentId(id);
+    setOpenPaymentModal(true);
+  };
+
   const { tableProps } = useTable<ExpenseDocument>({
     syncWithLocation: true,
   });
@@ -44,7 +54,11 @@ export function ListExpensePage() {
           },
         }}
       >
-        <TableExpense tableProps={tableProps} openEditModal={editOpenModal} />
+        <TableExpense
+          tableProps={tableProps}
+          openEditModal={editOpenModal}
+          openPaymentModal={setupPaymentModal}
+        />
       </List>
       {!tableProps.loading && createModalProps && createFormProps && (
         <ModalFormExpense
@@ -60,6 +74,14 @@ export function ListExpensePage() {
           formProps={editFormProps as unknown as FormProps<ExpenseModelForm>}
         />
       )}
+      <ModalPayment
+        isOpen={openPaymentModal}
+        handleClose={() => {
+          setOpenPaymentModal(false);
+          setCurrentId("");
+        }}
+        expenseId={currentId}
+      />
     </>
   );
 }

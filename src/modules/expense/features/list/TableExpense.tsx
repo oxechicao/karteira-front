@@ -5,7 +5,7 @@ import EditButtonModal from "@common/components/button/EditButtonModal";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
-import { Col, Row, Table, type TableProps } from "antd";
+import { Button, Col, Row, Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
 import { PayButton } from "@modules/expense/components/PayButton";
 import React from "react";
@@ -13,10 +13,11 @@ import React from "react";
 type ListExpenseProps = {
   tableProps: TableProps<ExpenseDocument>;
   openEditModal: (e: any) => void;
+  openPaymentModal: (e: any) => void;
 };
 
 export const TableExpense: React.FC<ListExpenseProps> = (props) => {
-  const { tableProps, openEditModal } = props;
+  const { tableProps, openEditModal, openPaymentModal } = props;
 
   const columns = [
     {
@@ -80,7 +81,11 @@ export const TableExpense: React.FC<ListExpenseProps> = (props) => {
         return (
           <Row gutter={4} justify="end">
             <Col>
-              <PayButton expenseId={id} />
+              <PayButton
+                expenseId={id}
+                onClick={() => openPaymentModal(id)}
+                onlyButton
+              />
             </Col>
             <Col>
               <EditButtonModal id={id} openModal={openEditModal} />

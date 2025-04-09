@@ -1,5 +1,16 @@
 # KarteiraSchema Front
 
+## ToDOing
+
+### Pagamento
+
+#### Conta individual
+- [ ] Implementar modal para escolher as datas de pagamento
+- [ ] Imeplementar lógica para pagar o mês
+ 
+#### Pagamento em massa
+- [ ] Implementar lógica para pagar todas os gastos de uma conta
+
 ## Como funciona?
 
 1. Cria uma karteira

@@ -19,7 +19,7 @@ export default function FormExpense() {
   const { open } = useNotification();
 
   const { data, isLoading } = useList<ExpenseTemplateDocument>({
-    resource: "tipos",
+    resource: "contas",
   });
 
   const options = useMemo(() => {
@@ -51,7 +51,8 @@ export default function FormExpense() {
       message: `Tipo de despesa foi alterado para: ${selectedTemplate.templateName}`,
       key: `template-changes-notification-${templateId}`,
     });
-  }, [templateId, form, data, open]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [templateId]);
 
   return (
     <>
