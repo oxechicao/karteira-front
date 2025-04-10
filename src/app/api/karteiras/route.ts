@@ -1,6 +1,5 @@
 import { withAuth } from "@lib/with-auth/withAuth";
-import { saveKarteira } from "@modules/karteira/features/create/createKarteira.service";
-import { getKarteiras } from "@modules/karteira/features/list/listKarteira.service";
+import { getKarteiras, saveKarteira } from "@modules/karteira/karteira.service";
 
 export const GET = withAuth(async () => {
   const karteiras = await getKarteiras();
