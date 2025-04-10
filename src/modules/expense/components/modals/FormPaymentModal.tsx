@@ -1,11 +1,10 @@
 import { Checkbox, Divider, Form, Modal } from "antd";
-import { ExpenseTemplatePaymentAt } from "@modules/expense-template/expenseTemplate.type";
 import { HttpError, useOne } from "@refinedev/core";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { useMemo, useReducer } from "react";
 import { beginningCurrentMonth, getDateTime } from "@common/utils/date";
 import { DateTime } from "luxon";
-import { payExpense } from "@modules/expense/pages/pay/payExpense.service";
+import { payExpense } from "@modules/expense/expense.service";
 
 type ModalPaymentProps = {
   isOpen: boolean;
@@ -13,7 +12,7 @@ type ModalPaymentProps = {
   expenseId: string;
 };
 
-export const ModalPayment: React.FC<ModalPaymentProps> = (props) => {
+export const FormPaymentModal: React.FC<ModalPaymentProps> = (props) => {
   const { isOpen, handleClose, expenseId } = props;
   const { data, isLoading } = useOne<ExpenseModelForm, HttpError>({
     resource: "despesas",

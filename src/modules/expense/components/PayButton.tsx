@@ -6,10 +6,10 @@ import {
   type ButtonProps,
   type PopconfirmProps,
 } from "antd";
-import { payExpense } from "@modules/expense/pages/pay/payExpense.service";
 import { useNotification } from "@refinedev/core";
 import React from "react";
 import { WalletOutlined } from "@ant-design/icons";
+import { payExpense } from "@modules/expense/expense.service";
 
 type PayButtonProps = {
   expenseId: string;

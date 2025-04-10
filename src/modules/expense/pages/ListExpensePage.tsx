@@ -1,13 +1,13 @@
 "use client";
 
-import ModalFormExpense from "@modules/expense/components/ModalFormExpanse";
-import { TableExpense } from "@modules/expense/pages/list/TableExpense";
+import ModalFormExpense from "@modules/expense/components/modals/FormExpanseModal";
+import { TableExpense } from "@modules/expense/components/TableExpense";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { useState } from "react";
-import { ModalPayment } from "@modules/expense/pages/pay/ModalPayment";
+import { FormPaymentModal } from "@modules/expense/components/modals/FormPaymentModal";
 
 export function ListExpensePage() {
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
@@ -74,7 +74,7 @@ export function ListExpensePage() {
           formProps={editFormProps as unknown as FormProps<ExpenseModelForm>}
         />
       )}
-      <ModalPayment
+      <FormPaymentModal
         isOpen={openPaymentModal}
         handleClose={() => {
           setOpenPaymentModal(false);

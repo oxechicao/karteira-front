@@ -1,8 +1,8 @@
+import { NextRequest } from "next/server";
 import {
   getByIdEditExpense,
   updateExpenseById,
-} from "@modules/expense/pages/edit/editExpense.service";
-import { NextRequest } from "next/server";
+} from "@modules/expense/expense.service";
 
 export const GET = async (
   _: NextRequest,

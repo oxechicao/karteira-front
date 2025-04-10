@@ -1,4 +1,4 @@
-import { payExpense } from "@modules/expense/pages/pay/payExpense.service";
+import { payExpense } from "@modules/expense/expense.service";
 
 export const POST = async (
   req: Request,

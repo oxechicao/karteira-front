@@ -1,6 +1,6 @@
 import dbConnect from "@lib/mongoose/dbConnect";
-import saveExpense from "@modules/expense/pages/create/createExpense.service";
-import { getExpensesFromToday } from "@modules/expense/pages/list/listExpense.repository";
+import { getExpensesFromToday } from "@modules/expense/expense.repository";
+import { saveExpense } from "@modules/expense/expense.service";
 
 export const dynamic = "force-dynamic";
 
