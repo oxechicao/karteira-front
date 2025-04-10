@@ -1,5 +1,5 @@
 import { Checkbox, Divider, Form, Modal } from "antd";
-import { ExpenseTemplatePaymentAt } from "@modules/expenseTemplate/expenseTemplate.type";
+import { ExpenseTemplatePaymentAt } from "@modules/expense-template/expenseTemplate.type";
 import { HttpError, useOne } from "@refinedev/core";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { useMemo, useReducer } from "react";

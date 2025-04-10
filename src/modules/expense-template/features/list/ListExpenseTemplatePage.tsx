@@ -1,11 +1,11 @@
 "use client";
 
-import { ModalFormExpenseTemplate } from "@modules/expenseTemplate/components/ModalFormExpanseTemplate";
-import { TableExpenseTemplate } from "@modules/expenseTemplate/features/list/TableExpenseTemplate";
-import { ExpenseTemplateDocument } from "@modules/expenseTemplate/expenseTemplate.schema";
+import { ModalFormExpenseTemplate } from "@modules/expense-template/components/ModalFormExpanseTemplate";
+import { TableExpenseTemplate } from "@modules/expense-template/features/list/TableExpenseTemplate";
+import { ExpenseTemplateDocument } from "@modules/expense-template/expenseTemplate.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
 
 export const ListExpenseTemplatePage = () => {
   const { tableProps } = useTable<ExpenseTemplateDocument>();

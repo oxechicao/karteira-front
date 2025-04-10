@@ -1,7 +1,7 @@
 "use server";
 import { getExpenseById } from "@modules/expense/features/pay/payExpense.repository";
 import { DateTime } from "luxon";
-import { ExpenseTemplatePaymentAt } from "@modules/expenseTemplate/expenseTemplate.type";
+import { ExpenseTemplatePaymentAt } from "@modules/expense-template/expenseTemplate.type";
 import { updateExpenseById } from "@modules/expense/features/edit/editExpense.service";
 
 export const payExpense = async (expenseId: string, dates: DateTime[]) => {

@@ -1,8 +1,8 @@
 "use client";
 
-import { FormExpenseTemplate } from "@modules/expenseTemplate/components/FormExpenseTemplate";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
-import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expenseTemplate/expenseTemplate.mapper";
+import { FormExpenseTemplate } from "@modules/expense-template/components/FormExpenseTemplate";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expenseTemplate.mapper";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Spin } from "antd";
 import React from "react";

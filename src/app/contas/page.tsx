@@ -1,4 +1,4 @@
-import { ListExpenseTemplatePage } from "@modules/expenseTemplate/features/list/ListExpenseTemplatePage";
+import { ListExpenseTemplatePage } from "@modules/expense-template/features/list/ListExpenseTemplatePage";
 
 export default function TiposPage() {
   return <ListExpenseTemplatePage />;

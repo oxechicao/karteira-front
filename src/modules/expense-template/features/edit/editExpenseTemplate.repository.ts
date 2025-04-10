@@ -3,7 +3,7 @@
 import dbConnect from "@lib/mongoose/dbConnect";
 import ExpenseTemplateSchema, {
   ExpenseTemplateSchemaModel,
-} from "@modules/expenseTemplate/expenseTemplate.schema";
+} from "@modules/expense-template/expenseTemplate.schema";
 
 export const fetchByIdExpenseTemplate = async (id: string) => {
   await dbConnect();

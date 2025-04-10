@@ -1,8 +1,8 @@
 import insertExpense from "@modules/expense/features/create/createExpense.repository";
 import { mapExpenseSchema } from "@modules/expense/expense.mapper";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
-import { newExpenseTemplate } from "@modules/expenseTemplate/features/create/createExpenseTemplate.service";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { newExpenseTemplate } from "@modules/expense-template/features/create/createExpenseTemplate.service";
 
 async function saveExpenseTemplateFromExpense(data: ExpenseModelForm) {
   const expenseTemplate = {

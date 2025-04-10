@@ -1,8 +1,8 @@
 "use client";
 
-import FormBaseExpense from "@modules/expenseTemplate/components/FormExpenseModel/FormBaseExpense";
-import FormDetailsExpense from "@modules/expenseTemplate/components/FormExpenseModel/FormDetailsExpense";
-import FormPaymentExpense from "@modules/expenseTemplate/components/FormExpenseModel/FormPaymentExpense";
+import FormBaseExpense from "@modules/expense-template/components/FormExpenseModel/FormBaseExpense";
+import FormDetailsExpense from "@modules/expense-template/components/FormExpenseModel/FormDetailsExpense";
+import FormPaymentExpense from "@modules/expense-template/components/FormExpenseModel/FormPaymentExpense";
 import { Col, Divider, Form, Input, Row, Space } from "antd";
 
 export type FormExpenseNoRequired = {

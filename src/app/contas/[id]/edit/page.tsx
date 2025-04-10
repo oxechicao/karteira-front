@@ -1,4 +1,4 @@
-import { EditExpenseTemplatePage } from "@modules/expenseTemplate/features/edit/EditExpenseTemplatePage";
+import { EditExpenseTemplatePage } from "@modules/expense-template/features/edit/EditExpenseTemplatePage";
 
 export default async function TiposEditPage() {
   return <EditExpenseTemplatePage />;

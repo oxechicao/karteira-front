@@ -1,11 +1,11 @@
 "use server";
 
-import { ExpenseTemplateModelForm } from "@modules/expenseTemplate/expenseTemplate.type";
-import { mapDataToExpenseTemplateModel } from "@modules/expenseTemplate/expenseTemplate.mapper";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { mapDataToExpenseTemplateModel } from "@modules/expense-template/expenseTemplate.mapper";
 import {
   fetchByIdExpenseTemplate,
   updateByIdExpenseTemplate,
-} from "@modules/expenseTemplate/features/edit/editExpenseTemplate.repository";
+} from "@modules/expense-template/features/edit/editExpenseTemplate.repository";
 
 export const getByIdEditExpenseTemplate = async (id: string) => {
   const result = await fetchByIdExpenseTemplate(id);

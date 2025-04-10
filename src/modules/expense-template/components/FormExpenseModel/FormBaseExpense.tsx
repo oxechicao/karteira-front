@@ -2,7 +2,7 @@ import { LDatePicker } from "@common/components/form/LDatePicker";
 import { RowCol } from "@common/components/grid/RowCol";
 import { moneyMask } from "@common/utils/doMask";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
-import { FormExpenseNoRequired } from "@modules/expenseTemplate/components/FormExpenseModel/FormExpenseModel";
+import { FormExpenseNoRequired } from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
 import { Form, Input, InputNumber } from "antd";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
 
