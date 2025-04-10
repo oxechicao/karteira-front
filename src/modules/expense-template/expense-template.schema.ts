@@ -1,4 +1,4 @@
-import { ExpenseTemplateForm } from "@modules/expense-template/expenseTemplate.type";
+import { ExpenseTemplateForm } from "@modules/expense-template/expense-template.type";
 import mongoose from "mongoose";
 
 export type ExpenseTemplateSchemaModel = {

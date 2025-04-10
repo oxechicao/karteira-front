@@ -10,7 +10,7 @@ import { ExpenseModelSchema } from "@modules/expense/expense.schema";
 import {
   ExpenseTemplateForm,
   ExpenseTemplatePaymentAt,
-} from "@modules/expense-template/expenseTemplate.type";
+} from "@modules/expense-template/expense-template.type";
 import { Types } from "mongoose";
 
 export function mapFormExpenseEditing(data: ExpenseDocument): ExpenseModelForm {
@@ -52,11 +52,11 @@ const mapInstallments = (
   payday: number,
   payment: ExpenseTemplateForm["payment"],
 ): ExpenseTemplatePaymentAt[] => {
-  let arraySize = 0;
   const minMonth = DateTime.now()
     .set({ day: 1 })
     .diff(purchasedAt.set({ day: 1 }), "months").months;
 
+  let arraySize: number;
   if (payment.isRecurrent) {
     arraySize = Math.ceil(minMonth + 12);
   } else {

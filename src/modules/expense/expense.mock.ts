@@ -13,7 +13,7 @@ import {
   ExpenseTemplateDetails,
   ExpenseTemplatePayment,
   ExpenseTemplateValueDefinition,
-} from "@modules/expense-template/expenseTemplate.type";
+} from "@modules/expense-template/expense-template.type";
 
 export const expenseValueDefinitionFabric = ({
   precision = 2,

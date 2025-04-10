@@ -1,5 +1,5 @@
 "use server";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
 import { mapDataToExpenseTemplateModel } from "@modules/expense-template/expense-template.mapper";
 import {
   deleteByIdExpenseTemplate,
@@ -29,14 +29,8 @@ export const updateExpenseTemplate = async (
   id: string,
   body: ExpenseTemplateModelForm,
 ) => {
-  const result = await updateByIdExpenseTemplate(
-    id,
-    mapDataToExpenseTemplateModel(body),
-  );
-
-  return result;
+  return updateByIdExpenseTemplate(id, mapDataToExpenseTemplateModel(body));
 };
 export const getExpensesTemplates = async () => {
-  const result = await fetchExpenseTemplates();
-  return result;
+  return fetchExpenseTemplates();
 };

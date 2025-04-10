@@ -5,7 +5,7 @@ import { TableExpenseTemplate } from "@modules/expense-template/components/Table
 import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
 
 export const ListExpenseTemplatePage = () => {
   const { tableProps } = useTable<ExpenseTemplateDocument>();

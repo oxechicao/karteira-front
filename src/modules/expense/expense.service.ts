@@ -9,7 +9,7 @@ import { ExpenseModelForm } from "@modules/expense/expense.type";
 import {
   ExpenseTemplateModelForm,
   ExpenseTemplatePaymentAt,
-} from "@modules/expense-template/expenseTemplate.type";
+} from "@modules/expense-template/expense-template.type";
 import { DateTime } from "luxon";
 import {
   fetchExpenseById,
@@ -39,8 +39,7 @@ export async function saveExpense(data: ExpenseModelForm) {
   }
 
   const expense = mapExpenseSchema(data);
-  const result = await insertExpense(expense);
-  return result;
+  return insertExpense(expense);
 }
 
 export const updateExpenseById = async (id: string, body: ExpenseModelForm) => {

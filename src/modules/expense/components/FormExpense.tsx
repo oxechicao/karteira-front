@@ -6,7 +6,7 @@ import { ExpenseTemplateDocument } from "@modules/expense-template/expense-templ
 import { useList, useNotification } from "@refinedev/core";
 import { Checkbox, Col, Divider, Form, Input, Row, Select } from "antd";
 import { useEffect, useMemo } from "react";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
 
 export default function FormExpense() {
   const form = Form.useFormInstance();
