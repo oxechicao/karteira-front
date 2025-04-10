@@ -1,6 +1,6 @@
 import mongoose, { Types } from "mongoose";
 import { ExpenseTemplateForm } from "@modules/expense-template/expenseTemplate.type";
-import { ExpenseTemplatePaymentAtSchema } from "@modules/expense-template/expenseTemplate.schema";
+import { ExpenseTemplatePaymentAtSchema } from "@modules/expense-template/expense-template.schema";
 
 export type ExpenseModelSchema = ExpenseTemplateForm & {
   templateId: Types.ObjectId;

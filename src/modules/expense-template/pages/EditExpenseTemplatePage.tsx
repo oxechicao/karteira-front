@@ -2,7 +2,7 @@
 
 import { FormExpenseTemplate } from "@modules/expense-template/components/FormExpenseTemplate";
 import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
-import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expenseTemplate.mapper";
+import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expense-template.mapper";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Spin } from "antd";
 import React from "react";

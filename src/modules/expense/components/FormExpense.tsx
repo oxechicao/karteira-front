@@ -1,8 +1,8 @@
 "use client";
 
 import FormExpenseModel from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
-import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expenseTemplate.mapper";
-import { ExpenseTemplateDocument } from "@modules/expense-template/expenseTemplate.schema";
+import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expense-template.mapper";
+import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
 import { useList, useNotification } from "@refinedev/core";
 import { Checkbox, Col, Divider, Form, Input, Row, Select } from "antd";
 import { useEffect, useMemo } from "react";

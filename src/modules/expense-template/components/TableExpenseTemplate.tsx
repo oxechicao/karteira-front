@@ -1,7 +1,7 @@
 "use client";
 
 import { RowCol } from "@common/components/grid/RowCol";
-import { ExpenseTemplateDocument } from "@modules/expense-template/expenseTemplate.schema";
+import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
 import { Table, TableProps } from "antd";
 import React from "react";
 import EditButtonModal from "@common/components/button/EditButtonModal";

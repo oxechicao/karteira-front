@@ -1,4 +1,4 @@
-import { ExpenseTemplateSchemaModel } from "@modules/expense-template/expenseTemplate.schema";
+import { ExpenseTemplateSchemaModel } from "@modules/expense-template/expense-template.schema";
 import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";

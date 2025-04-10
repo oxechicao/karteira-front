@@ -10,13 +10,13 @@ import {
   ExpenseTemplateModelForm,
   ExpenseTemplatePaymentAt,
 } from "@modules/expense-template/expenseTemplate.type";
-import { newExpenseTemplate } from "@modules/expense-template/features/create/createExpenseTemplate.service";
 import { DateTime } from "luxon";
 import {
   fetchExpenseById,
   insertExpense,
   updateExpense,
 } from "@modules/expense/expense.repository";
+import { newExpenseTemplate } from "@modules/expense-template/expense-template.service";
 
 export async function getByIdEditExpense(id: string) {
   const expense = await fetchExpenseById(id);

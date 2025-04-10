@@ -1,9 +1,9 @@
-import { deleteExpenseTemplate } from "@modules/expense-template/features/delete/deleteExpenseTemplate.service";
+import type { NextRequest } from "next/server";
 import {
+  deleteExpenseTemplate,
   getByIdEditExpenseTemplate,
   updateExpenseTemplate,
-} from "@modules/expense-template/features/edit/editExpenseTemplate.service";
-import type { NextRequest } from "next/server";
+} from "@modules/expense-template/expense-template.service";
 export const dynamic = "force-dynamic";
 
 export const GET = async (

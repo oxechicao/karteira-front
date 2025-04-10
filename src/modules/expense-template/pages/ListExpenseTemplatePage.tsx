@@ -1,8 +1,8 @@
 "use client";
 
 import { ModalFormExpenseTemplate } from "@modules/expense-template/components/ModalFormExpanseTemplate";
-import { TableExpenseTemplate } from "@modules/expense-template/features/list/TableExpenseTemplate";
-import { ExpenseTemplateDocument } from "@modules/expense-template/expenseTemplate.schema";
+import { TableExpenseTemplate } from "@modules/expense-template/components/TableExpenseTemplate";
+import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";
