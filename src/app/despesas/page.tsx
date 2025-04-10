@@ -1,4 +1,4 @@
-import { ListExpensePage } from "@modules/expense/features/list/ListExpensePage";
+import { ListExpensePage } from "@modules/expense/pages/ListExpensePage";
 
 export default function DespesasPage() {
   return <ListExpensePage />;

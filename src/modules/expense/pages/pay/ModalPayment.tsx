@@ -5,7 +5,7 @@ import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { useMemo, useReducer } from "react";
 import { beginningCurrentMonth, getDateTime } from "@common/utils/date";
 import { DateTime } from "luxon";
-import { payExpense } from "@modules/expense/features/pay/payExpense.service";
+import { payExpense } from "@modules/expense/pages/pay/payExpense.service";
 
 type ModalPaymentProps = {
   isOpen: boolean;

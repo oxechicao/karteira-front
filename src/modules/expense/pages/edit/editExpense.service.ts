@@ -7,7 +7,7 @@ import { ExpenseModelForm } from "@modules/expense/expense.type";
 import {
   fetchExpenseById,
   updateExpense,
-} from "@modules/expense/features/edit/editExpense.repository";
+} from "@modules/expense/pages/edit/editExpense.repository";
 
 export const getByIdEditExpense = async (id: string) => {
   const expense = await fetchExpenseById(id);

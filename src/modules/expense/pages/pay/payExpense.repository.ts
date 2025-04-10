@@ -1,5 +1,5 @@
-import { fetchExpenseById } from "@modules/expense/features/edit/editExpense.repository";
-import { updateExpenseById } from "@modules/expense/features/edit/editExpense.service";
+import { fetchExpenseById } from "@modules/expense/pages/edit/editExpense.repository";
+import { updateExpenseById } from "@modules/expense/pages/edit/editExpense.service";
 
 export const getExpenseById = async (id: string) => {
   const expense = await fetchExpenseById(id);

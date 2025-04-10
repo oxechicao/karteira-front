@@ -1,4 +1,4 @@
-import insertExpense from "@modules/expense/features/create/createExpense.repository";
+import insertExpense from "@modules/expense/pages/create/createExpense.repository";
 import { mapExpenseSchema } from "@modules/expense/expense.mapper";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { ExpenseTemplateModelForm } from "@modules/expense-template/expenseTemplate.type";

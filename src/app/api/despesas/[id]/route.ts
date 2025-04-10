@@ -1,7 +1,7 @@
 import {
   getByIdEditExpense,
   updateExpenseById,
-} from "@modules/expense/features/edit/editExpense.service";
+} from "@modules/expense/pages/edit/editExpense.service";
 import { NextRequest } from "next/server";
 
 export const GET = async (

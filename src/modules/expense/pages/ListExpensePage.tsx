@@ -1,13 +1,13 @@
 "use client";
 
 import ModalFormExpense from "@modules/expense/components/ModalFormExpanse";
-import { TableExpense } from "@modules/expense/features/list/TableExpense";
+import { TableExpense } from "@modules/expense/pages/list/TableExpense";
 import { ExpenseModelForm } from "@modules/expense/expense.type";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
 import { ExpenseDocument } from "@modules/expense/expense.schema";
 import { useState } from "react";
-import { ModalPayment } from "@modules/expense/features/pay/ModalPayment";
+import { ModalPayment } from "@modules/expense/pages/pay/ModalPayment";
 
 export function ListExpensePage() {
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);

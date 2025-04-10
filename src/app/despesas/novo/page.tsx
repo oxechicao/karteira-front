@@ -1,4 +1,4 @@
-import { CreateExpensePage } from "@modules/expense/features/create/CreateExpensePage";
+import { CreateExpensePage } from "@modules/expense/pages/CreateExpensePage";
 
 export default function DespesasCreatePage() {
   return <CreateExpensePage />;
