@@ -1,23 +1,9 @@
-import { DevtoolsProvider } from "@common/providers/devtools";
-import {
-  ThemedLayoutContextProvider,
-  ThemedLayoutV2,
-  useNotificationProvider,
-} from "@refinedev/antd";
-import { GitHubBanner, Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import routerProvider from "@refinedev/nextjs-router";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import React, { Suspense } from "react";
-
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { ColorModeContextProvider } from "@common/contexts/color-mode";
-import { authProviderClient } from "@common/providers/auth-provider/auth-provider.client";
-import { dataProvider } from "@common/providers/data-provider";
+import React from "react";
 import "@refinedev/antd/dist/reset.css";
 import "@common/styles/global.css";
-import { Sider } from "@common/components/layout/Sider";
+import { RefineLayout } from "@refine/RefineLayout";
 
 export const metadata: Metadata = {
   title: "Refine",
@@ -39,58 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Suspense>
-          <GitHubBanner />
-          <RefineKbarProvider>
-            <AntdRegistry>
-              <ColorModeContextProvider defaultMode={defaultMode}>
-                <DevtoolsProvider>
-                  <Refine
-                    routerProvider={routerProvider}
-                    dataProvider={dataProvider}
-                    notificationProvider={useNotificationProvider}
-                    authProvider={authProviderClient}
-                    resources={[
-                      {
-                        name: "dashboard",
-                        list: "/",
-                      },
-                      {
-                        name: "despesas",
-                        list: "/despesas",
-                        create: "/despesas/novo",
-                        show: "/despesas/:id",
-                        edit: "/despesas/:id/edit",
-                      },
-                      {
-                        name: "contas",
-                        list: "/contas",
-                        create: "/contas/novo",
-                        show: "/contas/:id",
-                        edit: "/contas/:id/edit",
-                      },
-                      {
-                        name: "karteiras",
-                        list: "/karteiras",
-                      }
-                    ]}
-                    options={{
-                      syncWithLocation: true,
-                      warnWhenUnsavedChanges: true,
-                      useNewQueryKeys: true,
-                      projectId: "VjxSuJ-TJOjlk-Djbugf",
-                    }}
-                  >
-                    <ThemedLayoutContextProvider>
-                      <ThemedLayoutV2 Sider={Sider}>{children}</ThemedLayoutV2>
-                    </ThemedLayoutContextProvider>
-                    <RefineKbar />
-                  </Refine>
-                </DevtoolsProvider>
-              </ColorModeContextProvider>
-            </AntdRegistry>
-          </RefineKbarProvider>
-        </Suspense>
+        <RefineLayout defaultMode={defaultMode}>{children}</RefineLayout>
       </body>
     </html>
   );
