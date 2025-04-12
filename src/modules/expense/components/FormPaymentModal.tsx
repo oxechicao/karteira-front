@@ -2,7 +2,7 @@ import { Checkbox, Divider, Form, Modal } from "antd";
 import { HttpError, useOne } from "@refinedev/core";
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { useMemo, useReducer } from "react";
-import { beginningCurrentMonth, getDateTime } from "@common/utils/date";
+import { beginningCurrentMonth, convertToDateTime } from "@common/utils/date";
 import { DateTime } from "luxon";
 
 import { payExpense } from "@modules/expense/services/payExpense";
@@ -27,8 +27,8 @@ export const FormPaymentModal: React.FC<ModalPaymentProps> = (props) => {
     return data?.data.payment?.installments
       ?.filter((installment) => !installment.isPaid)
       .map((installment) => ({
-        label: getDateTime(installment.date).toFormat("dd/MM/yyyy"),
-        value: getDateTime(installment.date).toFormat("yyyy-MM-dd"),
+        label: convertToDateTime(installment.date).toFormat("dd/MM/yyyy"),
+        value: convertToDateTime(installment.date).toFormat("yyyy-MM-dd"),
       }));
   }, [data]);
 

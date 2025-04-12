@@ -35,4 +35,4 @@ const ExpenseSchema = new mongoose.Schema<ExpenseDocument>(
 
 export const ExpenseModel =
   mongoose.models?.Expense ||
-  mongoose.model<ExpenseDocument>("ExpenseModel", ExpenseSchema);
+  mongoose.model<ExpenseDocument>("Expense", ExpenseSchema);

@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 
-export const beginningCurrentMonth = DateTime.now()
-  .startOf("day")
-  .startOf("month");
+export function beginningCurrentMonth(): DateTime {
+  return DateTime.now().startOf("day").startOf("month");
+}
 
-export const getDateTime = (date: string | DateTime | Date): DateTime => {
+export function convertToDateTime(date: string | DateTime | Date): DateTime {
   if (typeof date === "string") {
     return DateTime.fromISO(date);
   }
@@ -14,4 +14,4 @@ export const getDateTime = (date: string | DateTime | Date): DateTime => {
   }
 
   return date;
-};
+}

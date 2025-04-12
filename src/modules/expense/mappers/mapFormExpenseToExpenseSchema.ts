@@ -1,10 +1,11 @@
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
-import { formatValueSchema } from "@modules/expense/utils/formatValueSchema";
+import { formatFormValueToExpenseSchemaValue } from "@modules/expense/utils/formatFormValueToExpenseSchemaValue";
 import { FrequencyEnum } from "@common/constants/FrequencyEnum";
 import { ExpenseModelSchema } from "@modules/expense/schemas/ExpenseModelSchema";
 import { IPaymentAt } from "@modules/expense/models/IPaymentAt";
+import { convertToDateTime } from "@common/utils/date";
 
 type PlusDateReturn = {
   days?: number;
@@ -119,17 +120,17 @@ function checkIsPaid(
   return isPaidByDate;
 }
 
-export function mapExpenseSchema(data: ExpenseForm): ExpenseModelSchema {
-  const purchasedAt = DateTime.fromJSDate(
-    data.purchasedAt ? data.purchasedAt.toJSDate() : new Date(),
-  );
-
+export function mapFormExpenseToExpenseSchema(
+  data: ExpenseForm,
+): ExpenseModelSchema {
+  const purchasedAt = convertToDateTime(data.purchasedAt);
+  const value = formatFormValueToExpenseSchemaValue(data.value || "0");
   return {
     templateId: data?.templateId || new Types.ObjectId(),
     karteira: data.karteira,
     name: data.name,
     purchasedAt,
-    value: formatValueSchema(data.value || "0"),
+    value,
     isFinished: Boolean(data.isFinished),
     valueDefinition: {
       precision: 2,
@@ -143,7 +144,7 @@ export function mapExpenseSchema(data: ExpenseForm): ExpenseModelSchema {
     },
     payment: {
       installments: mapInstallments(
-        formatValueSchema(data.value || "0"),
+        value,
         purchasedAt,
         data.payment.payday,
         data.payment,

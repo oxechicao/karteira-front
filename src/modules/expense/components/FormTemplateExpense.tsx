@@ -4,15 +4,14 @@ import React, { useEffect, useMemo } from "react";
 import { Checkbox, Col, Divider, Form, Input, Row, Select } from "antd";
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { useList, useNotification } from "@refinedev/core";
-import { ExpenseTemplateDocument } from "@modules/expense-template/schemas/ExpenseTemplateModel";
 import { mapFormEditExpenseTemplate as mapFormExpenseEditing } from "@modules/expense-template/mappers/mapFormEditExpenseTemplate";
-import { ITemplateExpenseTemplate } from "@modules/expense-template/models/IExpenseTemplateModel";
-import { IExpenseModel } from "@modules/expense/models/IExpenseModel";
+import { ExpenseTemplateModelSchema } from "@modules/expense-template/schemas/ExpenseTemplateModelSchema";
+import { mapExpenseTemplateToExpenseForm } from "@modules/expense/mappers/mapExpenseTemplateToExpenseForm";
 
 export const FormTemplateExpense: React.FC = () => {
   const { open } = useNotification();
 
-  const { data, isLoading } = useList<ExpenseTemplateDocument>({
+  const { data, isLoading } = useList<ExpenseTemplateModelSchema>({
     resource: "contas",
   });
 
@@ -23,25 +22,31 @@ export const FormTemplateExpense: React.FC = () => {
     { form },
   );
 
-  const options = useMemo(() => {
-    if (isLoading || !data?.data) return [];
+  const expenseTemplateList: ExpenseTemplateModelSchema[] = useMemo(() => {
+    return data?.data || [];
+  }, [data]);
 
-    return data.data.map((item: ExpenseTemplateDocument) => ({
+  const options = useMemo(() => {
+    if (!expenseTemplateList) return [];
+
+    return expenseTemplateList.map((item: ExpenseTemplateModelSchema) => ({
       label: item.templateName,
       value: item._id,
     }));
-  }, [data, isLoading]);
+  }, [expenseTemplateList]);
 
   useEffect(() => {
     if (!templateId) return;
 
     const selectedTemplate = data?.data.find(
-      (item: ExpenseTemplateDocument) => item._id === templateId,
+      (item: ExpenseTemplateModelSchema) => item._id === templateId,
     );
+
+    console.log(selectedTemplate);
 
     if (!selectedTemplate) return;
     form.setFieldsValue({
-      ...mapFormExpenseEditing(selectedTemplate),
+      ...mapExpenseTemplateToExpenseForm(selectedTemplate),
     });
 
     open?.({
