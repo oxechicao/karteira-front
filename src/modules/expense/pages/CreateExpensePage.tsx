@@ -1,15 +1,14 @@
 "use client";
 
 import FormExpense from "@modules/expense/components/FormExpense";
-import { ExpenseModelForm } from "@modules/expense/expense.type";
+import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { Create, useForm } from "@refinedev/antd";
 import { Form } from "antd";
 
 export const CreateExpensePage: React.FC = () => {
-  const { formProps: createFormProps, saveButtonProps } =
-    useForm<ExpenseModelForm>({
-      action: "create",
-    });
+  const { formProps: createFormProps, saveButtonProps } = useForm<ExpenseForm>({
+    action: "create",
+  });
 
   return (
     <Create

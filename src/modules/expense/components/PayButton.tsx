@@ -9,7 +9,8 @@ import {
 import { useNotification } from "@refinedev/core";
 import React from "react";
 import { WalletOutlined } from "@ant-design/icons";
-import { payExpense } from "@modules/expense/expense.service";
+
+import { payExpense } from "@modules/expense/services/payExpense";
 
 type PayButtonProps = {
   expenseId: string;

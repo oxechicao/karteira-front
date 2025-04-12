@@ -1,5 +1,5 @@
 import FormExpenseModel from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/models/ExpenseTemplateModelForm";
 import { Divider, Form, Input } from "antd";
 import React from "react";
 

@@ -1,8 +1,6 @@
 import dbConnect from "@lib/mongoose/dbConnect";
-import {
-  getExpensesTemplates,
-  newExpenseTemplate,
-} from "@modules/expense-template/expense-template.service";
+import { getExpensesTemplates } from "@modules/expense-template/services/updateExpenseTemplate";
+import { newExpenseTemplate } from "@modules/expense-template/services/newExpenseTemplate";
 
 export const dynamic = "force-dynamic";
 

@@ -4,14 +4,18 @@ import DeleteButtonTableList from "@common/components/button/DeleteButtonTableLi
 import EditButtonModal from "@common/components/button/EditButtonModal";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
-import { ExpenseDocument } from "@modules/expense/expense.schema";
-import { Button, Col, Row, Table, type TableProps } from "antd";
+import { ExpenseDocument } from "@modules/expense/schemas/ExpenseModel";
+import { Col, Row, Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
 import { PayButton } from "@modules/expense/components/PayButton";
 import React from "react";
+import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
+import { EditButton } from "@refinedev/antd";
+import { EditOutlined } from "@ant-design/icons";
+import { ExpenseListTable } from "@modules/expense/models/ExpenseListTable";
 
 type ListExpenseProps = {
-  tableProps: TableProps<ExpenseDocument>;
+  tableProps: TableProps<ExpenseListTable>;
   openEditModal: (e: any) => void;
   openPaymentModal: (e: any) => void;
 };
@@ -35,7 +39,7 @@ export const TableExpense: React.FC<ListExpenseProps> = (props) => {
       title: "Parcela",
       dataIndex: ["payment", "currentInstallment"],
       key: "installment.current",
-      render: (value: number, record: ExpenseDocument) =>
+      render: (value: number, record: ExpenseListTable) =>
         `${value}/${record.payment.currentInstallment}`,
     },
     {
@@ -76,7 +80,7 @@ export const TableExpense: React.FC<ListExpenseProps> = (props) => {
       dataIndex: "table-actions",
       key: "table-actions",
       width: 350,
-      render: (_: any, record: ExpenseDocument) => {
+      render: (_: any, record: ExpenseListTable) => {
         const id = (record?._id as string) || "";
         return (
           <Row gutter={4} justify="end">
@@ -88,7 +92,15 @@ export const TableExpense: React.FC<ListExpenseProps> = (props) => {
               />
             </Col>
             <Col>
-              <EditButtonModal id={id} openModal={openEditModal} />
+              <EditButton
+                key="button-edit"
+                color="gold"
+                variant="solid"
+                icon={<EditOutlined />}
+                recordItemId={id}
+              >
+                Editar
+              </EditButton>
             </Col>
             <Col>
               <DeleteButtonTableList id={id} resource="despesas" />

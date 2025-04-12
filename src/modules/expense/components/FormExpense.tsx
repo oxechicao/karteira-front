@@ -1,15 +1,16 @@
 "use client";
 
 import FormExpenseModel from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
-import { mapFormExpenseTemplateEditing as mapFormExpenseEditing } from "@modules/expense-template/expense-template.mapper";
-import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
+import { ExpenseTemplateDocument } from "@modules/expense-template/schemas/ExpenseTemplateModel";
 import { useList, useNotification } from "@refinedev/core";
 import { Checkbox, Col, Divider, Form, Input, Row, Select } from "antd";
 import { useEffect, useMemo } from "react";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/models/ExpenseTemplateModelForm";
+import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
+import { mapFormEditExpenseTemplate as mapFormExpenseEditing } from "@modules/expense-template/mappers/mapFormEditExpenseTemplate";
 
 export default function FormExpense() {
-  const form = Form.useFormInstance();
+  const form = Form.useFormInstance<ExpenseForm>();
   const templateId = Form.useWatch<string>(["templateId"], { form });
   const shouldCreateNewTemplate = Form.useWatch<boolean>(
     ["shouldCreateNewTemplate"],

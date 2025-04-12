@@ -2,8 +2,14 @@
 
 ## ToDOing
 
-### Pagamento
+### Despesas
+- [x] Criar despesas
+- [x] Editar despesas
+- [x] Deletar despesa
+- [x] Automatizar criação da parcelas despesas
+- [x] Corrigir o bug quando edita despesa define o mês atual como pago se a data de vencimento já estiver passado.
 
+### Pagamento
 #### Conta individual
 - [ ] Implementar modal para escolher as datas de pagamento
 - [ ] Imeplementar lógica para pagar o mês

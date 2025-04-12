@@ -1,7 +1,7 @@
 import { LDatePicker } from "@common/components/form/LDatePicker";
 import { RowCol } from "@common/components/grid/RowCol";
 import { moneyMask } from "@common/utils/doMask";
-import { ExpenseModelForm } from "@modules/expense/expense.type";
+import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { FormExpenseNoRequired } from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
 import { Form, Input, InputNumber } from "antd";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
@@ -9,7 +9,7 @@ import useFormInstance from "antd/es/form/hooks/useFormInstance";
 export default function FormBaseExpense({
   notRequired,
 }: FormExpenseNoRequired) {
-  const { setFieldValue } = useFormInstance<ExpenseModelForm>();
+  const { setFieldValue } = useFormInstance<ExpenseForm>();
 
   return (
     <RowCol

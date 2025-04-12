@@ -2,10 +2,10 @@
 
 import { ModalFormExpenseTemplate } from "@modules/expense-template/components/ModalFormExpanseTemplate";
 import { TableExpenseTemplate } from "@modules/expense-template/components/TableExpenseTemplate";
-import { ExpenseTemplateDocument } from "@modules/expense-template/expense-template.schema";
+import { ExpenseTemplateDocument } from "@modules/expense-template/schemas/ExpenseTemplateModel";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/expense-template.type";
+import { ExpenseTemplateModelForm } from "@modules/expense-template/models/ExpenseTemplateModelForm";
 
 export const ListExpenseTemplatePage = () => {
   const { tableProps } = useTable<ExpenseTemplateDocument>();

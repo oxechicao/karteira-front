@@ -1,13 +1,14 @@
 "use client";
 
-import ModalFormExpense from "@modules/expense/components/modals/FormExpanseModal";
+import ModalFormExpense from "@modules/expense/components/FormExpanseModal";
 import { TableExpense } from "@modules/expense/components/TableExpense";
-import { ExpenseModelForm } from "@modules/expense/expense.type";
+import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { List, useModalForm, useTable } from "@refinedev/antd";
 import { FormProps } from "antd";
-import { ExpenseDocument } from "@modules/expense/expense.schema";
+import { ExpenseDocument } from "@modules/expense/schemas/ExpenseModel";
 import { useState } from "react";
-import { FormPaymentModal } from "@modules/expense/components/modals/FormPaymentModal";
+import { FormPaymentModal } from "@modules/expense/components/FormPaymentModal";
+import { ExpenseListTable } from "@modules/expense/models/ExpenseListTable";
 
 export function ListExpensePage() {
   const [openPaymentModal, setOpenPaymentModal] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export function ListExpensePage() {
     setOpenPaymentModal(true);
   };
 
-  const { tableProps } = useTable<ExpenseDocument>({
+  const { tableProps } = useTable<ExpenseListTable>({
     syncWithLocation: true,
   });
 
@@ -27,7 +28,7 @@ export function ListExpensePage() {
     formProps: editFormProps,
     show: editOpenModal,
     formLoading: editModalLoading,
-  } = useModalForm<ExpenseModelForm>({
+  } = useModalForm<ExpenseForm>({
     action: "edit",
     syncWithLocation: true,
   });
@@ -37,7 +38,7 @@ export function ListExpensePage() {
     formProps: createFormProps,
     show: createOpenModal,
     formLoading: createModalLoading,
-  } = useModalForm<ExpenseModelForm>({
+  } = useModalForm<ExpenseForm>({
     action: "create",
     syncWithLocation: true,
   });
@@ -64,16 +65,14 @@ export function ListExpensePage() {
         <ModalFormExpense
           loading={createModalLoading}
           modalProps={createModalProps}
-          formProps={createFormProps as unknown as FormProps<ExpenseModelForm>}
+          formProps={createFormProps as unknown as FormProps<ExpenseForm>}
         />
       )}
-      {!tableProps.loading && editModalProps && editFormProps && (
-        <ModalFormExpense
-          loading={editModalLoading}
-          modalProps={editModalProps}
-          formProps={editFormProps as unknown as FormProps<ExpenseModelForm>}
-        />
-      )}
+      <ModalFormExpense
+        loading={editModalLoading}
+        modalProps={editModalProps}
+        formProps={editFormProps as unknown as FormProps<ExpenseForm>}
+      />
       <FormPaymentModal
         isOpen={openPaymentModal}
         handleClose={() => {

@@ -1,11 +1,10 @@
 import dbConnect from "@lib/mongoose/dbConnect";
-import { getExpensesFromToday } from "@modules/expense/expense.repository";
-import { saveExpense } from "@modules/expense/expense.service";
+import { getExpensesFromToday } from "@modules/expense/services/getExpensesFromToday";
+import { saveExpense } from "@modules/expense/services/saveExpenseTemplateFromExpense";
 
 export const dynamic = "force-dynamic";
 
 export const GET = async () => {
-  await dbConnect();
   const data = await getExpensesFromToday();
   return Response.json(data);
 };

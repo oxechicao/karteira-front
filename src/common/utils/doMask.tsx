@@ -38,4 +38,4 @@ export const doMask = (
 };
 
 export const moneyMask = (value: string): string =>
-  doMask(value, "###.###.###,##", { reverse: true });
+  doMask(value.replace(/\D/g, ""), "###.###.###,##", { reverse: true });
