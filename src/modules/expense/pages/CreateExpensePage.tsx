@@ -1,6 +1,6 @@
 "use client";
 
-import FormExpense from "@modules/expense/components/FormExpense";
+import { FormExpense } from "@modules/expense/components/FormExpense";
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { Create, useForm } from "@refinedev/antd";
 import { Form } from "antd";

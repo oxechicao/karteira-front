@@ -2,8 +2,8 @@
 
 import { ExpenseTemplateModelForm } from "@modules/expense-template/models/ExpenseTemplateModelForm";
 import { saveExpenseTemplate } from "@modules/expense-template/repositories/saveExpenseTemplate";
-import { mapDataToExpenseTemplateModel } from "@modules/expense-template/mappers/mapDataToExpenseTemplateModel";
+import { mapFormToExpenseTemplateModelSchema } from "@modules/expense-template/mappers/mapFormToExpenseTemplateModelSchema";
 
 export async function newExpenseTemplate(data: ExpenseTemplateModelForm) {
-  await saveExpenseTemplate(mapDataToExpenseTemplateModel(data));
+  await saveExpenseTemplate(mapFormToExpenseTemplateModelSchema(data));
 }

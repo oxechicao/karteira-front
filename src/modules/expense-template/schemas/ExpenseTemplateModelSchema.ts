@@ -1,7 +1,8 @@
-import { IExpenseTemplateModel } from "@modules/expense-template/models/IExpenseTemplateModel";
+import { ITemplateExpenseTemplate } from "@modules/expense-template/models/IExpenseTemplateModel";
+import { Types } from "mongoose";
 
 export type ExpenseTemplateModelSchema = {
+  _id: string | Types.ObjectId;
   templateName: string;
-  isAnonymous: boolean;
-  template: IExpenseTemplateModel;
+  template: ITemplateExpenseTemplate;
 };

@@ -4,5 +4,4 @@ import { IExpenseTemplateModel } from "@modules/expense-template/models/IExpense
 export type ExpenseTemplateModelForm = IExpenseTemplateModel & {
   templateName: string;
   templateId: Types.ObjectId;
-  isAnonymous: boolean;
 };

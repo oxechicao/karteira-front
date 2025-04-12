@@ -1,19 +1,13 @@
 "use server";
 
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
-import { ExpenseTemplateModelForm } from "@modules/expense-template/models/ExpenseTemplateModelForm";
 import { mapExpenseSchema } from "@modules/expense/mappers/mapExpenseSchema";
 import { insertExpense } from "@modules/expense/repositories/insertExpense";
 import { newExpenseTemplate } from "@modules/expense-template/services/newExpenseTemplate";
+import { mapExpenseToExpenseTemplate } from "@modules/expense/mappers/mapExpenseToExpenseTemplate";
 
 async function saveExpenseTemplateFromExpense(data: ExpenseForm) {
-  const expenseTemplate = {
-    ...data,
-    templateName: data.templateName || "",
-    isAnonymous: false,
-  } as ExpenseTemplateModelForm;
-
-  return newExpenseTemplate(expenseTemplate);
+  await newExpenseTemplate(mapExpenseToExpenseTemplate(data));
 }
 
 export async function saveExpense(data: ExpenseForm) {

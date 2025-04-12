@@ -3,7 +3,7 @@
 import { Edit, useForm } from "@refinedev/antd";
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { Form, Spin } from "antd";
-import FormExpense from "@modules/expense/components/FormExpense";
+import { FormExpense } from "@modules/expense/components/FormExpense";
 
 import { mapFormExpenseEditing } from "@modules/expense/mappers/mapFormExpenseEditing";
 

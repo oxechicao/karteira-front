@@ -1,10 +1,8 @@
 "use client";
 
 import DeleteButtonTableList from "@common/components/button/DeleteButtonTableList";
-import EditButtonModal from "@common/components/button/EditButtonModal";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
-import { ExpenseDocument } from "@modules/expense/schemas/ExpenseModel";
 import { Col, Row, Table, type TableProps } from "antd";
 import { DateTime } from "luxon";
 import { PayButton } from "@modules/expense/components/PayButton";
@@ -16,12 +14,11 @@ import { ExpenseListTable } from "@modules/expense/models/ExpenseListTable";
 
 type ListExpenseProps = {
   tableProps: TableProps<ExpenseListTable>;
-  openEditModal: (e: any) => void;
   openPaymentModal: (e: any) => void;
 };
 
 export const TableExpense: React.FC<ListExpenseProps> = (props) => {
-  const { tableProps, openEditModal, openPaymentModal } = props;
+  const { tableProps, openPaymentModal } = props;
 
   const columns = [
     {

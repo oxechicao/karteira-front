@@ -3,7 +3,7 @@ import { ExpenseTemplateModelSchema } from "@modules/expense-template/schemas/Ex
 import { TemplateSchema } from "@modules/expense-template/schemas/TemplateSchema";
 
 export interface ExpenseTemplateDocument
-  extends ExpenseTemplateModelSchema,
+  extends Omit<ExpenseTemplateModelSchema, "_id">,
     mongoose.Document {}
 
 const ExpenseTemplateSchema = new mongoose.Schema<ExpenseTemplateDocument>(

@@ -1,10 +1,8 @@
-import { KarteiraModel } from "@modules/karteira/karteira.types";
-import mongoose, { Types } from "mongoose";
-
-export type KarteiraSchemaModel = KarteiraModel & { _id?: Types.ObjectId};
+import mongoose from "mongoose";
+import { KarteiraModelSchema } from "@modules/karteira/schemas/KarteiraModelSchema";
 
 export interface KarteiraDocument
-  extends Omit<KarteiraSchemaModel, '_id'>,
+  extends Omit<KarteiraModelSchema, "_id">,
     mongoose.Document {}
 
 const karteiraGuestSchema = new mongoose.Schema(
@@ -29,5 +27,6 @@ const KarteiraSchema = new mongoose.Schema<KarteiraDocument>(
   { timestamps: true },
 );
 
-export default mongoose.models.Karteira ||
+export const KarteiraModel =
+  mongoose.models.Karteira ||
   mongoose.model<KarteiraDocument>("karteira", KarteiraSchema);

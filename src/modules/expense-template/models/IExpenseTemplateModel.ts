@@ -5,7 +5,7 @@ import { IDetails } from "@modules/expense/models/IDetails";
 import { IPayment } from "@modules/expense/models/IPayment";
 import { IExpenseModel } from "@modules/expense/models/IExpenseModel";
 
-interface ITemplateExpenseTemplate
+export interface ITemplateExpenseTemplate
   extends Omit<IExpenseModel, "templateId" | "isFinished"> {}
 
 export interface IExpenseTemplateModel {
