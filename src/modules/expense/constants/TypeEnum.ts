@@ -9,3 +9,9 @@ export enum TypeLabelEnum {
   DEBIT = "A Vista",
   RECURRENT = "Recorrente",
 }
+
+export enum TypeColorEnum {
+  INSTALLMENT = "blue",
+  DEBIT = "volcano",
+  RECURRENT = "gold",
+}

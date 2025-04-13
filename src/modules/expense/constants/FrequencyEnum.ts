@@ -18,3 +18,10 @@ export enum FrequencyPeriodEnum {
   MONTHS = 12,
   YEARS = 40,
 }
+
+export enum FrequencyColorEnum {
+  DAYS = "magenta",
+  WEEKS = "orange",
+  MONTHS = "cyan",
+  YEARS = "lime",
+}

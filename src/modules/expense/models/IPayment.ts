@@ -1,7 +1,7 @@
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
-} from "@common/constants/FrequencyEnum";
+} from "@modules/expense/constants/FrequencyEnum";
 
 import { IPaymentAt } from "@modules/expense/models/IPaymentAt";
 

@@ -4,7 +4,7 @@ import {
   categoryOptions,
   formOptions,
   typeOptions,
-} from "@modules/expense-template/components/FormExpenseModel/options";
+} from "@modules/expense/constants/options";
 import { Form, Input, Select } from "antd";
 
 export default function FormDetailsExpense({

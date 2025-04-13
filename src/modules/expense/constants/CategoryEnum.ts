@@ -13,7 +13,7 @@ export enum CategoryLabelEnum {
   VESTUARIO = "Vestuario",
 }
 
-export enum CategoryEnum {
+export enum CategoryValueEnum {
   ASSINATURAS = "assinaturas",
   CASA = "casa",
   EDUCACAO = "educacao",
@@ -26,4 +26,19 @@ export enum CategoryEnum {
   SAUDE = "saude",
   TRANSPORTE = "transporte",
   VESTUARIO = "vestuario",
+}
+
+export enum CategoryColorEnum {
+  ASSINATURAS = "magenta",
+  CASA = "lime",
+  EDUCACAO = "red",
+  ETC = "purple",
+  FASTFOOD = "volcano",
+  LAZER = "green",
+  MERCADO = "cyan",
+  PET = "geekblue",
+  RESERVAS = "gold",
+  SAUDE = "blue",
+  TRANSPORTE = "lime",
+  VESTUARIO = "magenta",
 }

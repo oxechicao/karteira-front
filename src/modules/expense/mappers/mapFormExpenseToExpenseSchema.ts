@@ -2,7 +2,7 @@ import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
 import { formatFormValueToExpenseSchemaValue } from "@modules/expense/utils/formatFormValueToExpenseSchemaValue";
-import { FrequencyEnum } from "@common/constants/FrequencyEnum";
+import { FrequencyEnum } from "@modules/expense/constants/FrequencyEnum";
 import { ExpenseModelSchema } from "@modules/expense/schemas/ExpenseModelSchema";
 import { IPaymentAt } from "@modules/expense/models/IPaymentAt";
 import { convertToDateTime } from "@common/utils/date";
@@ -23,61 +23,10 @@ type BuildInstallmentArgs = {
   value: number;
 };
 
-function mapInstallments(
-  value: number,
-  purchasedAt: ExpenseForm["purchasedAt"],
-  payday: number,
-  payment: ExpenseForm["payment"],
-  shouldPayCurrentMonth: boolean = true,
-): IPaymentAt[] {
-  const minMonth: number = DateTime.now()
-    .set({ day: 1 })
-    .diff(purchasedAt.set({ day: 1 }), "months").months;
-
-  const arraySize: number = payment.isRecurrent
-    ? Math.ceil(minMonth + 12)
-    : payment.totalInstallments;
-
-  return Array.from(
-    { length: arraySize },
-    (_, index): IPaymentAt =>
-      buildInstallment({
-        index,
-        payment,
-        purchasedAt,
-        shouldPayCurrentMonth,
-        shouldPayNextPeriod: purchasedAt > DateTime.now().set({ day: payday }),
-        value: Number(value),
-      }),
-  );
-}
-
-function buildInstallment(data: BuildInstallmentArgs): IPaymentAt {
-  const {
-    index,
-    payment,
-    purchasedAt,
-    shouldPayCurrentMonth,
-    shouldPayNextPeriod,
-    value,
-  } = data;
-
-  const { frequency, frequencyPeriod, payday } = payment;
-
-  const interval = getPlusDate(
-    frequency,
-    frequencyPeriod,
-    shouldPayNextPeriod,
-    index,
-  );
-
-  const date = purchasedAt.plus(interval).endOf("day");
-
-  return {
-    date,
-    value,
-    isPaid: checkIsPaid(date, payment, shouldPayCurrentMonth),
-  };
+interface ImapInstallmentsReturn {
+  installments: IPaymentAt[];
+  totalInstallments: number;
+  currentInstallment: number;
 }
 
 function getPlusDate(
@@ -120,11 +69,86 @@ function checkIsPaid(
   return isPaidByDate;
 }
 
+function buildInstallment(data: BuildInstallmentArgs): IPaymentAt {
+  const {
+    index,
+    payment,
+    purchasedAt,
+    shouldPayCurrentMonth,
+    shouldPayNextPeriod,
+    value,
+  } = data;
+
+  const { frequency, frequencyPeriod, payday } = payment;
+
+  const interval = getPlusDate(
+    frequency,
+    frequencyPeriod,
+    shouldPayNextPeriod,
+    index,
+  );
+
+  const date = purchasedAt.plus(interval).endOf("day");
+
+  return {
+    date,
+    value,
+    isPaid: checkIsPaid(date, payment, shouldPayCurrentMonth),
+  };
+}
+
+function mapInstallments(
+  value: number,
+  purchasedAt: ExpenseForm["purchasedAt"],
+  payment: ExpenseForm["payment"],
+  shouldPayCurrentMonth: boolean = true,
+): ImapInstallmentsReturn {
+  const { payday } = payment;
+
+  const minMonth: number = DateTime.now()
+    .set({ day: 1 })
+    .diff(purchasedAt.set({ day: 1 }), "months").months;
+
+  const arraySize: number = payment.isRecurrent
+    ? Math.ceil(minMonth + 12)
+    : payment.totalInstallments;
+  let currentInstallment = 0;
+
+  const installments: IPaymentAt[] = Array.from(
+    { length: arraySize },
+    (_, index): IPaymentAt => {
+      const installment = buildInstallment({
+        index,
+        payment,
+        purchasedAt,
+        shouldPayCurrentMonth,
+        shouldPayNextPeriod: purchasedAt > DateTime.now().set({ day: payday }),
+        value: Number(value),
+      });
+
+      if (installment.isPaid) {
+        currentInstallment += 1;
+      }
+
+      return installment;
+    },
+  );
+
+  return {
+    installments,
+    currentInstallment,
+    totalInstallments: arraySize,
+  };
+}
+
 export function mapFormExpenseToExpenseSchema(
   data: ExpenseForm,
 ): ExpenseModelSchema {
   const purchasedAt = convertToDateTime(data.purchasedAt);
   const value = formatFormValueToExpenseSchemaValue(data.value || "0");
+  const { installments, totalInstallments, currentInstallment } =
+    mapInstallments(value, purchasedAt, data.payment);
+
   return {
     templateId: data?.templateId || new Types.ObjectId(),
     karteira: data.karteira,
@@ -143,14 +167,9 @@ export function mapFormExpenseToExpenseSchema(
       category: data.details.category,
     },
     payment: {
-      installments: mapInstallments(
-        value,
-        purchasedAt,
-        data.payment.payday,
-        data.payment,
-      ),
-      totalInstallments: data.payment.totalInstallments,
-      currentInstallment: data.payment.currentInstallment,
+      installments,
+      totalInstallments,
+      currentInstallment,
       payday: data.payment.payday,
       frequency: data.payment.frequency,
       frequencyPeriod: data.payment.frequencyPeriod,

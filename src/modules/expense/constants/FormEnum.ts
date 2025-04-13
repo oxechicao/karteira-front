@@ -6,6 +6,12 @@ export enum FormEnum {
 
 export enum FormLabelEnum {
   CREDIT = "Crédito",
-  DEBIT = "Debito",
+  DEBIT = "Debito/Boleto",
   PIX = "Pix",
+}
+
+export enum FormColorEnum {
+  CREDIT = "greekblue",
+  DEBIT = "purple",
+  PIX = "green",
 }

@@ -1,12 +1,12 @@
-import { CategoryEnum } from "@common/constants/CategoryEnum";
-import { FormEnum } from "@common/constants/FormEnum";
-import { SourceEnum } from "@common/constants/SourceEnum";
-import { TypeEnum } from "@common/constants/TypeEnum";
+import { CategoryValueEnum } from "@modules/expense/constants/CategoryEnum";
+import { FormEnum } from "@modules/expense/constants/FormEnum";
+import { SourceEnum } from "@modules/expense/constants/SourceEnum";
+import { TypeEnum } from "@modules/expense/constants/TypeEnum";
 
 import { IDetails } from "@modules/expense/models/IDetails";
 
 export const expenseDetailsFabric = ({
-  category = CategoryEnum.ETC,
+  category = CategoryValueEnum.ETC,
   form = FormEnum.CREDIT,
   source = SourceEnum.NUBANK,
   type = TypeEnum.DEBIT,

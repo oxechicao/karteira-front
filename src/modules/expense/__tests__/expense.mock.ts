@@ -1,14 +1,14 @@
 import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
-import { CategoryEnum } from "@common/constants/CategoryEnum";
-import { SourceEnum } from "@common/constants/SourceEnum";
-import { FormEnum } from "@common/constants/FormEnum";
-import { TypeEnum } from "@common/constants/TypeEnum";
+import { CategoryValueEnum } from "@modules/expense/constants/CategoryEnum";
+import { SourceEnum } from "@modules/expense/constants/SourceEnum";
+import { FormEnum } from "@modules/expense/constants/FormEnum";
+import { TypeEnum } from "@modules/expense/constants/TypeEnum";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
-} from "@common/constants/FrequencyEnum";
+} from "@modules/expense/constants/FrequencyEnum";
 import ExpenseModel, {
   ExpenseDocument,
 } from "@modules/expense/schemas/ExpenseModel";
@@ -48,7 +48,7 @@ const defaultExpenseModelForm: ExpenseForm = {
   templateId: defaultTemplateId,
   shouldCreateNewTemplate: false,
   details: {
-    category: CategoryEnum.ETC,
+    category: CategoryValueEnum.ETC,
     source: SourceEnum.OUTROS,
     form: FormEnum.PIX,
     type: TypeEnum.INSTALLMENT,
@@ -78,7 +78,7 @@ const defaultExpenseDocument: ExpenseDocument = new ExpenseModel({
     currency: "BRL",
   },
   details: {
-    category: CategoryEnum.ETC,
+    category: CategoryValueEnum.ETC,
     source: SourceEnum.OUTROS,
     form: FormEnum.PIX,
     type: TypeEnum.INSTALLMENT,

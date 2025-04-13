@@ -3,14 +3,14 @@
 import DeleteButtonTableList from "@common/components/button/DeleteButtonTableList";
 import { moneyMask } from "@common/utils/doMask";
 import { TagDefinition } from "@modules/expense/components/TagDefinition";
-import { Col, Row, Table, type TableProps } from "antd";
+import { Col, Row, Table, type TableProps, Tag } from "antd";
 import { DateTime } from "luxon";
 import { PayButton } from "@modules/expense/components/PayButton";
 import React from "react";
-import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { EditButton } from "@refinedev/antd";
 import { EditOutlined } from "@ant-design/icons";
 import { ExpenseListTable } from "@modules/expense/models/ExpenseListTable";
+import { getPaydayThisMonth } from "@modules/expense/utils/getPaydayThisMonth";
 
 type ListExpenseProps = {
   tableProps: TableProps<ExpenseListTable>;
@@ -33,11 +33,46 @@ export const TableExpense: React.FC<ListExpenseProps> = (props) => {
       render: (value: number) => `R$ ${moneyMask(String(value))}`,
     },
     {
-      title: "Parcela",
+      title: "Parcelas",
       dataIndex: ["payment", "currentInstallment"],
       key: "installment.current",
-      render: (value: number, record: ExpenseListTable) =>
-        `${value}/${record.payment.currentInstallment}`,
+      render: (value: number, record: ExpenseListTable) => {
+        const installmentText = `${value}/${record.payment.totalInstallments}`;
+
+        const lastInstallmentPaid = record.payment.installments
+          .filter((installment) => {
+            return installment.isPaid;
+          })
+          .pop();
+
+        const paydayThisMonth = getPaydayThisMonth(record.payment.payday);
+        const isNowPreviousPayday =
+          lastInstallmentPaid && lastInstallmentPaid.date <= paydayThisMonth;
+
+        if (!lastInstallmentPaid || isNowPreviousPayday) {
+          return (
+            <Row>
+              <Col span={24}>{installmentText}</Col>
+              <Col span={24}>
+                <Tag color="red">Mês Não pago</Tag>
+              </Col>
+            </Row>
+          );
+        }
+
+        const isPaid = lastInstallmentPaid.isPaid;
+
+        return (
+          <Row gutter={3}>
+            <Col span={24}>{installmentText}</Col>
+            <Col span={24}>
+              <Tag color={isPaid ? "green" : "red"}>
+                Mês {isPaid ? "Pago" : "Não pago"}
+              </Tag>
+            </Col>
+          </Row>
+        );
+      },
     },
     {
       title: "Data da compra",

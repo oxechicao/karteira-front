@@ -7,8 +7,10 @@ export type ExpenseListTable = {
   value: ExpenseForm["value"];
   purchasedAt: ExpenseForm["purchasedAt"];
   payment: {
+    installments: ExpenseForm["payment"]["installments"];
     currentInstallment: ExpenseForm["payment"]["currentInstallment"];
     totalInstallments: ExpenseForm["payment"]["totalInstallments"];
+    payday: ExpenseForm["payment"]["payday"];
   };
   details: {
     category: ExpenseForm["details"]["category"];

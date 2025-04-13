@@ -2,9 +2,9 @@ import { RowCol } from "@common/components/grid/RowCol";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
-} from "@common/constants/FrequencyEnum";
+} from "@modules/expense/constants/FrequencyEnum";
 import { FormExpenseNoRequired } from "@modules/expense-template/components/FormExpenseModel/FormExpenseModel";
-import { frequencyOptions } from "@modules/expense-template/components/FormExpenseModel/options";
+import { frequencyOptions } from "@modules/expense/constants/options";
 import { Checkbox, Form, InputNumber, Select } from "antd";
 
 const inputStyle: { style: React.CSSProperties } = { style: { width: "100%" } };
