@@ -1,15 +1,14 @@
 import { CategoryValueEnum } from "@modules/expense/constants/CategoryEnum";
-import { FormEnum } from "@modules/expense/constants/FormEnum";
-import { SourceEnum } from "@modules/expense/constants/SourceEnum";
-import { TypeEnum } from "@modules/expense/constants/TypeEnum";
+import { FormValueEnum } from "@modules/expense/constants/FormEnum";
+import { TypeValueEnum } from "@modules/expense/constants/TypeValueEnum";
 
 import { IDetails } from "@modules/expense/models/IDetails";
 
 export const expenseDetailsFabric = ({
   category = CategoryValueEnum.ETC,
-  form = FormEnum.CREDIT,
+  form = FormValueEnum.CREDIT,
   source = SourceEnum.NUBANK,
-  type = TypeEnum.DEBIT,
+  type = TypeValueEnum.DEBIT,
 }: Partial<IDetails>) => ({
   category,
   form,

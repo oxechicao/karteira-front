@@ -1,4 +1,10 @@
 export enum FormEnum {
+  credit = "CREDIT",
+  debit = "DEBIT",
+  pix = "PIX",
+}
+
+export enum FormValueEnum {
   CREDIT = "credit",
   DEBIT = "debit",
   PIX = "pix",

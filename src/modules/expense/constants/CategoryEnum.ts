@@ -1,3 +1,18 @@
+export enum CategoryEnum {
+  assinaturas = "ASSINATURAS",
+  casa = "CASA",
+  educacao = "EDUCACAO",
+  etc = "ETC",
+  fastfood = "FASTFOOD",
+  lazer = "LAZER",
+  mercado = "MERCADO",
+  pet = "PET",
+  reservas = "RESERVAS",
+  saude = "SAUDE",
+  transporte = "TRANSPORTE",
+  vestuario = "VESTUARIO",
+}
+
 export enum CategoryLabelEnum {
   ASSINATURAS = "Assinaturas",
   CASA = "Casa",

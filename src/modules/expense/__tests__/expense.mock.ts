@@ -2,9 +2,8 @@ import { ExpenseForm } from "@modules/expense/models/ExpenseForm";
 import { DateTime } from "luxon";
 import { Types } from "mongoose";
 import { CategoryValueEnum } from "@modules/expense/constants/CategoryEnum";
-import { SourceEnum } from "@modules/expense/constants/SourceEnum";
-import { FormEnum } from "@modules/expense/constants/FormEnum";
-import { TypeEnum } from "@modules/expense/constants/TypeEnum";
+import { FormValueEnum } from "@modules/expense/constants/FormEnum";
+import { TypeValueEnum } from "@modules/expense/constants/TypeValueEnum";
 import {
   FrequencyEnum,
   FrequencyPeriodEnum,
@@ -50,8 +49,8 @@ const defaultExpenseModelForm: ExpenseForm = {
   details: {
     category: CategoryValueEnum.ETC,
     source: SourceEnum.OUTROS,
-    form: FormEnum.PIX,
-    type: TypeEnum.INSTALLMENT,
+    form: FormValueEnum.PIX,
+    type: TypeValueEnum.INSTALLMENT,
   },
   payment: {
     installments: [],
@@ -80,8 +79,8 @@ const defaultExpenseDocument: ExpenseDocument = new ExpenseModel({
   details: {
     category: CategoryValueEnum.ETC,
     source: SourceEnum.OUTROS,
-    form: FormEnum.PIX,
-    type: TypeEnum.INSTALLMENT,
+    form: FormValueEnum.PIX,
+    type: TypeValueEnum.INSTALLMENT,
   },
   payment: {
     installments: [],

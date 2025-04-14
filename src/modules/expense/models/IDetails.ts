@@ -1,10 +1,10 @@
 import { CategoryValueEnum } from "@modules/expense/constants/CategoryEnum";
-import { FormEnum } from "@modules/expense/constants/FormEnum";
-import { TypeEnum } from "@modules/expense/constants/TypeEnum";
+import { FormValueEnum } from "@modules/expense/constants/FormEnum";
+import { TypeValueEnum } from "@modules/expense/constants/TypeValueEnum";
 
 export type IDetails = {
   category: CategoryValueEnum;
-  form: FormEnum;
+  form: FormValueEnum;
   source: string;
-  type: TypeEnum;
+  type: TypeValueEnum;
 };

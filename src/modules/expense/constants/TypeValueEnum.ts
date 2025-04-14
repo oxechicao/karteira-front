@@ -1,4 +1,10 @@
 export enum TypeEnum {
+  installment = "INSTALLMENT",
+  debit = "DEBIT",
+  recurrent = "RECURRENT",
+}
+
+export enum TypeValueEnum {
   INSTALLMENT = "installment",
   DEBIT = "debit",
   RECURRENT = "recurrent",

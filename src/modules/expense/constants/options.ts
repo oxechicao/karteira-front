@@ -2,16 +2,18 @@ import {
   CategoryValueEnum,
   CategoryLabelEnum,
 } from "@modules/expense/constants/CategoryEnum";
-import { FormEnum, FormLabelEnum } from "@modules/expense/constants/FormEnum";
+import {
+  FormValueEnum,
+  FormLabelEnum,
+} from "@modules/expense/constants/FormEnum";
 import {
   FrequencyEnum,
   FrequencyLabelEnum,
 } from "@modules/expense/constants/FrequencyEnum";
 import {
-  SourceEnum,
-  SourceLabelEnum,
-} from "@modules/expense/constants/SourceEnum";
-import { TypeEnum, TypeLabelEnum } from "@modules/expense/constants/TypeEnum";
+  TypeValueEnum,
+  TypeLabelEnum,
+} from "@modules/expense/constants/TypeValueEnum";
 
 type Options<T, Y> = {
   label: T;
@@ -25,16 +27,16 @@ export const frequencyOptions: Options<FrequencyLabelEnum, FrequencyEnum>[] = [
   { label: FrequencyLabelEnum.YEARS, value: FrequencyEnum.YEARS },
 ];
 
-export const typeOptions: Options<TypeLabelEnum, TypeEnum>[] = [
-  { label: TypeLabelEnum.INSTALLMENT, value: TypeEnum.INSTALLMENT },
-  { label: TypeLabelEnum.DEBIT, value: TypeEnum.DEBIT },
-  { label: TypeLabelEnum.RECURRENT, value: TypeEnum.RECURRENT },
+export const typeOptions: Options<TypeLabelEnum, TypeValueEnum>[] = [
+  { label: TypeLabelEnum.INSTALLMENT, value: TypeValueEnum.INSTALLMENT },
+  { label: TypeLabelEnum.DEBIT, value: TypeValueEnum.DEBIT },
+  { label: TypeLabelEnum.RECURRENT, value: TypeValueEnum.RECURRENT },
 ];
 
-export const formOptions: Options<FormLabelEnum, FormEnum>[] = [
-  { label: FormLabelEnum.CREDIT, value: FormEnum.CREDIT },
-  { label: FormLabelEnum.DEBIT, value: FormEnum.DEBIT },
-  { label: FormLabelEnum.PIX, value: FormEnum.PIX },
+export const formOptions: Options<FormLabelEnum, FormValueEnum>[] = [
+  { label: FormLabelEnum.CREDIT, value: FormValueEnum.CREDIT },
+  { label: FormLabelEnum.DEBIT, value: FormValueEnum.DEBIT },
+  { label: FormLabelEnum.PIX, value: FormValueEnum.PIX },
 ];
 
 export const categoryOptions: Options<CategoryLabelEnum, CategoryValueEnum>[] =
@@ -58,10 +60,3 @@ export const categoryOptions: Options<CategoryLabelEnum, CategoryValueEnum>[] =
     },
     { label: CategoryLabelEnum.VESTUARIO, value: CategoryValueEnum.VESTUARIO },
   ];
-
-export const sourceOptions: Options<SourceLabelEnum, SourceEnum>[] = [
-  { label: SourceLabelEnum.ITAU, value: SourceEnum.ITAU },
-  { label: SourceLabelEnum.NUBANK, value: SourceEnum.NUBANK },
-  { label: SourceLabelEnum.INTER, value: SourceEnum.INTER },
-  { label: SourceLabelEnum.OUTROS, value: SourceEnum.OUTROS },
-];
