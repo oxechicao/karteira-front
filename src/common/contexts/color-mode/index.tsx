@@ -23,11 +23,13 @@ type ColorModeContextProviderProps = {
   defaultMode?: string;
 };
 
+const defaultTheme = "dark";
+
 export const ColorModeContextProvider: React.FC<
   PropsWithChildren<ColorModeContextProviderProps>
 > = ({ children, defaultMode }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [mode, setMode] = useState(defaultMode || "light");
+  const [mode, setMode] = useState(defaultMode || defaultMode);
 
   useEffect(() => {
     setIsMounted(true);
@@ -35,10 +37,10 @@ export const ColorModeContextProvider: React.FC<
 
   useEffect(() => {
     if (isMounted) {
-      const theme = Cookies.get("theme") || "light";
+      const theme = Cookies.get("theme") || defaultMode; // Define default one
       setMode(theme);
     }
-  }, [isMounted]);
+  }, [isMounted, defaultTheme]);
 
   const setColorMode = () => {
     if (mode === "light") {

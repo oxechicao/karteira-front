@@ -20,7 +20,11 @@ export default function RootLayout({
 }>) {
   const cookieStore = cookies();
   const theme = cookieStore.get("theme");
-  const defaultMode = theme?.value === "dark" ? "dark" : "light";
+  const defaultMode = theme?.value
+    ? theme?.value === "dark"
+      ? "dark"
+      : "light"
+    : "dark";
 
   return (
     <html lang="en">

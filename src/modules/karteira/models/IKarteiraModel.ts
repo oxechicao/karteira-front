@@ -6,6 +6,8 @@ export interface IKarteiraModel {
   name: string;
   owner: string;
   guests: IGuestModel[] | [];
+  goal: string;
+  limit: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

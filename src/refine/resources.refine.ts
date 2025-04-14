@@ -20,5 +20,8 @@ export const resourcesRefine = [
   {
     name: "karteiras",
     list: "/karteiras",
+    create: "/karteiras/novo",
+    show: "/karteiras/:id",
+    edit: "/karteiras/:id/edit",
   },
 ];

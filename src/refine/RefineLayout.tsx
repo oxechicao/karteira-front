@@ -16,7 +16,7 @@ export const RefineLayout: React.FC<RefineLayoutProps> = ({
 }) => {
   return (
     <Suspense>
-      <GitHubBanner />
+      {/*<GitHubBanner />*/}
       <RefineKbarProvider>
         <AntdRegistry>
           <ColorModeContextProvider defaultMode={defaultMode}>

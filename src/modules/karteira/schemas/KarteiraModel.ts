@@ -21,6 +21,8 @@ const KarteiraSchema = new mongoose.Schema<KarteiraDocument>(
     },
     owner: { type: String, required: true },
     guests: [karteiraGuestSchema],
+    limit: Number,
+    goal: Number,
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
   },
@@ -29,4 +31,4 @@ const KarteiraSchema = new mongoose.Schema<KarteiraDocument>(
 
 export const KarteiraModel =
   mongoose.models.Karteira ||
-  mongoose.model<KarteiraDocument>("karteira", KarteiraSchema);
+  mongoose.model<KarteiraDocument>("Karteira", KarteiraSchema);
